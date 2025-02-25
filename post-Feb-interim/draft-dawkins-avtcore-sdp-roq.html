@@ -1250,10 +1250,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-quic-datagrams" class="internal xref">quic-datagrams</a></p>
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-quic-and-quic-related-proto" class="internal xref">QUIC and QUIC-related protos</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-roq-flow-id" class="internal xref">roq-flow-id</a></p>
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-quic-datagrams" class="internal xref">quic-datagrams</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
+                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="auto internal xref">9.3</a>.  <a href="#name-roq-flow-id" class="internal xref">roq-flow-id</a></p>
 </li>
             </ul>
 </li>
@@ -1749,12 +1752,17 @@ The editors encourage feedback on this point.<a href="#section-6.4-2" class="pil
 </td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">a=setup:passive</td>
+            <td class="text-left" rowspan="1" colspan="1">Will wait for QUIC handshake (setup attribute from <span>[<a href="#RFC4145" class="cite xref">RFC4145</a>]</span>
+</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">t=0 0</td>
             <td class="text-left" rowspan="1" colspan="1">Same as <span><a href="https://rfc-editor.org/rfc/rfc8866#section-5" class="relref">Section 5</a> of [<a href="#RFC8866" class="cite xref">RFC8866</a>]</span>
 </td>
           </tr>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">fingerprint:sha-1 47:5D:A9:48:E4:BA:44:D9:B5:BC:31:AB:4B:80:06:11:3F:D5:F5:38</td>
+            <td class="text-left" rowspan="1" colspan="1">a=fingerprint:sha-1 47:5D:A9:48:E4:BA:44:D9:B5:BC:31:AB:4B:80:06:11:3F:D5:F5:38</td>
             <td class="text-left" rowspan="1" colspan="1">
               <span><a href="https://rfc-editor.org/rfc/rfc8122#section-5" class="relref">Section 5</a> of [<a href="#RFC8122" class="cite xref">RFC8122</a>]</span>
 </td>
@@ -1828,20 +1836,28 @@ The editors encourage feedback on this point.<a href="#section-8.1-4" class="pil
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
 <p id="section-9-1">This document defines new IANA values in the <span>[<a href="#SDP-protos" class="cite xref">SDP-protos</a>]</span> and <span>[<a href="#SDP-attribute-name" class="cite xref">SDP-attribute-name</a>]</span> registries.<a href="#section-9-1" class="pilcrow">¶</a></p>
-<div id="IANA-quic-datagrams">
+<div id="IANA-quic-protos">
 <section id="section-9.1">
-        <h3 id="name-quic-datagrams">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-quic-datagrams" class="section-name selfRef">quic-datagrams</a>
+        <h3 id="name-quic-and-quic-related-proto">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-quic-and-quic-related-proto" class="section-name selfRef">QUIC and QUIC-related protos</a>
         </h3>
-<p id="section-9.1-1">This document defines a new SDP media-level attribute, "quic-datagrams". The details of the attribute are defined in <a href="#quic-datagrams" class="auto internal xref">Section 4.1</a>.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<p id="section-9.1-1">This document defines five new SDP proto names, QUIC, QUIC/RTP/AVP, QUIC/RTP/AVPF, QUIC/RTP/SAVP, and QUIC/RTP/SAVPF/. The details of these protos are defined in <a href="#quic" class="auto internal xref">Section 3.1</a> and <a href="#rtp-protos" class="auto internal xref">Section 3.2</a>.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="IANA-quic-datagrams">
+<section id="section-9.2">
+        <h3 id="name-quic-datagrams">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-quic-datagrams" class="section-name selfRef">quic-datagrams</a>
+        </h3>
+<p id="section-9.2-1">This document defines a new SDP session media-level attribute, "quic-datagrams". The details of the attribute are defined in <a href="#quic-datagrams" class="auto internal xref">Section 4.1</a>.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="roq-flow-id">
-<section id="section-9.2">
+<section id="section-9.3">
         <h3 id="name-roq-flow-id">
-<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-roq-flow-id" class="section-name selfRef">roq-flow-id</a>
+<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-roq-flow-id" class="section-name selfRef">roq-flow-id</a>
         </h3>
-<p id="section-9.2-1">This document defines a new SDP media-level attribute, "roq-flow-id". The details of the attribute are defined in <a href="#rtp-quic-flow-id" class="auto internal xref">Section 4.2</a>.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
+<p id="section-9.3-1">This document defines a new SDP media-level attribute, "roq-flow-id". The details of the attribute are defined in <a href="#rtp-quic-flow-id" class="auto internal xref">Section 4.2</a>.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
