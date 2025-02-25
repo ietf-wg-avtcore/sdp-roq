@@ -1208,7 +1208,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-the-sdp-setup-attribute" class="internal xref">The SDP "setup" Attribute</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-the-sdp-connection-and-tls-" class="internal xref">The SDP "connection" and "tls-id" Attributes</a></p>
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-the-sdp-tls-id-attribute" class="internal xref">The SDP "tls-id" Attribute</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
                 <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-the-sdp-fingerprint-attribu" class="internal xref">The SDP "fingerprint" Attribute</a></p>
@@ -1565,12 +1565,12 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-5.1-1">The SDP "setup" attribute, defined for media over TCP in <span>[<a href="#RFC4145" class="cite xref">RFC4145</a>]</span>, is reused to indicate which endpoint initiates a QUIC connection (whether the endpoint actively opens a QUIC connection, or accepts an incoming QUIC connection. This attribute <span class="bcp14">MUST</span> be present in SDP offers and answers for RoQ.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="connect">
+<div id="tls-id">
 <section id="section-5.2">
-        <h3 id="name-the-sdp-connection-and-tls-">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-the-sdp-connection-and-tls-" class="section-name selfRef">The SDP "connection" and "tls-id" Attributes</a>
+        <h3 id="name-the-sdp-tls-id-attribute">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-the-sdp-tls-id-attribute" class="section-name selfRef">The SDP "tls-id" Attribute</a>
         </h3>
-<p id="section-5.2-1">The SDP "connection" and "tls-id" attributes are reused to indicate whether the endpoint will open a new QUIC connection, or reuse an existing QUIC connection. RoQ applications <span class="bcp14">MUST</span> use these attributes as described in <span><a href="https://rfc-editor.org/rfc/rfc8842#section-7" class="relref">Section 7</a> of [<a href="#RFC8842" class="cite xref">RFC8842</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">The SDP "tls-id" attribute is reused to allow either endpoint to decide whether to open a new QUIC connection, rather than reusing an existing QUIC connection, as described in <span><a href="https://rfc-editor.org/rfc/rfc8842#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC8842" class="cite xref">RFC8842</a>]</span>. This attribute <span class="bcp14">MUST</span> be present in SDP offers and answers for RoQ.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="fingerprint">
@@ -1742,6 +1742,11 @@ The editors encourage feedback on this point.<a href="#section-6.4-2" class="pil
           <tr>
             <td class="text-left" rowspan="1" colspan="1">a=quic-datagrams</td>
             <td class="text-left" rowspan="1" colspan="1">Expects to use QUIC DATAGRAMs in this RTP session, as defined in this specification</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">a=tls-id:abc3de65cddef001be82</td>
+            <td class="text-left" rowspan="1" colspan="1">As defined in <span><a href="https://rfc-editor.org/rfc/rfc8842#section-4" class="relref">Section 4</a> of [<a href="#RFC8842" class="cite xref">RFC8842</a>]</span>
+</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">t=0 0</td>

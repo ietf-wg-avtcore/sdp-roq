@@ -88,7 +88,7 @@ Table of Contents
    5.  Special Considerations for Selected SDP Attributes When Using
            RoQ Transport
      5.1.  The SDP "setup" Attribute
-     5.2.  The SDP "connection" and "tls-id" Attributes
+     5.2.  The SDP "tls-id" Attribute
      5.3.  The SDP "fingerprint" Attribute
      5.4.  The SDP "rtcp-mux" Attribute
    6.  Implementation Topics
@@ -461,12 +461,12 @@ Table of Contents
    incoming QUIC connection.  This attribute MUST be present in SDP
    offers and answers for RoQ.
 
-5.2.  The SDP "connection" and "tls-id" Attributes
+5.2.  The SDP "tls-id" Attribute
 
-   The SDP "connection" and "tls-id" attributes are reused to indicate
-   whether the endpoint will open a new QUIC connection, or reuse an
-   existing QUIC connection.  RoQ applications MUST use these attributes
-   as described in Section 7 of [RFC8842].
+   The SDP "tls-id" attribute is reused to allow either endpoint to
+   decide whether to open a new QUIC connection, rather than reusing an
+   existing QUIC connection, as described in Section 5.1 of [RFC8842].
+   This attribute MUST be present in SDP offers and answers for RoQ.
 
 5.3.  The SDP "fingerprint" Attribute
 
@@ -685,6 +685,9 @@ Table of Contents
    |                                                           |DATAGRAMs in this RTP     |
    |                                                           |session, as defined in    |
    |                                                           |this specification        |
+   +-----------------------------------------------------------+--------------------------+
+   |a=tls-id:abc3de65cddef001be82                              |As defined in Section 4 of|
+   |                                                           |[RFC8842]                 |
    +-----------------------------------------------------------+--------------------------+
    |t=0 0                                                      |Same as Section 5 of      |
    |                                                           |[RFC8866]                 |
