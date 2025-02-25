@@ -5,8 +5,8 @@
 Network Working Group                                         S. Dawkins
 Internet-Draft                        Wonder Hamster Internetworking LLC
 Intended status: Experimental                                 V. Pascual
-Expires: 14 August 2025                                            Nokia
-                                                        10 February 2025
+Expires: 29 August 2025                                            Nokia
+                                                        25 February 2025
 
 
                 SDP Offer/Answer for RTP over QUIC (RoQ)
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 August 2025.
+   This Internet-Draft will expire on 29 August 2025.
 
 Copyright Notice
 
@@ -99,8 +99,9 @@ Table of Contents
    8.  Security Considerations
      8.1.  AV Profile-related Security Considerations
    9.  IANA Considerations
-     9.1.  quic-datagrams
-     9.2.  roq-flow-id
+     9.1.  QUIC and QUIC-related protos
+     9.2.  quic-datagrams
+     9.3.  roq-flow-id
    10. References
      10.1.  Normative References
      10.2.  Informative References
@@ -637,10 +638,19 @@ Table of Contents
    |                                                           |session, as defined in    |
    |                                                           |this specification        |
    +-----------------------------------------------------------+--------------------------+
+   |a=setup:passive                                            |Will wait for QUIC        |
+   |                                                           |handshake (setup attribute|
+   |                                                           |from [RFC4145]            |
+   +-----------------------------------------------------------+--------------------------+
+   |a=connection:new                                           |don't want to reuse an    |
+   |                                                           |existing QUIC connection  |
+   |                                                           |(connection attribute from|
+   |                                                           |[RFC4145]                 |
+   +-----------------------------------------------------------+--------------------------+
    |t=0 0                                                      |Same as Section 5 of      |
    |                                                           |[RFC8866]                 |
    +-----------------------------------------------------------+--------------------------+
-   |fingerprint:sha-1                                          |Section 5 of [RFC8122]    |
+   |a=fingerprint:sha-1                                        |Section 5 of [RFC8122]    |
    |47:5D:A9:48:E4:BA:44:D9:B5:BC:31:AB:4B:80:06:11:3F:D5:F5:38|                          |
    +-----------------------------------------------------------+--------------------------+
    |*Media Description*                                        |                          |
@@ -718,12 +728,18 @@ Table of Contents
    This document defines new IANA values in the [SDP-protos] and
    [SDP-attribute-name] registries.
 
-9.1.  quic-datagrams
+9.1.  QUIC and QUIC-related protos
 
-   This document defines a new SDP media-level attribute, "quic-
+   This document defines five new SDP proto names, QUIC, QUIC/RTP/AVP,
+   QUIC/RTP/AVPF, QUIC/RTP/SAVP, and QUIC/RTP/SAVPF/. The details of
+   these protos are defined in Section 3.1 and Section 3.2.
+
+9.2.  quic-datagrams
+
+   This document defines a new SDP session media-level attribute, "quic-
    datagrams".  The details of the attribute are defined in Section 4.1.
 
-9.2.  roq-flow-id
+9.3.  roq-flow-id
 
    This document defines a new SDP media-level attribute, "roq-flow-id".
    The details of the attribute are defined in Section 4.2.
@@ -733,7 +749,11 @@ Table of Contents
 10.1.  Normative References
 
    [I-D.dawkins-avtcore-sdp-roq]
-              "*** BROKEN REFERENCE ***".
+              Dawkins, S. and V. P. Pascual, "SDP Offer/Answer for RTP
+              over QUIC (RoQ)", Work in Progress, Internet-Draft, draft-
+              dawkins-avtcore-sdp-roq-00, 10 February 2025,
+              <https://datatracker.ietf.org/doc/html/draft-dawkins-
+              avtcore-sdp-roq-00>.
 
    [I-D.ietf-avtcore-rtp-over-quic]
               Engelbart, M., Ott, J., and S. Dawkins, "RTP over QUIC
