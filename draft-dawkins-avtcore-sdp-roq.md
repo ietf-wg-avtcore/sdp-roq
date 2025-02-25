@@ -286,9 +286,9 @@ This document assumes that an authenticated QUIC connection will be opened using
 
 The SDP "setup" attribute, defined for media over TCP in {{!RFC4145}}, is reused to indicate which endpoint initiates a QUIC connection (whether the endpoint actively opens a QUIC connection, or accepts an incoming QUIC connection. This attribute MUST be present in SDP offers and answers for RoQ.
 
-## The SDP "connection" Attribute {#connect}
+## The SDP "connection" and "tls-id" Attributes {#connect}
 
-The SDP "connection" attribute, defined for TCP in {{!RFC4145}}, is reused to indicate whether the endpoint will open a new QUIC connection, or reuse an existing QUIC connection. This attribute MUST be present in SDP offers and answers for RoQ.
+The SDP "connection" and "tls-id" attributes are reused to indicate whether the endpoint will open a new QUIC connection, or reuse an existing QUIC connection. RoQ applications MUST use these attributes as described in {{Section 7 of !RFC8842}}.
 
 ## The SDP "fingerprint" Attribute {#fingerprint}
 
@@ -326,7 +326,7 @@ It is assumed that an implementer will review the application requirements, the 
 
 More information about what RTCP feedback might be replaced by QUIC statistics, and what is possible, appears in {{Appendix B of !I-D.ietf-avtcore-rtp-over-quic}}.
 
-**Editors' Note:** The API between QUIC and RoQ is, of course, a private matter, but the authors got feedback at the February 2025 AVTCORE interim meeting that it would be useful to "standardize", or at least provide guidance about, specific QUIC feedback substitutions so that eeach RoQ implementer doesn't have to perform this analysis from first principles. **We almost certainly need implementation and deployment experience before we can do more than offer a strawman proposal. Spencer suggests that we include any IETF-recommended QUIC feedback substitutions in separate documents, as we do with RTCP extensions today, or even include them in the GitHub repository Wiki for this document, since these recommendations may change as the QUIC protocol evolves. The editors encourage feedback on these points.**
+**Editors' Note:** The API between QUIC and RoQ is, of course, a private matter, but the authors got feedback at the February 2025 AVTCORE interim meeting that it would be useful to "standardize", or at least provide guidance about, specific QUIC feedback substitutions so that each RoQ implementer doesn't have to perform this analysis from first principles. **We almost certainly need implementation and deployment experience before we can do more than offer a strawman proposal. Spencer suggests that we include any IETF-recommended QUIC feedback substitutions in separate documents, as we do with RTCP extensions today, or even include them in the GitHub repository Wiki for this document, since these recommendations may change as the QUIC protocol evolves. The editors encourage feedback on these points.**
 
 ## Implications of Congestion Control {#cong-ctrl}
 
@@ -345,7 +345,7 @@ Because RoQ applications are always congestion controlled at the QUIC connection
 The profiles defined in {{rtp-protos}} assume that if an application needs to perform NAT traversal, the endpoints will perform ICE procedures as described in {{!RFC8445}} to gather and prioritize candidate pairs, and will then select candidate pairs that can be included in SDP media lines, as described in {{rtp-protos}}.
 
 **Editors' Note:** Other ways of performing NAT traversal for QUIC are possible, and this specification might be modified to support one or more of those methods in the future, given sufficient requirements.
-The modifications would likely include additional protos being included in {{rtp-protos}}.
+The modifications would likely include additional protos being defined in {{rtp-protos}}.
 The editors encourage feedback on this point.
 
 Because a peer address is validated during QUIC connection establishment as described in {{Section 8.1 of !RFC9000}}, when a RoQ endpoint uses ICE {{!RFC8445}} to communicate with another RoQ endpoint, an ICE agent will have already performed ICE candidate pair connectivity checking before a QUIC connection can be opened for use with RoQ.
@@ -435,10 +435,12 @@ This document defines a new SDP media-level attribute, "roq-flow-id". The detail
 
 The authors thank Sam Hurst for sharing his thoughts about the challenges of developing SDP for RoQ, and for providing specific comments and draft text.
 
+The authors thank Mathis Engelbart for his feedback on this specification, and for helping to keep this this specification aligned with {{!I-D.ietf-avtcore-rtp-over-quic}}.
+
 The authors thank Bernard Aboba and Mathis Westerlund for comments on various previous versions of this specification, under a variety of draft names.
 
-The authors thank Jonathan and Harald Alvestrand for their feedback on this version of the specification.
+The authors thank Jonathan Lennox and Harald Alvestrand for their feedback on this version of the specification.
 
-The authors thank Mathis Engelbart for his feedback on this specification, and for helping to keep this this specification aligned with {{!I-D.ietf-avtcore-rtp-over-quic}}.
+The authors thank Roman Shpount for helping us get the specification of "connection" and "tls-id" correct in our specification.
 
 A significant amount of work on this draft happened while Spencer was affiliated with Tencent America LLC. Spencer still appreciates that support.
