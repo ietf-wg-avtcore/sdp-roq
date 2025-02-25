@@ -288,7 +288,7 @@ The SDP "setup" attribute, defined for media over TCP in {{!RFC4145}}, is reused
 
 ## The SDP "tls-id" Attribute {#tls-id}
 
-The SDP "tls-id" attribute is reused to allow either endpoint to decide whether to open a new QUIC connection, rather than reusing an existing QUIC connection, as described in {{Section 5.1 of !RFC8842}}. This attribute MUST be present in SDP offers and answers for RoQ.
+The SDP "tls-id" attribute is reused as described in {{Section 5.1 of !RFC8842}} to allow either endpoint to decide whether to open a new QUIC connection, rather than reusing an existing QUIC connection. This attribute MUST be present in SDP offers and answers for RoQ.
 
 ## The SDP "fingerprint" Attribute {#fingerprint}
 
