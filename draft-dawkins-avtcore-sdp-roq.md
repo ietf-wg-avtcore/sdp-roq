@@ -366,8 +366,10 @@ A complete example of an SDP offer using QUIC/RTP/AVPF might look like:
 |p=+1 617 555-6011 |Same as {{Section 5 of !RFC8866}}|
 |c=IN IP4 198.51.100.1 |Same as {{Section 5 of !RFC8866}}|
 |a=quic-datagrams | Expects to use QUIC DATAGRAMs in this RTP session, as defined in this specification |
+|a=setup:passive | Will wait for QUIC handshake (setup attribute from {{!RFC4145}} |
+|a=connection:new | don't want to reuse an existing QUIC connection (connection attribute from {{!RFC4145}} |
 |t=0 0 |Same as {{Section 5 of !RFC8866}}|
-|fingerprint:sha-1 47:5D:A9:48:E4:BA:44:D9:B5:BC:31:AB:4B:80:06:11:3F:D5:F5:38 | {{Section 5 of !RFC8122}} |
+|a=fingerprint:sha-1 47:5D:A9:48:E4:BA:44:D9:B5:BC:31:AB:4B:80:06:11:3F:D5:F5:38 | {{Section 5 of !RFC8122}} |
 |---
 |**Media Description** | |
 |m=video 51372 QUIC/RTP/AVPF 99 | As defined in {{avpf}}|
@@ -404,9 +406,13 @@ If this is not a good plan, there are two alternatives.
 
 This document defines new IANA values in the {{SDP-protos}} and {{SDP-attribute-name}} registries.
 
+## QUIC and QUIC-related protos {#IANA-quic-protos}
+
+This document defines five new SDP proto names, QUIC, QUIC/RTP/AVP, QUIC/RTP/AVPF, QUIC/RTP/SAVP, and QUIC/RTP/SAVPF/. The details of these protos are defined in {{quic}} and {{rtp-protos}}.
+
 ## quic-datagrams {#IANA-quic-datagrams}
 
-This document defines a new SDP media-level attribute, "quic-datagrams". The details of the attribute are defined in {{quic-datagrams}}.
+This document defines a new SDP session media-level attribute, "quic-datagrams". The details of the attribute are defined in {{quic-datagrams}}.
 
 ## roq-flow-id
 
