@@ -464,9 +464,9 @@ Table of Contents
 
 5.2.  The SDP "tls-id" Attribute
 
-   The SDP "tls-id" attribute is reused to allow either endpoint to
-   decide whether to open a new QUIC connection, rather than reusing an
-   existing QUIC connection, as described in Section 5.1 of [RFC8842].
+   The SDP "tls-id" attribute is reused as described in Section 5.1 of
+   [RFC8842] to allow either endpoint to decide whether to open a new
+   QUIC connection, rather than reusing an existing QUIC connection.
    This attribute MUST be present in SDP offers and answers for RoQ.
 
 5.3.  The SDP "fingerprint" Attribute
