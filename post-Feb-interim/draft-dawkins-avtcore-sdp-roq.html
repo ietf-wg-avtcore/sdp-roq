@@ -1208,7 +1208,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-the-sdp-setup-attribute" class="internal xref">The SDP "setup" Attribute</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-the-sdp-connection-attribut" class="internal xref">The SDP "connection" Attribute</a></p>
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-the-sdp-connection-and-tls-" class="internal xref">The SDP "connection" and "tls-id" Attributes</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
                 <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-the-sdp-fingerprint-attribu" class="internal xref">The SDP "fingerprint" Attribute</a></p>
@@ -1567,10 +1567,10 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </div>
 <div id="connect">
 <section id="section-5.2">
-        <h3 id="name-the-sdp-connection-attribut">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-the-sdp-connection-attribut" class="section-name selfRef">The SDP "connection" Attribute</a>
+        <h3 id="name-the-sdp-connection-and-tls-">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-the-sdp-connection-and-tls-" class="section-name selfRef">The SDP "connection" and "tls-id" Attributes</a>
         </h3>
-<p id="section-5.2-1">The SDP "connection" attribute, defined for TCP in <span>[<a href="#RFC4145" class="cite xref">RFC4145</a>]</span>, is reused to indicate whether the endpoint will open a new QUIC connection, or reuse an existing QUIC connection. This attribute <span class="bcp14">MUST</span> be present in SDP offers and answers for RoQ.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">The SDP "connection" and "tls-id" attributes are reused to indicate whether the endpoint will open a new QUIC connection, or reuse an existing QUIC connection. RoQ applications <span class="bcp14">MUST</span> use these attributes as described in <span><a href="https://rfc-editor.org/rfc/rfc8842#section-7" class="relref">Section 7</a> of [<a href="#RFC8842" class="cite xref">RFC8842</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="fingerprint">
@@ -1619,7 +1619,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-6.2-1"><span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-avtcore-rtp-over-quic-12#section-10.4" class="relref">Section 10.4</a> of [<a href="#I-D.ietf-avtcore-rtp-over-quic" class="cite xref">I-D.ietf-avtcore-rtp-over-quic</a>]</span> describes how some RTCP feedback can be replaced by equivalent statistics that are already collected by QUIC. The exact RTCP feedback that can be replaced depends on the QUIC statistics exposed by the underlying QUIC implementation, and these QUIC statistics might depend in turn on QUIC extensions supported in the underlying QUIC implementation. The set of possible relevant QUIC extensions is not fixed, but some discussion appears in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-avtcore-rtp-over-quic-12#section-11" class="relref">Section 11</a> of [<a href="#I-D.ietf-avtcore-rtp-over-quic" class="cite xref">I-D.ietf-avtcore-rtp-over-quic</a>]</span>. For these reasons, decisions about what RTCP feedback can be replaced will always be media-dependent and implementation-dependent.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">It is assumed that an implementer will review the application requirements, the RTP proto in use, the available RTCP feedback for the media types being transferred, and available QUIC statistics, and will do the right thing.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3">More information about what RTCP feedback might be replaced by QUIC statistics, and what is possible, appears in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-avtcore-rtp-over-quic-12#appendix-B" class="relref">Appendix B</a> of [<a href="#I-D.ietf-avtcore-rtp-over-quic" class="cite xref">I-D.ietf-avtcore-rtp-over-quic</a>]</span>.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
-<p id="section-6.2-4"><strong>Editors' Note:</strong> The API between QUIC and RoQ is, of course, a private matter, but the authors got feedback at the February 2025 AVTCORE interim meeting that it would be useful to "standardize", or at least provide guidance about, specific QUIC feedback substitutions so that eeach RoQ implementer doesn't have to perform this analysis from first principles. <strong>We almost certainly need implementation and deployment experience before we can do more than offer a strawman proposal. Spencer suggests that we include any IETF-recommended QUIC feedback substitutions in separate documents, as we do with RTCP extensions today, or even include them in the GitHub repository Wiki for this document, since these recommendations may change as the QUIC protocol evolves. The editors encourage feedback on these points.</strong><a href="#section-6.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.2-4"><strong>Editors' Note:</strong> The API between QUIC and RoQ is, of course, a private matter, but the authors got feedback at the February 2025 AVTCORE interim meeting that it would be useful to "standardize", or at least provide guidance about, specific QUIC feedback substitutions so that each RoQ implementer doesn't have to perform this analysis from first principles. <strong>We almost certainly need implementation and deployment experience before we can do more than offer a strawman proposal. Spencer suggests that we include any IETF-recommended QUIC feedback substitutions in separate documents, as we do with RTCP extensions today, or even include them in the GitHub repository Wiki for this document, since these recommendations may change as the QUIC protocol evolves. The editors encourage feedback on these points.</strong><a href="#section-6.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cong-ctrl">
@@ -1641,7 +1641,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         </h3>
 <p id="section-6.4-1">The profiles defined in <a href="#rtp-protos" class="auto internal xref">Section 3.2</a> assume that if an application needs to perform NAT traversal, the endpoints will perform ICE procedures as described in <span>[<a href="#RFC8445" class="cite xref">RFC8445</a>]</span> to gather and prioritize candidate pairs, and will then select candidate pairs that can be included in SDP media lines, as described in <a href="#rtp-protos" class="auto internal xref">Section 3.2</a>.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <p id="section-6.4-2"><strong>Editors' Note:</strong> Other ways of performing NAT traversal for QUIC are possible, and this specification might be modified to support one or more of those methods in the future, given sufficient requirements.
-The modifications would likely include additional protos being included in <a href="#rtp-protos" class="auto internal xref">Section 3.2</a>.
+The modifications would likely include additional protos being defined in <a href="#rtp-protos" class="auto internal xref">Section 3.2</a>.
 The editors encourage feedback on this point.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 <p id="section-6.4-3">Because a peer address is validated during QUIC connection establishment as described in <span><a href="https://rfc-editor.org/rfc/rfc9000#section-8.1" class="relref">Section 8.1</a> of [<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>, when a RoQ endpoint uses ICE <span>[<a href="#RFC8445" class="cite xref">RFC8445</a>]</span> to communicate with another RoQ endpoint, an ICE agent will have already performed ICE candidate pair connectivity checking before a QUIC connection can be opened for use with RoQ.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
 <p id="section-6.4-4">An implementer should be aware that it is possible for a RoQ connection to be subject to "ping"/liveness checks at several different levels:<a href="#section-6.4-4" class="pilcrow">¶</a></p>
@@ -1912,6 +1912,10 @@ The editors encourage feedback on this point.<a href="#section-8.1-4" class="pil
         <dd>
 <span class="refAuthor">Keranen, A.</span>, <span class="refAuthor">Holmberg, C.</span>, and <span class="refAuthor">J. Rosenberg</span>, <span class="refTitle">"Interactive Connectivity Establishment (ICE): A Protocol for Network Address Translator (NAT) Traversal"</span>, <span class="seriesInfo">RFC 8445</span>, <span class="seriesInfo">DOI 10.17487/RFC8445</span>, <time datetime="2018-07" class="refDate">July 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8445">https://www.rfc-editor.org/rfc/rfc8445</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8842">[RFC8842]</dt>
+        <dd>
+<span class="refAuthor">Holmberg, C.</span> and <span class="refAuthor">R. Shpount</span>, <span class="refTitle">"Session Description Protocol (SDP) Offer/Answer Considerations for Datagram Transport Layer Security (DTLS) and Transport Layer Security (TLS)"</span>, <span class="seriesInfo">RFC 8842</span>, <span class="seriesInfo">DOI 10.17487/RFC8842</span>, <time datetime="2021-01" class="refDate">January 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8842">https://www.rfc-editor.org/rfc/rfc8842</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8866">[RFC8866]</dt>
         <dd>
 <span class="refAuthor">Begen, A.</span>, <span class="refAuthor">Kyzivat, P.</span>, <span class="refAuthor">Perkins, C.</span>, and <span class="refAuthor">M. Handley</span>, <span class="refTitle">"SDP: Session Description Protocol"</span>, <span class="seriesInfo">RFC 8866</span>, <span class="seriesInfo">DOI 10.17487/RFC8866</span>, <time datetime="2021-01" class="refDate">January 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8866">https://www.rfc-editor.org/rfc/rfc8866</a>&gt;</span>. </dd>
@@ -1993,10 +1997,6 @@ The editors encourage feedback on this point.<a href="#section-8.1-4" class="pil
         <dd>
 <span class="refAuthor">Alvestrand, H.</span>, <span class="refTitle">"Overview: Real-Time Protocols for Browser-Based Applications"</span>, <span class="seriesInfo">RFC 8825</span>, <span class="seriesInfo">DOI 10.17487/RFC8825</span>, <time datetime="2021-01" class="refDate">January 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8825">https://www.rfc-editor.org/rfc/rfc8825</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8842">[RFC8842]</dt>
-        <dd>
-<span class="refAuthor">Holmberg, C.</span> and <span class="refAuthor">R. Shpount</span>, <span class="refTitle">"Session Description Protocol (SDP) Offer/Answer Considerations for Datagram Transport Layer Security (DTLS) and Transport Layer Security (TLS)"</span>, <span class="seriesInfo">RFC 8842</span>, <span class="seriesInfo">DOI 10.17487/RFC8842</span>, <time datetime="2021-01" class="refDate">January 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8842">https://www.rfc-editor.org/rfc/rfc8842</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC8843">[RFC8843]</dt>
         <dd>
 <span class="refAuthor">Holmberg, C.</span>, <span class="refAuthor">Alvestrand, H.</span>, and <span class="refAuthor">C. Jennings</span>, <span class="refTitle">"Negotiating Media Multiplexing Using the Session Description Protocol (SDP)"</span>, <span class="seriesInfo">RFC 8843</span>, <span class="seriesInfo">DOI 10.17487/RFC8843</span>, <time datetime="2021-01" class="refDate">January 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8843">https://www.rfc-editor.org/rfc/rfc8843</a>&gt;</span>. </dd>
@@ -2020,10 +2020,11 @@ The editors encourage feedback on this point.<a href="#section-8.1-4" class="pil
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">The authors thank Sam Hurst for sharing his thoughts about the challenges of developing SDP for RoQ, and for providing specific comments and draft text.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">The authors thank Bernard Aboba and Mathis Westerlund for comments on various previous versions of this specification, under a variety of draft names.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
-<p id="appendix-A-3">The authors thank Jonathan and Harald Alvestrand for their feedback on this version of the specification.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
-<p id="appendix-A-4">The authors thank Mathis Engelbart for his feedback on this specification, and for helping to keep this this specification aligned with <span>[<a href="#I-D.ietf-avtcore-rtp-over-quic" class="cite xref">I-D.ietf-avtcore-rtp-over-quic</a>]</span>.<a href="#appendix-A-4" class="pilcrow">¶</a></p>
-<p id="appendix-A-5">A significant amount of work on this draft happened while Spencer was affiliated with Tencent America LLC. Spencer still appreciates that support.<a href="#appendix-A-5" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">The authors thank Mathis Engelbart for his feedback on this specification, and for helping to keep this this specification aligned with <span>[<a href="#I-D.ietf-avtcore-rtp-over-quic" class="cite xref">I-D.ietf-avtcore-rtp-over-quic</a>]</span>.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-3">The authors thank Bernard Aboba and Mathis Westerlund for comments on various previous versions of this specification, under a variety of draft names.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
+<p id="appendix-A-4">The authors thank Jonathan Lennox and Harald Alvestrand for their feedback on this version of the specification.<a href="#appendix-A-4" class="pilcrow">¶</a></p>
+<p id="appendix-A-5">The authors thank Roman Shpount for helping us get the specification of "connection" and "tls-id" correct in our specification.<a href="#appendix-A-5" class="pilcrow">¶</a></p>
+<p id="appendix-A-6">A significant amount of work on this draft happened while Spencer was affiliated with Tencent America LLC. Spencer still appreciates that support.<a href="#appendix-A-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
