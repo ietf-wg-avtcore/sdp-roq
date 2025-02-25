@@ -286,9 +286,9 @@ This document assumes that an authenticated QUIC connection will be opened using
 
 The SDP "setup" attribute, defined for media over TCP in {{!RFC4145}}, is reused to indicate which endpoint initiates a QUIC connection (whether the endpoint actively opens a QUIC connection, or accepts an incoming QUIC connection. This attribute MUST be present in SDP offers and answers for RoQ.
 
-## The SDP "connection" and "tls-id" Attributes {#connect}
+## The SDP "tls-id" Attribute {#tls-id}
 
-The SDP "connection" and "tls-id" attributes are reused to indicate whether the endpoint will open a new QUIC connection, or reuse an existing QUIC connection. RoQ applications MUST use these attributes as described in {{Section 7 of !RFC8842}}.
+The SDP "tls-id" attribute is reused to allow either endpoint to decide whether to open a new QUIC connection, rather than reusing an existing QUIC connection, as described in {{Section 5.1 of !RFC8842}}. This attribute MUST be present in SDP offers and answers for RoQ.
 
 ## The SDP "fingerprint" Attribute {#fingerprint}
 
@@ -384,6 +384,7 @@ A complete example of an SDP offer using QUIC/RTP/AVPF might look like:
 |p=+1 617 555-6011 |Same as {{Section 5 of !RFC8866}}|
 |c=IN IP4 198.51.100.1 |Same as {{Section 5 of !RFC8866}}|
 |a=quic-datagrams | Expects to use QUIC DATAGRAMs in this RTP session, as defined in this specification |
+|a=tls-id:abc3de65cddef001be82 | As defined in {{Section 4 of !RFC8842}}|
 |t=0 0 |Same as {{Section 5 of !RFC8866}}|
 |fingerprint:sha-1 47:5D:A9:48:E4:BA:44:D9:B5:BC:31:AB:4B:80:06:11:3F:D5:F5:38 | {{Section 5 of !RFC8122}} |
 |---
