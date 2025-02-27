@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-25T01:04:53.056841+00:00",
+  "timestamp": "2025-02-27T01:04:37.109482+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -603,7 +603,7 @@
       "id": "PR_kwDOMBStD86Kuall",
       "title": "Last minute corrections before 2025-02 interim meeting",
       "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/17",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SpencerDawkins",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -612,17 +612,47 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-02-10T23:10:36Z",
-      "updatedAt": "2025-02-10T23:10:36Z",
+      "updatedAt": "2025-02-25T18:16:34Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "6a7c9b408dd0b5827a719eb14be82abef7bd3ee5",
       "headRepository": "ietf-wg-avtcore/sdp-roq",
       "headRefName": "pre-interim",
       "headRefOid": "9e0cd23e7aae92da225794ebf0350bce070d05c4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-25T15:36:08Z",
+      "mergedAt": "2025-02-25T15:36:08Z",
+      "mergedBy": "SpencerDawkins",
+      "mergeCommit": {
+        "oid": "106ec3fd2e68838290d2c178fb8e2d6ea1eb2049"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOMBStD86Mfh3S",
+      "title": "Initial changes incorporating AVTCORE interim meeting feedback",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/18",
+      "state": "MERGED",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-02-25T15:37:41Z",
+      "updatedAt": "2025-02-25T18:16:36Z",
+      "baseRepository": "ietf-wg-avtcore/sdp-roq",
+      "baseRefName": "main",
+      "baseRefOid": "106ec3fd2e68838290d2c178fb8e2d6ea1eb2049",
+      "headRepository": "ietf-wg-avtcore/sdp-roq",
+      "headRefName": "post-Feb-interim",
+      "headRefOid": "f07c918ec4b6c8879a5d9b79dad9e40b19817e53",
+      "closedAt": "2025-02-25T18:16:03Z",
+      "mergedAt": "2025-02-25T18:16:03Z",
+      "mergedBy": "SpencerDawkins",
+      "mergeCommit": {
+        "oid": "8838b8a62d91c83f3f4b1258b780bdf2ee8026e3"
+      },
       "comments": [],
       "reviews": []
     }
