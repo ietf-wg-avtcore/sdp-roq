@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-04T01:05:44.052066+00:00",
+  "timestamp": "2025-03-06T01:05:40.314051+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -653,6 +653,34 @@
       "mergeCommit": {
         "oid": "8838b8a62d91c83f3f4b1258b780bdf2ee8026e3"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOMBStD86NZeip",
+      "title": "Relocate questions for IETF 122 AVTCORE session",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/19",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-05T01:52:38Z",
+      "updatedAt": "2025-03-05T01:53:33Z",
+      "baseRepository": "ietf-wg-avtcore/sdp-roq",
+      "baseRefName": "main",
+      "baseRefOid": "8838b8a62d91c83f3f4b1258b780bdf2ee8026e3",
+      "headRepository": "ietf-wg-avtcore/sdp-roq",
+      "headRefName": "122-questions",
+      "headRefOid": "2a974cc821ec2db2ec0ea7abe1230e6979240aba",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
