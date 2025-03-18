@@ -72,6 +72,48 @@ A sample SDP offer appears in {{offer-example}}.
 
 This document has not yet been adopted by any IETF working group, so does not carry any special status within the IETF.
 
+## Notes for the Working Group {#wgnotes}
+
+The editors have these questions, and at a minimum, we need informed opinions from the working group. The editors encourage feedback on these points.
+
+### ICE versus other NAT traversal mechanisms {#q-non-ice}
+
+The proto names defined in {{rtp-protos}} do not distinguish between applications that use ICE for NAT traversal, and applications that do not perform NAT traversal.
+Those protos are intended for environments where the RoQ application knows the path IP addresses and port numbers, whether or not this knowledge is from ICE candidate selection.
+If an application uses a non-ICE method for NAT traversal, the discussion in {{ice-impl}} would apply.
+
+**QUESTION: Are there any non-ICE methods for NAT traversal that ought to be included?**
+
+### DATAGRAM signaling in SDP {#q-DATAGRAM}
+
+The need to include information about QUIC DATAGRAM usage in SDP signaling was challenged at the 2025-02-11 AVTCORE interim meeting.
+We noted (as the text in {{quic-datagrams}} says) that mentioning support for QUIC DATAGRAMs in SDP is at most advisory, and the QUIC Initial handshake is authoritative for whether the RTP session can use QUIC DATAGRAMs.
+The editors included this section at the request of implementers, and we said we would survey the people who asked for it to be included before making a final decision.
+
+**QUESTION: Are we ready to remove {{quic-datagrams}}?**
+
+### Interaction with MASQUE UDP-Connect {#q-UDP-Connect}
+
+We've been asked about interaction with UDP-Connect to open pinholes in corporate proxies.
+
+**QUESTION: What, if anything, do we need to say about that, in this specification?**
+
+### Specific RTCP feedback replacement with QUIC equivalents {#q-api}
+
+The API between QUIC and RoQ is, of course, a private matter, but the authors got feedback at the February 2025 AVTCORE interim meeting that it would be useful to "standardize", or at least provide guidance about, specific QUIC feedback substitutions so that each RoQ implementer doesn't have to perform this analysis from first principles.
+
+* We almost certainly need implementation and deployment experience before we can do more than offer a strawman proposal.
+* Spencer suggests that we include any IETF-recommended QUIC feedback substitutions in separate documents, as we do with RTCP extensions today, or even include them in the GitHub repository Wiki for this document, since these recommendations may change as the QUIC protocol evolves.
+
+**QUESTION: Are we ready to say anything about specific RTCP feedback replacements with QUIC equivalents in this specification, now, or in the near future?**
+
+### Recommendations for RoQ on multiple QUIC paths {#q-roq-mp}
+
+{{Section 3.1.6 of !I-D.ietf-avtcore-rtp-over-quic}} points to the possibility of RoQ exploiting multiple paths using the Multipath Extension for QUIC {{?I-D.draft-ietf-quic-multipath}}.
+More recent conversations at the 2025-02-11 AVTCORE interim meeting have questioned whether this is the right model for multiple RoQ paths, pointing to the (currently expired) Multipath RTP (MPRTP) draft as a more desireable direction, since the Multipath Extension for QUIC {{?I-D.draft-ietf-quic-multipath}} will not be aware that the QUIC payload is RTP, so will not be able to provide media-specific path selection.
+
+**QUESTION: Are we ready to say anything about how SDP might support multiple QUIC paths in this specification, now, or in the near future?**
+
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
@@ -112,8 +154,6 @@ The following is an update to the ABNF for an 'm' line, as specified by {{!RFC88
 ## RoQ RTP Protos {#rtp-protos}
 
 As much as possible, attributes used in this section are reused from other specifications, with references to the original definitions.
-
-**NOTE:** These proto names do not distinguish between applications that use ICE for NAT traversal, and applications that do not perform NAT traversal. If an application uses a non-ICE method for NAT traversal, the discussion in {{ice-impl}} applies.
 
 ### The QUIC/RTP/AVP proto {#avp}
 
@@ -184,8 +224,6 @@ The following is an update to the ABNF for an 'm' line, as specified by {{!RFC88
 This section describes new SDP attributes that are created for use with RoQ.
 
 ## RoQ QUIC-DATAGRAMs Attribute {#quic-datagrams}
-
-> **Editors' Note:** The need to include information about QUIC DATAGRAM usage in SDP signaling was challenged at the 2025-02-11 AVTCORE interim meeting. We noted (as the text below says) that mentioning support for QUIC DATAGRAMs in SDP is at most advisory, and the QUIC Initial handshake is authoritative for whether the RTP session can use QUIC DATAGRAMs. The editors initially included this section at the request of implementers, and we will survey the people who asked for it to be included before making a final decision. The editors encourage feedback on this point.
 
 As noted in {{!I-D.ietf-avtcore-rtp-over-quic}}, the RoQ specification only assumes a baseline QUIC implementation as defined in {{!RFC8999}}, {{!RFC9000}}, {{!RFC9001}}, and {{!RFC9002}}, and this baseline does not provide unreliable datagrams, which are defined in {{!RFC9221}}.
 
@@ -280,8 +318,6 @@ We have two goals for this section:
 
 This document assumes that an authenticated QUIC connection will be opened using a "roq" ALPN or some other ALPN, as described in Section 4.1 of {{!I-D.ietf-avtcore-rtp-over-quic}}.
 
-**Editor's Note:** Do we need to mention the SDP "tls-id" attribute, defined in {{?RFC8842}}? That spec is DTLS-specific, but whether it would also apply to TLS/QUIC connections changing five-tuples isn't clear to Spencer. This may require some conversations about QUIC connection migration (and, of course, Multipath QUIC, when {{?I-D.draft-ietf-quic-multipath}} leaves the QUIC working group).
-
 ## The SDP "setup" Attribute {#setup}
 
 The SDP "setup" attribute, defined for media over TCP in {{!RFC4145}}, is reused to indicate which endpoint initiates a QUIC connection (whether the endpoint actively opens a QUIC connection, or accepts an incoming QUIC connection. This attribute MUST be present in SDP offers and answers for RoQ.
@@ -306,8 +342,6 @@ Because QUIC itself uses the TLS handshake as described in {{!RFC9001}}, the par
 
 Beyond those normative requirements, there are topics that are worth considering as part of implementation work, because we have been asked, "but what about the grommet SDP extension?" These topics are not part of the normative "SDP for RoQ" specification, but are gathered here for now. These topics might better appear in an appendix, a separate "SDP for RoQ Implementation Guide", or even best included in the GitHub repository Wiki for this document, because that would allow us to maintain this material on an ongoing basis.
 
-**Editors' Question:** We've been asked about interaction with UDP-Connect to open pinholes in corporate proxies. What is there to say about that, in this specification?
-
 ## Bundling Considerations {#bundle-cons}
 
 {{?RFC8843}} describes a  Session Description Protocol (SDP) Grouping Framework extension called 'BUNDLE'. The extension can be used with the SDP offer/answer mechanism to negotiate the usage of a single transport (5-tuple) for sending and receiving media described by multiple SDP media descriptions ("m=" sections).
@@ -325,8 +359,6 @@ If an application uses multiple 5-tuples in order to make use of the Multipath E
 It is assumed that an implementer will review the application requirements, the RTP proto in use, the available RTCP feedback for the media types being transferred, and available QUIC statistics, and will do the right thing.
 
 More information about what RTCP feedback might be replaced by QUIC statistics, and what is possible, appears in {{Appendix B of !I-D.ietf-avtcore-rtp-over-quic}}.
-
-**Editors' Note:** The API between QUIC and RoQ is, of course, a private matter, but the authors got feedback at the February 2025 AVTCORE interim meeting that it would be useful to "standardize", or at least provide guidance about, specific QUIC feedback substitutions so that each RoQ implementer doesn't have to perform this analysis from first principles. **We almost certainly need implementation and deployment experience before we can do more than offer a strawman proposal. Spencer suggests that we include any IETF-recommended QUIC feedback substitutions in separate documents, as we do with RTCP extensions today, or even include them in the GitHub repository Wiki for this document, since these recommendations may change as the QUIC protocol evolves. The editors encourage feedback on these points.**
 
 ## Implications of Congestion Control {#cong-ctrl}
 
@@ -414,9 +446,6 @@ This document currently defines the QUIC/RTP/SAVP and QUIC/RTP/SAVPF secure prof
 * If a RoQ RTP endpoint is communicating with a non-RoQ RTP endpoint using an Top-PtP-Translator RTP middlebox (as described in {{Section 3.2.1 of !RFC7667}}, the RoQ endpoint might reasonably use a secure AVP profile over QUIC when sending to the middlebox, because the sending endpoint doesn't have any way to control or even discover whether the RTP middlebox used a secure profile when forwarding RTP to a non-RoQ endpoint.
 
 Alternatively, an implementation can use some approach like SFRAME, as described in {{!RFC9605}}, to achieve end-to-end media security, at the price of disallowing some types of translating middleboxes (for example, Topo-Media-Translator middleboxes, as described in {{Section 3.2.1.2 of !RFC7667}}).
-
-**Editors' Note:** We need discussion within the working group to determine whether we do need to include QUIC/RTP/SAVP and QUIC/RTP/SAVPF in this specification.
-The editors encourage feedback on this point.
 
 # IANA Considerations
 
