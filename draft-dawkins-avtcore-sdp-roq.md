@@ -74,15 +74,45 @@ This document has not yet been adopted by any IETF working group, so does not ca
 
 ## Notes for the Working Group {#wgnotes}
 
-The editors have these questions, and at a minimum, we need informed opinions from the working group.
+The editors have these questions, and at a minimum, we need informed opinions from the working group. The editors encourage feedback on these points.
 
-> **QUESTION:** The proto names defined in {{rtp-protos}} do not distinguish between applications that use ICE for NAT traversal, and applications that do not perform NAT traversal. Those protos are intended for environments where the RoQ application knows the path IP addresses and port numbers, whether or not this knowledge is from ICE candidate selection. If an application uses a non-ICE method for NAT traversal, the discussion in {{ice-impl}} would apply. **Are there any non-ICE methods for NAT traversal that ought to be included?**
+### ICE versus other NAT traversal mechanisms {#q-non-ice}
 
-> **QUESTION:** The need to include information about QUIC DATAGRAM usage in SDP signaling was challenged at the 2025-02-11 AVTCORE interim meeting. We noted (as the text in {{quic-datagrams}} says) that mentioning support for QUIC DATAGRAMs in SDP is at most advisory, and the QUIC Initial handshake is authoritative for whether the RTP session can use QUIC DATAGRAMs. The editors included this section at the request of implementers, and we will survey the people who asked for it to be included before making a final decision. **The editors encourage feedback on this point.**
+The proto names defined in {{rtp-protos}} do not distinguish between applications that use ICE for NAT traversal, and applications that do not perform NAT traversal.
+Those protos are intended for environments where the RoQ application knows the path IP addresses and port numbers, whether or not this knowledge is from ICE candidate selection.
+If an application uses a non-ICE method for NAT traversal, the discussion in {{ice-impl}} would apply.
 
-> **QUESTION:** We've been asked about interaction with UDP-Connect to open pinholes in corporate proxies. **What is there to say about that, in this specification?**
+**QUESTION: Are there any non-ICE methods for NAT traversal that ought to be included?**
 
->**QUESTION:** The API between QUIC and RoQ is, of course, a private matter, but the authors got feedback at the February 2025 AVTCORE interim meeting that it would be useful to "standardize", or at least provide guidance about, specific QUIC feedback substitutions so that each RoQ implementer doesn't have to perform this analysis from first principles. **We almost certainly need implementation and deployment experience before we can do more than offer a strawman proposal. Spencer suggests that we include any IETF-recommended QUIC feedback substitutions in separate documents, as we do with RTCP extensions today, or even include them in the GitHub repository Wiki for this document, since these recommendations may change as the QUIC protocol evolves. The editors encourage feedback on these points.**
+### DATAGRAM signaling in SDP {#q-DATAGRAM}
+
+The need to include information about QUIC DATAGRAM usage in SDP signaling was challenged at the 2025-02-11 AVTCORE interim meeting.
+We noted (as the text in {{quic-datagrams}} says) that mentioning support for QUIC DATAGRAMs in SDP is at most advisory, and the QUIC Initial handshake is authoritative for whether the RTP session can use QUIC DATAGRAMs.
+The editors included this section at the request of implementers, and we said we would survey the people who asked for it to be included before making a final decision.
+
+**QUESTION: Are we ready to remove {{quic-datagrams}}?**
+
+### Interaction with MASQUE UDP-Connect {#q-UDP-Connect}
+
+We've been asked about interaction with UDP-Connect to open pinholes in corporate proxies.
+
+**QUESTION: What, if anything, do we need to say about that, in this specification?**
+
+### Specific RTCP feedback replacement with QUIC equivalents {#q-api}
+
+The API between QUIC and RoQ is, of course, a private matter, but the authors got feedback at the February 2025 AVTCORE interim meeting that it would be useful to "standardize", or at least provide guidance about, specific QUIC feedback substitutions so that each RoQ implementer doesn't have to perform this analysis from first principles.
+
+* We almost certainly need implementation and deployment experience before we can do more than offer a strawman proposal.
+* Spencer suggests that we include any IETF-recommended QUIC feedback substitutions in separate documents, as we do with RTCP extensions today, or even include them in the GitHub repository Wiki for this document, since these recommendations may change as the QUIC protocol evolves.
+
+**QUESTION: Are we ready to say anything about specific RTCP feedback replacements with QUIC equivalents in this specification, now, or in the near future?**
+
+### Recommendations for RoQ on multiple QUIC paths {#q-roq-mp}
+
+{{Section 3.1.6 of !I-D.ietf-avtcore-rtp-over-quic}} points to the possibility of RoQ exploiting multiple paths using the Multipath Extension for QUIC {{?I-D.draft-ietf-quic-multipath}}.
+More recent conversations at the 2025-02-11 AVTCORE interim meeting have questioned whether this is the right model for multiple RoQ paths, pointing to the (currently expired) Multipath RTP (MPRTP) draft as a more desireable direction, since the Multipath Extension for QUIC {{?I-D.draft-ietf-quic-multipath}} will not be aware that the QUIC payload is RTP, so will not be able to provide media-specific path selection.
+
+**QUESTION: Are we ready to say anything about how SDP might support multiple QUIC paths in this specification, now, or in the near future?**
 
 # Conventions and Definitions
 
