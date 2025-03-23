@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-20T01:06:06.493235+00:00",
+  "timestamp": "2025-03-23T01:12:03.423981+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -328,6 +328,22 @@
       "body": "This issue is the counterpart to Issue [224](https://github.com/mengelbart/rtp-over-quic-draft/issues/224) in the[rtp-over-quic-draft](https://github.com/mengelbart/rtp-over-quic-draft/) Github repo. \r\n\r\nFor background, see [the June 2024 AVTCORE virtual interim meeting notes](https://notes.ietf.org/notes-ietf-interim-2024-avtcore-02-avtcore?edit) for both [RoQ](https://youtu.be/9K6lLFngMYM?si=sskgPTM4fLVC_Pdn&t=1712) and [SDP-RoQ](https://youtu.be/9K6lLFngMYM?si=TI0iJWv7RRcvvarq&t=3246) sessions. \r\n\r\nThis issue is intended to capture what is not part of the current RoQ specification, and is not specifically tied to SDP for RoQ. \r\n\r\nAs a starting point, this would include options for opening, and for reusing, a QUIC connection for RoQ.\r\n\r\nThese options include (at least) \r\n\r\n- manual configuration of an endpoint, \r\n- reuse of a QUIC connection that was used for SDP, \r\n- use of the \"roq\" APLN defined in the RoQ specification, and \r\n- using SDP to open and reuse a QUIC connection, similarly to the way RTP over TCP uses SDP to open and reuse TCP connections. \r\n\r\nThis issue will likely grow before it shrinks!",
       "createdAt": "2024-07-20T04:31:45Z",
       "updatedAt": "2024-07-20T04:31:46Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 20,
+      "id": "I_kwDOMBStD86u6R7s",
+      "title": "redundant statement about QUIC connection migration",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/issues/20",
+      "state": "OPEN",
+      "author": "marten-seemann",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "> If an application uses multiple 5-tuples in order to allow QUIC\n   Connection Migration as described in Section 9 of [RFC9000], it is\n   assumed that only one QUIC path will be active at any given time.\n\nThis is an inherent property of QUIC connection migration: While the transport layer may probe multiple paths at the time, application data can only be sent on one path.",
+      "createdAt": "2025-03-20T08:28:13Z",
+      "updatedAt": "2025-03-20T08:28:13Z",
       "closedAt": null,
       "comments": []
     }
