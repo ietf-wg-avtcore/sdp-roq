@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-08T01:12:42.960992+00:00",
+  "timestamp": "2025-06-01T01:26:49.081940+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -47,6 +47,26 @@
       "name": "wontfix",
       "description": "This will not be worked on",
       "color": "ffffff"
+    },
+    {
+      "name": "active",
+      "description": "Work has started (tag people who are doing the work!)",
+      "color": "fef2c0"
+    },
+    {
+      "name": "IETF123",
+      "description": "PR text due by IETF 123",
+      "color": "0D6733"
+    },
+    {
+      "name": "wg-discuss",
+      "description": "We need input from the working group to make a choice",
+      "color": "CD40B1"
+    },
+    {
+      "name": "notnow",
+      "description": "\"Not Now\" - the issue is real, but the authors are deferring work on it for now.",
+      "color": "bfdadc"
     }
   ],
   "issues": [
@@ -55,32 +75,48 @@
       "id": "I_kwDOMBStD86K88gs",
       "title": "Consider including a=fingerprint mechanism in a p2p SDP example",
       "url": "https://github.com/ietf-wg-avtcore/sdp-roq/issues/1",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "SpencerDawkins",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "From @juberti on AVTCORE mailing list: \r\n\r\n> For c2s use, the SDP you have outlined should work well. For p2p usage, we should include the a=fingerprint mechanism used in https://datatracker.ietf.org/doc/html/rfc5763 to allow validation of self-signed peer certs.",
       "createdAt": "2022-02-05T00:23:54Z",
-      "updatedAt": "2024-06-03T13:57:00Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-05-29T12:44:47Z",
+      "closedAt": "2025-05-29T12:44:46Z",
+      "comments": [
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This was included in #11. @juberti, thank you for raising the issue. ",
+          "createdAt": "2025-05-29T12:44:46Z",
+          "updatedAt": "2025-05-29T12:44:46Z"
+        }
+      ]
     },
     {
       "number": 2,
       "id": "I_kwDOMBStD86K89Qa",
       "title": "Consider including a=tls-id in SDP",
       "url": "https://github.com/ietf-wg-avtcore/sdp-roq/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "SpencerDawkins",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "From @juberti, on the AVTCORE mailing list: \r\n\r\n> It would probably be a good idea for the SDP to include a=tls-id, defined in https://datatracker.ietf.org/doc/html/rfc8842, to ensure endpoints can tell when the security handshake is being restarted, as discussed in the cited RFC. This would probably obivate the need for a=connection:new as well (which is not typically used in DTLS-SRTP).",
       "createdAt": "2022-02-05T00:21:13Z",
-      "updatedAt": "2024-06-03T13:58:17Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-05-29T12:41:56Z",
+      "closedAt": "2025-05-29T12:41:55Z",
+      "comments": [
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This was included in #18. @Juberti, thank you for initially raising the issue. ",
+          "createdAt": "2025-05-29T12:41:55Z",
+          "updatedAt": "2025-05-29T12:41:55Z"
+        }
+      ]
     },
     {
       "number": 3,
@@ -90,28 +126,41 @@
       "state": "OPEN",
       "author": "SpencerDawkins",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
-      "labels": [],
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [
+        "active",
+        "IETF123"
+      ],
       "body": "From @cdh4u - Please remember to check whether there are any BUNDLE impacts. Section 9 of BUNDLE contains RTP considerations for BUNDLE, so I suggest to check whether there is anything that needs to be updated/modified for QUIC usage.",
       "createdAt": "2022-01-30T00:48:23Z",
-      "updatedAt": "2024-06-03T13:58:49Z",
+      "updatedAt": "2025-05-29T15:47:41Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We had a LOT of discussion about BUNDLE and ROQ flow-ids in the run-up to IETF 122. I'm leaving this one open for now. ",
+          "createdAt": "2025-05-29T15:38:53Z",
+          "updatedAt": "2025-05-29T15:38:53Z"
+        }
+      ]
     },
     {
       "number": 4,
       "id": "I_kwDOMBStD86LNHmm",
       "title": "Proposal for identifying RoQ Flow IDs",
       "url": "https://github.com/ietf-wg-avtcore/sdp-roq/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "samhurst",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "I've been separately experimenting with describing RoQ sessions in an implementation of my [old SIP-over-QUIC draft](https://datatracker.ietf.org/doc/draft-hurst-sip-quic/), which uses SDP offer/answer underneath.\r\n\r\nI've been prodding at this for a while and gone through a few iterations, and what I've landed on is adding a new attribute that describes the RoQ Flow Identifier.\r\n\r\nLooking at the prior-art in this area, I've found [DCCP-UDP](https://datatracker.ietf.org/doc/html/rfc6773) and [SCTP-DTLS](https://datatracker.ietf.org/doc/html/rfc8841). In both of these cases, the transport protocol carrying the RTP (DCCP and SCTP) are encapsulated in another protocol (UDP and UDP/DTLS or TCP/DTLS respectively). This is the same as RoQ - this is RTP being encapsulated in QUIC transport, therefore I think this is the right way to do it.\r\n\r\nTaking DCCP as one example, the port of the encapsulating UDP packet goes in the media (\"m=\") line, and then the DCCP port number does in a [`dccp-port` attribute](https://datatracker.ietf.org/doc/html/rfc6773#section-5.2). This spec also specifies what to do with a media description that contains the `rtcp` or `rtcp-mux` attributes.\r\n\r\nTherefore, for RoQ the UDP port for the QUIC transport connection goes into the media (\"m=\") line, and then we have to describe the Flow Identifier in an attribute, which I've called `roq-flow-id`. The RoQ-SDP spec should probably mention the specifics about mapping RoQ Flow Identifiers onto the `rtcp` attribute as well. The concern here should be that some parsers will assume that the `rtcp` attribute will contain a value only between 1 and 65535 (i.e. a 16-bit unsigned integer), whereas an RTP Flow Identifier is defined as a 62-bit unsigned (variable length QUIC) integer. The ABNF for the `port` attribute is `1*(DIGIT)`, so in theory it should be fine as the limit is only given in a comment, but an implementer-beware message should suffice here I think.\r\n\r\nHere's an example SDP offer from my implementation:\r\n\r\n```o=samuelh 34178951687 34178951687 IN IP4 10.44.0.77:43243\r\ns= \r\ni=SIP-over-QUIC Offer/Answer example\r\nc=IN IP4 10.44.0.77:43243\r\nt=0 0\r\nm=video 43243 QUIC/RTP/AVPF 96\r\na=roq-flow-id:0\r\na=rtcp:1\r\na=rtpmap:96 H264/90000\r\na=fmtp:96 profile-level-id=640020;packetization-mode=1;sprop-parameter-sets=Z0LAHtkAyD2wFqDAwNS\r\na=imageattr:96 send [x=1280,y=720,sar=1.0]\r\na=sendonly\r\nb=AS:5000\r\n```\r\n\r\nLet me know what you think. I can try and come up with a pull request with some text to go into the draft for this if you'd like.",
       "createdAt": "2024-06-05T10:08:40Z",
-      "updatedAt": "2024-11-25T13:29:52Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-29T14:59:32Z",
+      "closedAt": "2025-05-29T14:59:31Z",
       "comments": [
         {
           "author": "SpencerDawkins",
@@ -161,6 +210,13 @@
           "body": "> I think RTP already has mechanisms that we can utilise for this, and it's not something RoQ needs to be bothering with. RoQ is just the framing mechanism between a pair of peers, my understanding is that RoQ does not (and my strong opinion is that it **should not**) imply any equivalency between RTP media sessions and QUIC/RoQ sessions. I actually had an [explicit section describing this in my previous QRT draft](https://datatracker.ietf.org/doc/html/draft-hurst-quic-rtp-tunnelling-01#section-3).\r\n> \r\n> I think the closest I can think of for @SpencerDawkins 's **set** idea are the [Media Stream Identification](https://www.rfc-editor.org/rfc/rfc3388#section-3) and [Group](https://www.rfc-editor.org/rfc/rfc3388#section-4) attributes.\r\n\r\n@samhurst - I was wondering about that myself - thank you for nudging me in that direction!\r\n\r\n> As a side note for @mengelbart - I just reviewed [rtp-over-quic-12](https://www.ietf.org/archive/id/draft-ietf-avtcore-rtp-over-quic-12.html) while tying this response and found a couple of references to a \"RoQ (media) session\" which might be worthwhile defining or removing - your choice.\r\n\r\nMy suggestion was to define it, especially if we can define it using existing RTP mechanisms. We seemed to fall into that term naturally. But I can talk with @mengelbart about that more. \r\n\r\n",
           "createdAt": "2024-11-25T13:29:51Z",
           "updatedAt": "2024-11-25T13:29:51Z"
+        },
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@samhurst - this was fixed in #10. Thank you for raising the issue. ",
+          "createdAt": "2025-05-29T14:59:31Z",
+          "updatedAt": "2025-05-29T14:59:31Z"
         }
       ]
     },
@@ -176,7 +232,7 @@
       "labels": [],
       "body": "The draft currently doesn't specify how to identify a QUIC transport session that will carry the RTP-over-QUIC traffic. I think we could adopt the COMEDIA mechanisms specified for TCP and adapt them to QUIC. [RFC4145](https://www.rfc-editor.org/rfc/rfc4145) specifies how to do it with regular TCP and section 8 describes how to apply it to protocols that are not TCP. Then there's [RFC8122](https://www.rfc-editor.org/rfc/rfc8122) which adds things about TLS (which I haven't read in detail yet so I don't know if this is helpful, but I'm linking it here anyway just in case).\r\n\r\nThe only concern I have is that existing COMEDIA options all use the 5-tuple to uniquely identify a transport connection. However, a QUIC connection is not bound to a single 5-tuple, as it can perform connection migration. In future, this would also preclude the description of multipath QUIC sessions.\r\n\r\nIn the case where a new connection is established, this should be fine - but the concern here is about reuse of existing connections. Given that QUIC allows multiplexing of traffic, there's definitely a use-case where you could negotiate SDP media descriptions using something like SIP-over-QUIC using bidirectional streams, and then re-use the same transport connection with the callee/caller to run the RTP over unidirectional streams.\r\n\r\nI don't have a good answer to the identification of extant QUIC transport associations at the moment, so this is more of an open question. We also can't use QUIC connection IDs as for one they can be generated and revoked at any time by the transport layer, and two I feel that putting connection IDs in an SDP media description is a security problem as it means an attacker could gain prior knowledge of some of the things which might be present in a QUIC transport packet, and use that to help attack the encryption context.",
       "createdAt": "2024-06-05T10:27:53Z",
-      "updatedAt": "2024-11-13T12:14:57Z",
+      "updatedAt": "2025-05-29T16:11:36Z",
       "closedAt": null,
       "comments": [
         {
@@ -199,6 +255,13 @@
           "body": "It is a very hard problem indeed, as we're trying to do something that QUIC was expressly designed to avoid. I still think that adopting the COMEDIA approach to specify new/existing connections is required, and it's always an option to be more prescriptive than the QUIC spec allows - for example, it could be written that we can't reuse QUIC connections that are multiplexed on the same 5-tuple. The SDP answerer would be expected to change the connection attribute to \"new\" if this condition cannot be met, as specified in [section 5.1 of RFC 4145](https://www.rfc-editor.org/rfc/rfc4145#section-5.1).\r\n\r\nI think it's also worth thinking about whether we want to consider the capabilities of extant QUIC connections to slim down the pool of potential reuse candidates. For example, if you've got three QUIC connections to choose from, you could look at the negotiated ALPNs for those connections and decide whether they would be compatible. For example, any `h3` ones wouldn't be compatible, but any with `roq` would be. Equally, any other ALPNs that include scope for carrying RoQ frames (such as SIP-over-QUIC, which may be the same connection exchanging these SDP documents) could be considered.\r\n\r\nI'm not sure the QUIC-LB approach would really work here, as it will make a lot of assumptions on how QUIC stacks work. The connection would need to support it right from the beginning, and if the connection is owned by something like a web browser I don't know what level of imposition we can realistically make on how they generate connection IDs. And indeed, it implies a much tighter bindings to the internals of a QUIC connection than realistically RoQ or SDP needs to have.\r\n\r\nI have also tried looking for other attributes or features that already exist in QUIC that we could use, and I'm coming up a bit short. We could reuse the token which is exchanged by `NEW_TOKEN` frames, but this is used to validate connection paths so this would be information leakage that an attacker could exploit to make the QUIC stack do something odd, same as disclosing connection IDs. The only other option I've come up with is to invent a new transport parameter that just stores a random value which is otherwise never shared between endpoints as a way of identifying QUIC connections out-of-band, but again this requires more fiddling deeper in the QUIC stack.",
           "createdAt": "2024-11-13T12:14:55Z",
           "updatedAt": "2024-11-13T12:14:55Z"
+        },
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Upon reflection, I think much of this is related to consideration of BUNDLE in #3. ",
+          "createdAt": "2025-05-29T16:11:35Z",
+          "updatedAt": "2025-05-29T16:11:35Z"
         }
       ]
     },
@@ -207,15 +270,15 @@
       "id": "I_kwDOMBStD86LNdkv",
       "title": "How to describe whether data will be sent over streams or datagrams",
       "url": "https://github.com/ietf-wg-avtcore/sdp-roq/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "samhurst",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Currently, there's no specified way for a a media description to describe how RTP and RTCP data is transmitted, either over QUIC streams or DATAGRAM frames.\r\n\r\nI seem to remember in the past that putting `stream` or `dgram` in the proto field of the media line (i.e. `QUIC/stream/RTP/AVP`), which I've been experimenting with but I don't think this is quite right.\r\n\r\nThe latest RoQ draft specifies that [RTP can be sent on streams, DATAGRAM frames or a mixture of both](https://www.ietf.org/archive/id/draft-ietf-avtcore-rtp-over-quic-10.html#name-rtp-with-quic-streams-quic-). With my implementer hat on, here's some use-cases that I can think of where I might want to do different things:\r\n\r\n- Send one RTP session over streams, and another over DATAGRAM frames (i.e. a more important stream that I'm less tolerant of loss on against something I don't mind loss on)\r\n- Within a single RTP session, sending all RTP over streams and all RTCP over DATAGRAM frames.\r\n- Within a single RTP session that in this case is sending a video stream, sending all RTP packets containing I-frames over streams for reliability, and then B- and P-frames over DATAGRAM frames.\r\n\r\nI'm sure there are potentially other use-cases, but these are the ones that I can think of so far.\r\n\r\nNow, looking at QUIC transport itself, DATAGRAM frames are an extension that may not be available. So a soft-touch approach to this might be that the SDP media description simply states that the QUIC connection should be negotiated with support for DATAGRAM frames, and then leave the actual usage up to the implementations.\r\n\r\nOtherwise, might there be a reason why we want to describe how streams/datagrams will be used in a given media session? Maybe an implementation doesn't want to have too much DATAGRAM processing to do, so it could reject an offer that includes lots of DATAGRAM usage. I don't have a good answer to this one either, so I'll leave this as an open question too.",
       "createdAt": "2024-06-05T10:48:09Z",
-      "updatedAt": "2024-11-13T12:28:00Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-29T13:06:25Z",
+      "closedAt": "2025-05-29T13:06:24Z",
       "comments": [
         {
           "author": "SpencerDawkins",
@@ -258,6 +321,13 @@
           "body": "I don't quite know how RoQ \"announces\" support for datagrams. Is it not more that if support for sending RoQ datagrams is implied if the transport has exchanged `max_datagram_frame_size` transport parameters with a non-zero size?\r\n\r\nIt's also not really unilateral, as each endpoint in a QUIC connection can specify different values for the `max_datagram_frame_size` transport parameter, leading to only one endpoint being able to transmit datagrams. I think it does need to be negotiated in SDP, because the transport parameter says what the given endpoint is willing to receive. So in the case where the endpoint that creates the SDP wants to be able to use datagrams to send media, it needs to tell the remote endpoint to set the `max_datagram_frame_size` transport parameter to an appropriate value.\r\n\r\nI do agree that the `a=quic-datagrams` attribute is cleaner, and when combined with the direction attributes would give a set of rules for an endpoint when opening a new QUIC connection for that media session.",
           "createdAt": "2024-11-13T12:27:58Z",
           "updatedAt": "2024-11-13T12:27:58Z"
+        },
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We added a=quic-datagrams in #10 ",
+          "createdAt": "2025-05-29T13:06:24Z",
+          "updatedAt": "2025-05-29T13:06:24Z"
         }
       ]
     },
@@ -269,11 +339,15 @@
       "state": "OPEN",
       "author": "samhurst",
       "authorAssociation": "NONE",
-      "assignees": [],
-      "labels": [],
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [
+        "wg-discuss"
+      ],
       "body": "This is related to my questions in #6, but this is something I've been experimenting on so wanted to surface it somewhere, and as this may result in some suggestions that go back to the RoQ draft itself I thought I won't detract from discussion there with this.\r\n\r\nIn my implementation, I've made it so the way that RTP frames are payloaded into QUIC streams can be controlled in the following ways:\r\n\r\n- All RTP frames on a single stream (until the QUIC stream runs out of sending credit)\r\n- All RTP frames for one or more GOPs on a single stream\r\n- All RTP frames for one or more frames on a single stream\r\n\r\nI control this with a \"stream boundary\" and \"stream packing\" parameter. The \"stream boundary\" parameter can be set to single, gop or frame, and then the \"stream packing\" parameter sets the number of GOPs or frames to put in each stream.\r\n\r\nThe reason you might want to do this is to be able to send `STOP_SENDING` or reset a stream you're no longer interested in, to get the sender to catch up to the latest frames.\r\n\r\nThe RoQ draft doesn't say anything on this subject, merely leaves it up to implementations to decide. I wonder whether this is something that we might want to specify more concretely, and where would be the best place to put it? Is there a use-case for a caller requesting a stream (i.e. `a=recvonly`) and then specifying how it wants that stream to be delivered? I've added `roq-stream-boundary` and `roq-stream-packing` attributes to my WIP implementation and have been experimenting with it a little bit with the intention of seeing whether it can positively affect latency on received streams.",
       "createdAt": "2024-06-05T11:01:20Z",
-      "updatedAt": "2024-11-11T19:13:51Z",
+      "updatedAt": "2025-05-29T16:13:14Z",
       "closedAt": null,
       "comments": [
         {
@@ -324,10 +398,12 @@
       "assignees": [
         "SpencerDawkins"
       ],
-      "labels": [],
+      "labels": [
+        "notnow"
+      ],
       "body": "This issue is the counterpart to Issue [224](https://github.com/mengelbart/rtp-over-quic-draft/issues/224) in the[rtp-over-quic-draft](https://github.com/mengelbart/rtp-over-quic-draft/) Github repo. \r\n\r\nFor background, see [the June 2024 AVTCORE virtual interim meeting notes](https://notes.ietf.org/notes-ietf-interim-2024-avtcore-02-avtcore?edit) for both [RoQ](https://youtu.be/9K6lLFngMYM?si=sskgPTM4fLVC_Pdn&t=1712) and [SDP-RoQ](https://youtu.be/9K6lLFngMYM?si=TI0iJWv7RRcvvarq&t=3246) sessions. \r\n\r\nThis issue is intended to capture what is not part of the current RoQ specification, and is not specifically tied to SDP for RoQ. \r\n\r\nAs a starting point, this would include options for opening, and for reusing, a QUIC connection for RoQ.\r\n\r\nThese options include (at least) \r\n\r\n- manual configuration of an endpoint, \r\n- reuse of a QUIC connection that was used for SDP, \r\n- use of the \"roq\" APLN defined in the RoQ specification, and \r\n- using SDP to open and reuse a QUIC connection, similarly to the way RTP over TCP uses SDP to open and reuse TCP connections. \r\n\r\nThis issue will likely grow before it shrinks!",
       "createdAt": "2024-07-20T04:31:45Z",
-      "updatedAt": "2024-07-20T04:31:46Z",
+      "updatedAt": "2025-05-29T16:58:48Z",
       "closedAt": null,
       "comments": []
     },
@@ -339,11 +415,127 @@
       "state": "OPEN",
       "author": "marten-seemann",
       "authorAssociation": "NONE",
-      "assignees": [],
-      "labels": [],
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [
+        "question"
+      ],
       "body": "> If an application uses multiple 5-tuples in order to allow QUIC\n   Connection Migration as described in Section 9 of [RFC9000], it is\n   assumed that only one QUIC path will be active at any given time.\n\nThis is an inherent property of QUIC connection migration: While the transport layer may probe multiple paths at the time, application data can only be sent on one path.",
       "createdAt": "2025-03-20T08:28:13Z",
-      "updatedAt": "2025-03-20T08:28:13Z",
+      "updatedAt": "2025-05-29T16:13:43Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi, @marten-seemann, you're correct that this is redundant for RFC9000 QUIC. The statement is actually a race condition between two things: \n\n- @mengelbart and I made a conscious decision for the RoQ draft that we were only referencing QUIC mechanisms that had at least cleared the QUIC working group, and @victorpascualavila and I have been working under the same self-imposed constraint in SDP-RoQ, BUT\n- I knew that the QUIC working group has been working on https://datatracker.ietf.org/doc/draft-ietf-quic-multipath/, so was trying to anticipate what we might need to support in SDP-RoQ (and, of course, in RoQ, but that's a related conversation).\n\nAt this moment, QUIC has https://datatracker.ietf.org/doc/draft-ietf-quic-multipath/ in WGLC, so the draft might be headed out of the working group before too terribly long. I see reviews from @tfpauly and @martinthomson, so that's probably not immediate. \n\nWould you object if I left this statement in the draft for a bit, as a reminder for myself, and left this issue open? \n\nThe alternative would be to reference https://datatracker.ietf.org/doc/draft-ietf-quic-multipath/, but I'd be more comfortable improving our explanation if I have a better idea of where that draft is likely to be soon. \n\n",
+          "createdAt": "2025-05-29T16:09:46Z",
+          "updatedAt": "2025-05-29T16:09:46Z"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "I_kwDOMBStD8640xz5",
+      "title": "Improve guidance on how ICE should work with RoQ",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/issues/21",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [
+        "notnow"
+      ],
+      "body": "From @alvestrand, in private email: \n\n> Section 6.4 is weak on guidance on how ICE with RoQ should work - should\n> there be ICE packets outside of the RoQ connection, or inside it? If\n> inside, are we using the \"demux\" method (first 2 bits) of distinguishing\n> ICE from RTP?\n> \n> There is no mechanism defined to specify RoQ as an ICE candidate in the\n> same way as a TCP or UDP candidate can be specified. This has\n> implication for the \"proto\" field - if you want to make it impossible to\n> pick and choose between UDP, TCP and RoQ connections, probably mention\n> this explicitly as \"out of scope - ICE with RoQ is for further study\".",
+      "createdAt": "2025-05-29T16:25:22Z",
+      "updatedAt": "2025-05-29T16:56:03Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 22,
+      "id": "I_kwDOMBStD86403vT",
+      "title": "Are we ready to remove an advisory indication that a RoQ endpoint expects to use QUIC DATAGRAMs?",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/issues/22",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [
+        "wg-discuss"
+      ],
+      "body": "As noted in https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-datagram-signaling-in-sdp, \n\n> The need to include information about QUIC DATAGRAM usage in SDP signaling was challenged at the 2025-02-11 AVTCORE interim meeting. We noted (as the text in Section 4.1 says) that mentioning support for QUIC DATAGRAMs in SDP is at most advisory, and the QUIC Initial handshake is authoritative for whether the RTP session can use QUIC DATAGRAMs. The editors included this section at the request of implementers, and we said we would survey the people who asked for it to be included before making a final decision.",
+      "createdAt": "2025-05-29T16:34:28Z",
+      "updatedAt": "2025-05-29T16:47:23Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm personally leaning toward removing [quic-datagrams](https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-roq-quic-datagrams-attribut), but \n\n1. I'd like confirmation from someone else that this is the right thing to do (it's my individual draft, but making this change myself and then asking for working group adoption seems unhelpful), and \n2. It is worth considering whether we need to mention datagrams elsewhere in the draft - [the base RoQ draft](https://datatracker.ietf.org/doc/html/draft-ietf-avtcore-rtp-over-quic-14) describes RoQ encapsulation within QUIC datagrams and provides guidance about using them, at various places in that draft, but it might be that there is no reason to mention datagrams in the SDP-RoQ draft at all. \n",
+          "createdAt": "2025-05-29T16:47:22Z",
+          "updatedAt": "2025-05-29T16:47:22Z"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOMBStD8641D-u",
+      "title": "Is it useful to specify specific RTCP feedback replacement with QUIC equivalents?",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/issues/23",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [
+        "wg-discuss"
+      ],
+      "body": "As described in https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-specific-rtcp-feedback-repl\n\n> The API between QUIC and RoQ is, of course, a private matter, but the authors got feedback at the February 2025 AVTCORE interim meeting that it would be useful to \"standardize\", or at least provide guidance about, specific QUIC feedback substitutions so that each RoQ implementer doesn't have to perform this analysis from first principles.\n> \n> - We almost certainly need implementation and deployment experience before we can do more than offer a strawman proposal.\n> \n> - Spencer suggests that we include any IETF-recommended QUIC feedback substitutions in separate documents, as we do with RTCP extensions today, or even include them in the GitHub repository Wiki for this document, since these recommendations may change as the QUIC protocol evolves.",
+      "createdAt": "2025-05-29T16:53:49Z",
+      "updatedAt": "2025-05-29T16:53:49Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 25,
+      "id": "I_kwDOMBStD8649AX4",
+      "title": "Can we assume/require RFC 5761-style RTP/RTCP multiplexing for RoQ?",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/issues/25",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "wg-discuss"
+      ],
+      "body": "The [RoQ specification](https://ietf-wg-avtcore.github.io/draft-ietf-avtcore-rtp-over-quic/draft-ietf-avtcore-rtp-over-quic.html) really doesn't rely on RTP and RTCP being treated differently, so it was natural for the SDP draft to define only one [roq-flow-id per media flow](https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-roq-flow-identifiers). \n\n@alvestrand pointed out in private email that if an application isn't using [RFC 5761-style RTP/RTCP multiplexing](https://datatracker.ietf.org/doc/html/rfc5761), the application needs to be able to define two roq-flow-ids per media flow (one for RTP, and one for related RTCP). \n\nWe can change the roq-flow-id syntax to allow that, but it seems useful to ask whether we need to accommodate applications that \n\n- are being written/updated to support RoQ, but \n- aren't being written/updated to support RTP/RTCP multiplexing",
+      "createdAt": "2025-05-30T11:47:56Z",
+      "updatedAt": "2025-05-30T11:48:09Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOMBStD865GZqG",
+      "title": "Interaction with MASQUE UDP-Connect?",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/issues/26",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "notnow"
+      ],
+      "body": "We've been asked about interaction with UDP-Connect to open pinholes in corporate proxies for RoQ connections.\n\n**What, if anything, do we need to say about that, in this specification?**\n",
+      "createdAt": "2025-05-31T13:12:07Z",
+      "updatedAt": "2025-05-31T13:12:57Z",
       "closedAt": null,
       "comments": []
     }
@@ -354,25 +546,33 @@
       "id": "PR_kwDOMBStD86EKc_4",
       "title": "Add roq-flow-id attribute (Fixes #4)",
       "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/9",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "samhurst",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "This change defines the roq-flow-id attribute, as discussed on issue #4.",
       "createdAt": "2024-12-05T10:39:36Z",
-      "updatedAt": "2024-12-16T00:15:38Z",
+      "updatedAt": "2025-05-29T12:47:07Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "8a121fd732cb4d2e555b84a833c7641d58a9f729",
       "headRepository": "samhurst/sdp-roq",
       "headRefName": "roq-flow-ids-4",
       "headRefOid": "fa92df7935889f51af5134a8d5951cc145de0c53",
-      "closedAt": null,
+      "closedAt": "2025-05-29T12:47:06Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm closing this as OBE - we included @samhurst's proposal in a large PR. ",
+          "createdAt": "2025-05-29T12:47:06Z",
+          "updatedAt": "2025-05-29T12:47:06Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOMBStD86VTXBr",
@@ -698,6 +898,34 @@
       "mergedBy": "SpencerDawkins",
       "mergeCommit": {
         "oid": "4719125129bd13d201b4d463fb8846513cfeabcf"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOMBStD86YJ7dj",
+      "title": "Capture changes from IETF 122",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/24",
+      "state": "MERGED",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Many, but not all, of these changes were based on a private review from @alvestrand, for which the authors are grateful.",
+      "createdAt": "2025-05-29T17:04:43Z",
+      "updatedAt": "2025-05-31T13:20:14Z",
+      "baseRepository": "ietf-wg-avtcore/sdp-roq",
+      "baseRefName": "main",
+      "baseRefOid": "4719125129bd13d201b4d463fb8846513cfeabcf",
+      "headRepository": "ietf-wg-avtcore/sdp-roq",
+      "headRefName": "post-122",
+      "headRefOid": "2b4ab5fcacde39fef8348bda12d4631daf7f49ac",
+      "closedAt": "2025-05-31T13:20:14Z",
+      "mergedAt": "2025-05-31T13:20:14Z",
+      "mergedBy": "SpencerDawkins",
+      "mergeCommit": {
+        "oid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6"
       },
       "comments": [],
       "reviews": []
