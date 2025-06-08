@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-01T01:26:49.081940+00:00",
+  "timestamp": "2025-06-08T01:20:56.815308+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -67,6 +67,11 @@
       "name": "notnow",
       "description": "\"Not Now\" - the issue is real, but the authors are deferring work on it for now.",
       "color": "bfdadc"
+    },
+    {
+      "name": "for-next-meeting",
+      "description": "Discuss at next meeting (IETF or interim)",
+      "color": "fef2c0"
     }
   ],
   "issues": [
@@ -131,11 +136,13 @@
       ],
       "labels": [
         "active",
-        "IETF123"
+        "IETF123",
+        "wg-discuss",
+        "for-next-meeting"
       ],
       "body": "From @cdh4u - Please remember to check whether there are any BUNDLE impacts. Section 9 of BUNDLE contains RTP considerations for BUNDLE, so I suggest to check whether there is anything that needs to be updated/modified for QUIC usage.",
       "createdAt": "2022-01-30T00:48:23Z",
-      "updatedAt": "2025-05-29T15:47:41Z",
+      "updatedAt": "2025-06-06T08:49:14Z",
       "closedAt": null,
       "comments": [
         {
@@ -467,11 +474,12 @@
         "SpencerDawkins"
       ],
       "labels": [
-        "wg-discuss"
+        "wg-discuss",
+        "for-next-meeting"
       ],
       "body": "As noted in https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-datagram-signaling-in-sdp, \n\n> The need to include information about QUIC DATAGRAM usage in SDP signaling was challenged at the 2025-02-11 AVTCORE interim meeting. We noted (as the text in Section 4.1 says) that mentioning support for QUIC DATAGRAMs in SDP is at most advisory, and the QUIC Initial handshake is authoritative for whether the RTP session can use QUIC DATAGRAMs. The editors included this section at the request of implementers, and we said we would survey the people who asked for it to be included before making a final decision.",
       "createdAt": "2025-05-29T16:34:28Z",
-      "updatedAt": "2025-05-29T16:47:23Z",
+      "updatedAt": "2025-06-06T08:26:30Z",
       "closedAt": null,
       "comments": [
         {
@@ -513,11 +521,12 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [
-        "wg-discuss"
+        "wg-discuss",
+        "for-next-meeting"
       ],
       "body": "The [RoQ specification](https://ietf-wg-avtcore.github.io/draft-ietf-avtcore-rtp-over-quic/draft-ietf-avtcore-rtp-over-quic.html) really doesn't rely on RTP and RTCP being treated differently, so it was natural for the SDP draft to define only one [roq-flow-id per media flow](https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-roq-flow-identifiers). \n\n@alvestrand pointed out in private email that if an application isn't using [RFC 5761-style RTP/RTCP multiplexing](https://datatracker.ietf.org/doc/html/rfc5761), the application needs to be able to define two roq-flow-ids per media flow (one for RTP, and one for related RTCP). \n\nWe can change the roq-flow-id syntax to allow that, but it seems useful to ask whether we need to accommodate applications that \n\n- are being written/updated to support RoQ, but \n- aren't being written/updated to support RTP/RTCP multiplexing",
       "createdAt": "2025-05-30T11:47:56Z",
-      "updatedAt": "2025-05-30T11:48:09Z",
+      "updatedAt": "2025-06-06T08:49:15Z",
       "closedAt": null,
       "comments": []
     },
@@ -914,7 +923,7 @@
       "labels": [],
       "body": "Many, but not all, of these changes were based on a private review from @alvestrand, for which the authors are grateful.",
       "createdAt": "2025-05-29T17:04:43Z",
-      "updatedAt": "2025-05-31T13:20:14Z",
+      "updatedAt": "2025-06-05T13:49:59Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "4719125129bd13d201b4d463fb8846513cfeabcf",
