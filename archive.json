@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-08T01:20:56.815308+00:00",
+  "timestamp": "2025-06-10T01:15:40.581467+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -503,11 +503,11 @@
         "SpencerDawkins"
       ],
       "labels": [
-        "wg-discuss"
+        "notnow"
       ],
       "body": "As described in https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-specific-rtcp-feedback-repl\n\n> The API between QUIC and RoQ is, of course, a private matter, but the authors got feedback at the February 2025 AVTCORE interim meeting that it would be useful to \"standardize\", or at least provide guidance about, specific QUIC feedback substitutions so that each RoQ implementer doesn't have to perform this analysis from first principles.\n> \n> - We almost certainly need implementation and deployment experience before we can do more than offer a strawman proposal.\n> \n> - Spencer suggests that we include any IETF-recommended QUIC feedback substitutions in separate documents, as we do with RTCP extensions today, or even include them in the GitHub repository Wiki for this document, since these recommendations may change as the QUIC protocol evolves.",
       "createdAt": "2025-05-29T16:53:49Z",
-      "updatedAt": "2025-05-29T16:53:49Z",
+      "updatedAt": "2025-06-08T18:33:49Z",
       "closedAt": null,
       "comments": []
     },
