@@ -131,48 +131,6 @@ This document currently defines the QUIC/RTP/SAVP and QUIC/RTP/SAVPF secure prof
 
 This section describes new SDP attributes that are created for use with RoQ.
 
-## RoQ QUIC-DATAGRAMs Attribute {#quic-datagrams}
-
-As noted in {{!I-D.ietf-avtcore-rtp-over-quic}}, the RoQ specification only assumes a baseline QUIC implementation as defined in {{!RFC8999}}, {{!RFC9000}}, {{!RFC9001}}, and {{!RFC9002}}, and this baseline does not provide unreliable datagrams, which are defined in {{!RFC9221}}.
-
-It is very likely that RoQ implementers will wish to use QUIC DATAGRAMs, for a variety of reasons too large to list in this specification.
-
-In order to support this capability, this section defines a new SDP media-level attribute, "quic-datagrams". The attribute can be associated with an SDP media description ("m=" line) with any of the QUIC proto values defined in {{quic}}.
-
-Actual support for QUIC DATAGRAMs is negotiated between two QUIC endpoints, as described in Section 3 of {{!RFC9221}}, and nothing specified in SDP will cause a QUIC endpoint that does not advertise support for QUIC DATAGRAMs to suddenly begin to support them. However, it may be useful to tell a RoQ receiver that the RoQ sender plans to send QUIC DATAGRAMs, and to allow a RoQ receiver to tell the SDP sender that the RoQ receiver does not plan to support receiving QUIC DATAGRAMs for that media flow.
-
-If the quic-datagrams attribute is present, the RoQ sender indicates its intention to use QUIC DATAGRAMs for the associated media flow, and the RoQ receiver indicates its willingness to accept QUIC DATAGRAMs for that media flow.
-
-The quic-datagrams attribute is OPTIONAL for RoQ applications, even when the sender intends to use QUIC DATAGRAMs. Omitting the quic-datagrams attribute merely complicates the sender's decision whether to send specific media using QUIC DATAGRAMs.
-
-If the attribute is not present in SDP, the sender sends its QUIC Initial packet with a non-zero max_datagram_frame_size QUIC transport parameter, and the receiver with a non-zero max_datagram_frame_size QUIC transport parameter, all will proceed normally. If the sender attempts to send DATAGRAMs before it receives a non-zero name=max_datagram_frame_size QUIC transport parameter in the initial handshake, this is a QUIC PROTOCOL_VIOLATION, as described in {{Section 3 of !RFC9221}}.
-
-The definition of the SDP "quic-datagrams" attribute is:
-
-Attribute name:  quic-datagrams
-
-Type of attribute:  session or media
-
-Mux category:  IDENTICAL
-
-> **NOTE:** This specification sets the mux category (as discussed in Section 4 of {{?RFC8859}}) as IDENTICAL, as an RTP mixer which is multiplexing several incoming streams onto one connection needs to provide the same quidance to a RoQ receiver for all multiplexed media flows.
-
-Subject to charset:  No
-
-Purpose:  This attribute provides a hint as to whether the media associated with the SDP media description is likely to arrive via QUIC DATAGRAMs. It is a property attribute, which does not take a value.
-
-Contact name:  Spencer Dawkins
-
-Contact e-mail:  spencerdawkins.ietf@gmail.com
-
-Reference:  {{!I-D.dawkins-avtcore-sdp-roq}} (This document)
-
-Syntax:
-
-~~~~~~
-    quic-datagrams
-~~~~~~
-
 ## RoQ Flow Identifiers {#rtp-quic-flow-id}
 
 Section 5.1 of {{!I-D.ietf-avtcore-rtp-over-quic}} introduces a multiplexing identifier for RTP flows carried over a QUIC connection called "Flow Identifiers". This section defines a new SDP media-level attribute, "roq-flow-id". The attribute can be associated with an SDP media description ("m=" line) with any of the QUIC proto values defined in {{quic}}. In that case, the "m=" line port value indicates the port of the underlying QUIC transport UDP port, and the "roq-flow-id" value indicates the RoQ Flow Identifier.
@@ -323,7 +281,6 @@ A complete example of an SDP offer using QUIC/RTP/AVPF might look like:
 |e=Jane Doe <jane@jdoe.example.com> |Same as {{Section 5 of !RFC8866}}|
 |p=+1 617 555-6011 |Same as {{Section 5 of !RFC8866}}|
 |c=IN IP4 198.51.100.1 |Same as {{Section 5 of !RFC8866}}|
-|a=quic-datagrams | Expects to use QUIC DATAGRAMs in this RTP session, as defined in this specification |
 |a=tls-id:abc3de65cddef001be82 | As defined in {{Section 4 of !RFC8842}}|
 |a=setup:passive | Will wait for QUIC handshake (setup attribute from {{!RFC4145}} |
 |t=0 0 |Same as {{Section 5 of !RFC8866}}|
@@ -364,16 +321,6 @@ This document defines these new SDP proto names.
 | proto | QUIC/RTP/AVPF | {{rtp-protos}} of this specification |
 | proto | QUIC/RTP/SAVP | {{rtp-protos}} of this specification |
 | proto | QUIC/RTP/SAVPF | {{rtp-protos}} of this specification |
-|-------+----------------+--------------------------------------+
-
-## quic-datagrams {#IANA-quic-datagrams}
-
-This document defines a new SDP attribute, "quic-datagrams".
-
-|-------+--------+-------------+--------------+-----------------+
-|Type | SDP Name | Usage Level | Mux Category | Reference |
-|-------+--------+-------------+--------------+-----------------+
-| attribute | quic-datagrams | session, media | IDENTICAL | {{quic-datagrams}} of this specification |
 |-------+--------+-------------+--------------+-----------------+
 
 ## roq-flow-id
