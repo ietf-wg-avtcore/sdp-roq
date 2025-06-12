@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-10T01:15:40.581467+00:00",
+  "timestamp": "2025-06-12T01:14:04.745671+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -479,7 +479,7 @@
       ],
       "body": "As noted in https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-datagram-signaling-in-sdp, \n\n> The need to include information about QUIC DATAGRAM usage in SDP signaling was challenged at the 2025-02-11 AVTCORE interim meeting. We noted (as the text in Section 4.1 says) that mentioning support for QUIC DATAGRAMs in SDP is at most advisory, and the QUIC Initial handshake is authoritative for whether the RTP session can use QUIC DATAGRAMs. The editors included this section at the request of implementers, and we said we would survey the people who asked for it to be included before making a final decision.",
       "createdAt": "2025-05-29T16:34:28Z",
-      "updatedAt": "2025-06-06T08:26:30Z",
+      "updatedAt": "2025-06-10T19:59:48Z",
       "closedAt": null,
       "comments": [
         {
@@ -488,6 +488,13 @@
           "body": "I'm personally leaning toward removing [quic-datagrams](https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-roq-quic-datagrams-attribut), but \n\n1. I'd like confirmation from someone else that this is the right thing to do (it's my individual draft, but making this change myself and then asking for working group adoption seems unhelpful), and \n2. It is worth considering whether we need to mention datagrams elsewhere in the draft - [the base RoQ draft](https://datatracker.ietf.org/doc/html/draft-ietf-avtcore-rtp-over-quic-14) describes RoQ encapsulation within QUIC datagrams and provides guidance about using them, at various places in that draft, but it might be that there is no reason to mention datagrams in the SDP-RoQ draft at all. \n",
           "createdAt": "2025-05-29T16:47:22Z",
           "updatedAt": "2025-05-29T16:47:22Z"
+        },
+        {
+          "author": "JonathanLennox",
+          "authorAssociation": "MEMBER",
+          "body": "My comment in today's interim: since this is purely advisory, adding this later if we discover a good use case for it shouldn't hurt compatibility.  In the mean time, we should keep things simple, and also not define things for which we don't have a use case (since we can get them wrong).",
+          "createdAt": "2025-06-10T19:59:47Z",
+          "updatedAt": "2025-06-10T19:59:47Z"
         }
       ]
     },
