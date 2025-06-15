@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-12T01:14:04.745671+00:00",
+  "timestamp": "2025-06-15T01:22:32.156208+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -479,7 +479,7 @@
       ],
       "body": "As noted in https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-datagram-signaling-in-sdp, \n\n> The need to include information about QUIC DATAGRAM usage in SDP signaling was challenged at the 2025-02-11 AVTCORE interim meeting. We noted (as the text in Section 4.1 says) that mentioning support for QUIC DATAGRAMs in SDP is at most advisory, and the QUIC Initial handshake is authoritative for whether the RTP session can use QUIC DATAGRAMs. The editors included this section at the request of implementers, and we said we would survey the people who asked for it to be included before making a final decision.",
       "createdAt": "2025-05-29T16:34:28Z",
-      "updatedAt": "2025-06-10T19:59:48Z",
+      "updatedAt": "2025-06-12T14:26:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -495,6 +495,13 @@
           "body": "My comment in today's interim: since this is purely advisory, adding this later if we discover a good use case for it shouldn't hurt compatibility.  In the mean time, we should keep things simple, and also not define things for which we don't have a use case (since we can get them wrong).",
           "createdAt": "2025-06-10T19:59:47Z",
           "updatedAt": "2025-06-10T19:59:47Z"
+        },
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> My comment in today's interim: since this is purely advisory, adding this later if we discover a good use case for it shouldn't hurt compatibility. In the mean time, we should keep things simple, and also not define things for which we don't have a use case (since we can get them wrong).\n\nSpencer agrees with this, FWIW. ",
+          "createdAt": "2025-06-12T14:26:41Z",
+          "updatedAt": "2025-06-12T14:26:41Z"
         }
       ]
     },
@@ -533,9 +540,17 @@
       ],
       "body": "The [RoQ specification](https://ietf-wg-avtcore.github.io/draft-ietf-avtcore-rtp-over-quic/draft-ietf-avtcore-rtp-over-quic.html) really doesn't rely on RTP and RTCP being treated differently, so it was natural for the SDP draft to define only one [roq-flow-id per media flow](https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-roq-flow-identifiers). \n\n@alvestrand pointed out in private email that if an application isn't using [RFC 5761-style RTP/RTCP multiplexing](https://datatracker.ietf.org/doc/html/rfc5761), the application needs to be able to define two roq-flow-ids per media flow (one for RTP, and one for related RTCP). \n\nWe can change the roq-flow-id syntax to allow that, but it seems useful to ask whether we need to accommodate applications that \n\n- are being written/updated to support RoQ, but \n- aren't being written/updated to support RTP/RTCP multiplexing",
       "createdAt": "2025-05-30T11:47:56Z",
-      "updatedAt": "2025-06-06T08:49:15Z",
+      "updatedAt": "2025-06-12T14:23:23Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This issue was discussed at the AVTCORE interim meeting on 6-11-2025, and the sense of the room is that requiring RTP/RTCP multiplexing is the right thing to do, and simplifies implementations that don't have to handle both multiplexed and non-multiplexed RTP/RTCP flows. ",
+          "createdAt": "2025-06-12T14:23:23Z",
+          "updatedAt": "2025-06-12T14:23:23Z"
+        }
+      ]
     },
     {
       "number": 26,
@@ -943,6 +958,62 @@
       "mergeCommit": {
         "oid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOMBStD86aOtkz",
+      "title": "Remove quic-datagrams RoQ attribute",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/27",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [],
+      "body": "closes #22\r\n\r\nThis is a straightforward change, but I'm inviting reviews from folks who have discussed this with us previously. ",
+      "createdAt": "2025-06-12T14:19:34Z",
+      "updatedAt": "2025-06-12T14:19:35Z",
+      "baseRepository": "ietf-wg-avtcore/sdp-roq",
+      "baseRefName": "main",
+      "baseRefOid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6",
+      "headRepository": "ietf-wg-avtcore/sdp-roq",
+      "headRefName": "22-rm-quic-datagrams",
+      "headRefOid": "3d140eae2ceadb133d4ce98151102060ffcfa409",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOMBStD86aPML_",
+      "title": "Require RFC 5761 RTP/RTCP multiplexing",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/28",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [],
+      "body": "closes #25\r\n\r\nThis change in the SDP-RoQ specification is pretty straightforward (I'm just saying \"MUST include rtcp-mux attribute in SDP\", but I THINK this may require a rippled change in the RoQ base specification. I'm including @mengelbart here, so that we stay in sync. \r\n\r\nI'm tagging reviewers who have expressed opinions about this change previously. ",
+      "createdAt": "2025-06-12T14:59:22Z",
+      "updatedAt": "2025-06-12T14:59:22Z",
+      "baseRepository": "ietf-wg-avtcore/sdp-roq",
+      "baseRefName": "main",
+      "baseRefOid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6",
+      "headRepository": "ietf-wg-avtcore/sdp-roq",
+      "headRefName": "25-require-rfc-5761",
+      "headRefOid": "d5ec91a732b7f9bb5e84501eac47b2c9e4a86b8e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
