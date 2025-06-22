@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-15T01:22:32.156208+00:00",
+  "timestamp": "2025-06-22T01:21:48.320825+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -1003,7 +1003,7 @@
       "labels": [],
       "body": "closes #25\r\n\r\nThis change in the SDP-RoQ specification is pretty straightforward (I'm just saying \"MUST include rtcp-mux attribute in SDP\", but I THINK this may require a rippled change in the RoQ base specification. I'm including @mengelbart here, so that we stay in sync. \r\n\r\nI'm tagging reviewers who have expressed opinions about this change previously. ",
       "createdAt": "2025-06-12T14:59:22Z",
-      "updatedAt": "2025-06-12T14:59:22Z",
+      "updatedAt": "2025-06-19T20:04:46Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6",
@@ -1014,8 +1014,85 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Just to follow up on this point (above) ... \r\n> This change in the SDP-RoQ specification is pretty straightforward (I'm just saying \"MUST include rtcp-mux attribute in SDP\", but I THINK this may require a rippled change in the RoQ base specification. \r\n\r\nI asked @mengelbart about this in Slack, and he shared this thought: \r\n> Hi Spencer, my understanding in the meeting was, that we're going to require 5761 in SDP, but I don't think it's necessary in RoQ itself. I have used static flow IDs for multiplexing RTP and RTCP in the past and I think that should be fine?\r\n\r\nI'm fine with leaving it that way in both specifications. My initial concern was that you can do things in RoQ that you can't describe in SDP, but we're not requiring all RoQ applications to use SDP for signaling, so we don't need to add restrictions to the RoQ base specification that aren't necessary if you aren't using SDP for signaling. ",
+          "createdAt": "2025-06-19T18:56:44Z",
+          "updatedAt": "2025-06-19T20:04:46Z"
+        }
+      ],
       "reviews": []
+    },
+    {
+      "number": 29,
+      "id": "PR_kwDOMBStD86bTzof",
+      "title": "Replace discussion of BUNDLE (no longer useful with RoQ)",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/29",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [],
+      "body": "closes #3\r\n\r\nAfter some discussion, @mengelbart and I were unable to develop a coherent theory of why BUNDLE would be used with RoQ, since the primary benefit of BUNDLE (multiple media flows on a single transport connection) is already provided by RoQ (multiple media flows on a single QUIC connection).\r\n\r\nI updated the SDP example (while correcting some mistakes) to show multiple media flows on a single RoQ connection, as @JonathanLennox had suggested in email (I was too lazy to do that, when I was putting the initial SDP example together).  That seemed closely related to the work I was already doing in this PR. \r\n\r\nThank you, @srinivasgu, for pointing out the mistakes during the June 10 virtual interim meeting. ",
+      "createdAt": "2025-06-19T20:26:49Z",
+      "updatedAt": "2025-06-20T07:07:01Z",
+      "baseRepository": "ietf-wg-avtcore/sdp-roq",
+      "baseRefName": "main",
+      "baseRefOid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6",
+      "headRepository": "ietf-wg-avtcore/sdp-roq",
+      "headRefName": "3-clarify-that-roq-makes-bundle-unnecessary",
+      "headRefOid": "87c835d0435f2837a7aa6643ea947b695552aa35",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMBStD86vhiHq",
+          "commit": {
+            "abbreviatedOid": "87c835d"
+          },
+          "author": "alvestrand",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-20T07:05:30Z",
+          "updatedAt": "2025-06-20T07:05:30Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "The troublesome part of this is the \"relay\" case - if the other side of the relay wishes to use BUNDLE, the BUNDLE constraints on IDs must be obeyed.\r\nIf we declare relays to be out of scope, or declare that relays must be RTP-session-terminating and may reassign IDs (ie the two SDPs are independent), this works.",
+              "createdAt": "2025-06-20T07:05:30Z",
+              "updatedAt": "2025-06-20T07:05:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMBStD86vhjXA",
+          "commit": {
+            "abbreviatedOid": "87c835d"
+          },
+          "author": "alvestrand",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-20T07:07:01Z",
+          "updatedAt": "2025-06-20T07:07:01Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "Multiple QUIC connections makes no deployment sense - it has all the issues that caused BUNDLE to be a requirement for WebRTC deployment. Please switch this to multiple flow IDs.\r\n\r\n",
+              "createdAt": "2025-06-20T07:07:01Z",
+              "updatedAt": "2025-06-20T07:07:22Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
