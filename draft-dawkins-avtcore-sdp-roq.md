@@ -254,11 +254,11 @@ Beyond those normative requirements, there are topics that are worth considering
 
 {{?RFC8843}} describes a  Session Description Protocol (SDP) Grouping Framework extension called 'BUNDLE'. The extension can be used with the SDP offer/answer mechanism to negotiate the usage of a single transport (5-tuple) for sending and receiving media described by multiple SDP media descriptions ("m=" sections).
 
-The basic functionality of BUNDLE (multiplexing multiple media flows on a single transport connection) is also provided by RoQ itself - multiple media flows can be carried within a single QUIC connection, using RoQ flow IDs to distinguish between the media flows being multiplexed.
+The basic functionality of BUNDLE (multiplexing multiple media flows on a single transport connection) is also provided by RoQ itself - multiple media flows can be carried within a single QUIC connection, using RoQ flow IDs within the single QUIC connection to distinguish between the media flows being multiplexed.
 
-For this reason, it is assumed that RTP applications being ported to use RoQ with SDP will no longer use BUNDLE, but will be updated to use RoQ Flow IDs for multiplexing, with the appropriate changes being made in SDP.
+For this reason, it is assumed that RTP applications being ported to use RoQ with SDP will not use BUNDLE, but will be updated to use RoQ Flow IDs for multiplexing, with the appropriate signaling being included in SDP.
 
-RoQ applications wishing to use multiple transport connections for media simply use multiple QUIC connections, each with its own connection information ("c="), with each QUIC connection carrying one or more media flows, each identified with its own RoQ Flow ID, described at the media description level in SDP.
+While it is certainly possible to use multiple QUIC connections with RoQ, and rely on QUIC Connection Migration for various benefits such as surviving path failures (as described in Section 9.2 of {{!RFC9000}}), RoQ RTP application developers might prefer to rely on RTCP-level liveness and path health mechanisms to detect path degredations and failures, and simply perform additional SDP signaling procedures to perform path switching at the application level. This would allow the RTP application to make any necessary application-level changes to the media being carried (for instance, switching to a different video codec if the new path bandwidth is significantly different).
 
 ## Implications of Replacing RTCP Feedback with QUIC Feedback  {#quic-rtcp}
 
