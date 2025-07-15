@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-22T01:21:48.320825+00:00",
+  "timestamp": "2025-07-15T01:21:24.659933+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -1039,13 +1039,13 @@
       "labels": [],
       "body": "closes #3\r\n\r\nAfter some discussion, @mengelbart and I were unable to develop a coherent theory of why BUNDLE would be used with RoQ, since the primary benefit of BUNDLE (multiple media flows on a single transport connection) is already provided by RoQ (multiple media flows on a single QUIC connection).\r\n\r\nI updated the SDP example (while correcting some mistakes) to show multiple media flows on a single RoQ connection, as @JonathanLennox had suggested in email (I was too lazy to do that, when I was putting the initial SDP example together).  That seemed closely related to the work I was already doing in this PR. \r\n\r\nThank you, @srinivasgu, for pointing out the mistakes during the June 10 virtual interim meeting. ",
       "createdAt": "2025-06-19T20:26:49Z",
-      "updatedAt": "2025-06-20T07:07:01Z",
+      "updatedAt": "2025-07-13T22:21:36Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6",
       "headRepository": "ietf-wg-avtcore/sdp-roq",
       "headRefName": "3-clarify-that-roq-makes-bundle-unnecessary",
-      "headRefOid": "87c835d0435f2837a7aa6643ea947b695552aa35",
+      "headRefOid": "d171345d87ae0e396170e0e238f418823c01dc65",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
