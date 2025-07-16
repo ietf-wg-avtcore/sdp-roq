@@ -5,8 +5,8 @@
 Network Working Group                                         S. Dawkins
 Internet-Draft                        Wonder Hamster Internetworking LLC
 Intended status: Experimental                                 V. Pascual
-Expires: 14 January 2026                                           Nokia
-                                                            13 July 2025
+Expires: 17 January 2026                                           Nokia
+                                                            16 July 2025
 
 
                 SDP Offer/Answer for RTP over QUIC (RoQ)
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 January 2026.
+   This Internet-Draft will expire on 17 January 2026.
 
 Copyright Notice
 
@@ -480,6 +480,16 @@ Table of Contents
    Flow IDs for multiplexing, with the appropriate signaling being
    included in SDP.
 
+   *Note:* It is likely that any RTP translator providing translation
+   service between RoQ RTP endpoints and non-RoQ RTP endpoints will see
+   multiple RoQ media flows carried in a single QUIC connection to the
+   RoQ endpoint.  If the RTP translator wishes to multiplex these RTP
+   flows onto a single non-RoQ transport connection, the RTP translator
+   is responsible for ensuring that BUNDLE constraints on IDs are
+   obeyed.  One way to ensure these constraints are obeyed is for the
+   translators to be RTP-session-terminating (Topo-Back-To-Back), as
+   described in Section 3.2.2 of [RFC7667].
+
    While it is certainly possible to use multiple QUIC connections with
    RoQ, and rely on QUIC Connection Migration for various benefits such
    as surviving path failures (as described in Section 9.2 of
@@ -487,10 +497,10 @@ Table of Contents
    RTCP-level liveness and path health mechanisms to detect path
    degredations and failures, and simply perform additional SDP
    signaling procedures to perform path switching at the application
-   level.  This would allow the RTP application to make any necessary
-   application-level changes to the media being carried (for instance,
-   switching to a different video codec if the new path bandwidth is
-   significantly different).
+   level.  This would allow the RTP application to simultaneously make
+   any necessary application-level changes to the media being carried
+   (for instance, switching to a different video codec if the new path
+   characteristicss are significantly different).
 
 6.2.  Implications of Replacing RTCP Feedback with QUIC Feedback
 
