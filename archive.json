@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-15T01:21:24.659933+00:00",
+  "timestamp": "2025-07-17T01:20:00.084305+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -72,6 +72,11 @@
       "name": "for-next-meeting",
       "description": "Discuss at next meeting (IETF or interim)",
       "color": "fef2c0"
+    },
+    {
+      "name": "ready-to-merge",
+      "description": "",
+      "color": "deda6f"
     }
   ],
   "issues": [
@@ -135,14 +140,13 @@
         "SpencerDawkins"
       ],
       "labels": [
-        "active",
         "IETF123",
-        "wg-discuss",
-        "for-next-meeting"
+        "for-next-meeting",
+        "ready-to-merge"
       ],
       "body": "From @cdh4u - Please remember to check whether there are any BUNDLE impacts. Section 9 of BUNDLE contains RTP considerations for BUNDLE, so I suggest to check whether there is anything that needs to be updated/modified for QUIC usage.",
       "createdAt": "2022-01-30T00:48:23Z",
-      "updatedAt": "2025-06-06T08:49:14Z",
+      "updatedAt": "2025-07-16T20:36:37Z",
       "closedAt": null,
       "comments": [
         {
@@ -426,11 +430,12 @@
         "SpencerDawkins"
       ],
       "labels": [
-        "question"
+        "IETF123",
+        "ready-to-merge"
       ],
       "body": "> If an application uses multiple 5-tuples in order to allow QUIC\n   Connection Migration as described in Section 9 of [RFC9000], it is\n   assumed that only one QUIC path will be active at any given time.\n\nThis is an inherent property of QUIC connection migration: While the transport layer may probe multiple paths at the time, application data can only be sent on one path.",
       "createdAt": "2025-03-20T08:28:13Z",
-      "updatedAt": "2025-05-29T16:13:43Z",
+      "updatedAt": "2025-07-16T20:55:10Z",
       "closedAt": null,
       "comments": [
         {
@@ -439,6 +444,13 @@
           "body": "Hi, @marten-seemann, you're correct that this is redundant for RFC9000 QUIC. The statement is actually a race condition between two things: \n\n- @mengelbart and I made a conscious decision for the RoQ draft that we were only referencing QUIC mechanisms that had at least cleared the QUIC working group, and @victorpascualavila and I have been working under the same self-imposed constraint in SDP-RoQ, BUT\n- I knew that the QUIC working group has been working on https://datatracker.ietf.org/doc/draft-ietf-quic-multipath/, so was trying to anticipate what we might need to support in SDP-RoQ (and, of course, in RoQ, but that's a related conversation).\n\nAt this moment, QUIC has https://datatracker.ietf.org/doc/draft-ietf-quic-multipath/ in WGLC, so the draft might be headed out of the working group before too terribly long. I see reviews from @tfpauly and @martinthomson, so that's probably not immediate. \n\nWould you object if I left this statement in the draft for a bit, as a reminder for myself, and left this issue open? \n\nThe alternative would be to reference https://datatracker.ietf.org/doc/draft-ietf-quic-multipath/, but I'd be more comfortable improving our explanation if I have a better idea of where that draft is likely to be soon. \n\n",
           "createdAt": "2025-05-29T16:09:46Z",
           "updatedAt": "2025-05-29T16:09:46Z"
+        },
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi, @marten-seemann, this text was part of a section on the use of BUNDLE, which has now gone away. The theory is that RoQ applications will handle aspects of multiple paths at the application level, rather than relying on QUIC connection migration or QUIC multipath. I'll be closing this issue as part of a PR that removes the problematic text - and thank you for your help with improving the document!",
+          "createdAt": "2025-07-16T20:53:10Z",
+          "updatedAt": "2025-07-16T20:53:10Z"
         }
       ]
     },
@@ -474,12 +486,13 @@
         "SpencerDawkins"
       ],
       "labels": [
-        "wg-discuss",
-        "for-next-meeting"
+        "IETF123",
+        "for-next-meeting",
+        "ready-to-merge"
       ],
       "body": "As noted in https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-datagram-signaling-in-sdp, \n\n> The need to include information about QUIC DATAGRAM usage in SDP signaling was challenged at the 2025-02-11 AVTCORE interim meeting. We noted (as the text in Section 4.1 says) that mentioning support for QUIC DATAGRAMs in SDP is at most advisory, and the QUIC Initial handshake is authoritative for whether the RTP session can use QUIC DATAGRAMs. The editors included this section at the request of implementers, and we said we would survey the people who asked for it to be included before making a final decision.",
       "createdAt": "2025-05-29T16:34:28Z",
-      "updatedAt": "2025-06-12T14:26:41Z",
+      "updatedAt": "2025-07-16T20:32:14Z",
       "closedAt": null,
       "comments": [
         {
@@ -535,12 +548,13 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [
-        "wg-discuss",
-        "for-next-meeting"
+        "IETF123",
+        "for-next-meeting",
+        "ready-to-merge"
       ],
       "body": "The [RoQ specification](https://ietf-wg-avtcore.github.io/draft-ietf-avtcore-rtp-over-quic/draft-ietf-avtcore-rtp-over-quic.html) really doesn't rely on RTP and RTCP being treated differently, so it was natural for the SDP draft to define only one [roq-flow-id per media flow](https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-roq-flow-identifiers). \n\n@alvestrand pointed out in private email that if an application isn't using [RFC 5761-style RTP/RTCP multiplexing](https://datatracker.ietf.org/doc/html/rfc5761), the application needs to be able to define two roq-flow-ids per media flow (one for RTP, and one for related RTCP). \n\nWe can change the roq-flow-id syntax to allow that, but it seems useful to ask whether we need to accommodate applications that \n\n- are being written/updated to support RoQ, but \n- aren't being written/updated to support RTP/RTCP multiplexing",
       "createdAt": "2025-05-30T11:47:56Z",
-      "updatedAt": "2025-06-12T14:23:23Z",
+      "updatedAt": "2025-07-16T20:31:34Z",
       "closedAt": null,
       "comments": [
         {
@@ -1039,18 +1053,26 @@
       "labels": [],
       "body": "closes #3\r\n\r\nAfter some discussion, @mengelbart and I were unable to develop a coherent theory of why BUNDLE would be used with RoQ, since the primary benefit of BUNDLE (multiple media flows on a single transport connection) is already provided by RoQ (multiple media flows on a single QUIC connection).\r\n\r\nI updated the SDP example (while correcting some mistakes) to show multiple media flows on a single RoQ connection, as @JonathanLennox had suggested in email (I was too lazy to do that, when I was putting the initial SDP example together).  That seemed closely related to the work I was already doing in this PR. \r\n\r\nThank you, @srinivasgu, for pointing out the mistakes during the June 10 virtual interim meeting. ",
       "createdAt": "2025-06-19T20:26:49Z",
-      "updatedAt": "2025-07-13T22:21:36Z",
+      "updatedAt": "2025-07-16T20:54:17Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6",
       "headRepository": "ietf-wg-avtcore/sdp-roq",
       "headRefName": "3-clarify-that-roq-makes-bundle-unnecessary",
-      "headRefOid": "d171345d87ae0e396170e0e238f418823c01dc65",
+      "headRefOid": "0532b375426438d7e8e1f02ec34d18d59c28c802",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "closes #20 (actually, this PR removes the text that #20 found problematic). ",
+          "createdAt": "2025-07-16T20:54:17Z",
+          "updatedAt": "2025-07-16T20:54:17Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOMBStD86vhiHq",
@@ -1089,6 +1111,26 @@
               "body": "Multiple QUIC connections makes no deployment sense - it has all the issues that caused BUNDLE to be a requirement for WebRTC deployment. Please switch this to multiple flow IDs.\r\n\r\n",
               "createdAt": "2025-06-20T07:07:01Z",
               "updatedAt": "2025-06-20T07:07:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMBStD860aWYC",
+          "commit": {
+            "abbreviatedOid": "87c835d"
+          },
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-16T20:36:00Z",
+          "updatedAt": "2025-07-16T20:36:00Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "@alvestrand - thank you for the pointers in this space. There were a couple of miscommunications in the previous text, and understanding what you thought I was talking about was key to improving the document. ",
+              "createdAt": "2025-07-16T20:36:00Z",
+              "updatedAt": "2025-07-16T20:36:00Z"
             }
           ]
         }
