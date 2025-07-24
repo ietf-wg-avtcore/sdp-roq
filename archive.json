@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-20T01:26:22.773731+00:00",
+  "timestamp": "2025-07-24T01:19:54.665297+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -409,11 +409,11 @@
         "SpencerDawkins"
       ],
       "labels": [
-        "notnow"
+        "for-next-meeting"
       ],
       "body": "This issue is the counterpart to Issue [224](https://github.com/mengelbart/rtp-over-quic-draft/issues/224) in the[rtp-over-quic-draft](https://github.com/mengelbart/rtp-over-quic-draft/) Github repo. \r\n\r\nFor background, see [the June 2024 AVTCORE virtual interim meeting notes](https://notes.ietf.org/notes-ietf-interim-2024-avtcore-02-avtcore?edit) for both [RoQ](https://youtu.be/9K6lLFngMYM?si=sskgPTM4fLVC_Pdn&t=1712) and [SDP-RoQ](https://youtu.be/9K6lLFngMYM?si=TI0iJWv7RRcvvarq&t=3246) sessions. \r\n\r\nThis issue is intended to capture what is not part of the current RoQ specification, and is not specifically tied to SDP for RoQ. \r\n\r\nAs a starting point, this would include options for opening, and for reusing, a QUIC connection for RoQ.\r\n\r\nThese options include (at least) \r\n\r\n- manual configuration of an endpoint, \r\n- reuse of a QUIC connection that was used for SDP, \r\n- use of the \"roq\" APLN defined in the RoQ specification, and \r\n- using SDP to open and reuse a QUIC connection, similarly to the way RTP over TCP uses SDP to open and reuse TCP connections. \r\n\r\nThis issue will likely grow before it shrinks!",
       "createdAt": "2024-07-20T04:31:45Z",
-      "updatedAt": "2025-05-29T16:58:48Z",
+      "updatedAt": "2025-07-22T12:56:01Z",
       "closedAt": null,
       "comments": []
     },
@@ -530,11 +530,12 @@
         "SpencerDawkins"
       ],
       "labels": [
+        "wg-discuss",
         "notnow"
       ],
       "body": "As described in https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-specific-rtcp-feedback-repl\n\n> The API between QUIC and RoQ is, of course, a private matter, but the authors got feedback at the February 2025 AVTCORE interim meeting that it would be useful to \"standardize\", or at least provide guidance about, specific QUIC feedback substitutions so that each RoQ implementer doesn't have to perform this analysis from first principles.\n> \n> - We almost certainly need implementation and deployment experience before we can do more than offer a strawman proposal.\n> \n> - Spencer suggests that we include any IETF-recommended QUIC feedback substitutions in separate documents, as we do with RTCP extensions today, or even include them in the GitHub repository Wiki for this document, since these recommendations may change as the QUIC protocol evolves.",
       "createdAt": "2025-05-29T16:53:49Z",
-      "updatedAt": "2025-06-08T18:33:49Z",
+      "updatedAt": "2025-07-22T12:55:23Z",
       "closedAt": null,
       "comments": []
     },
@@ -1016,7 +1017,7 @@
       "labels": [],
       "body": "closes #25\r\n\r\nThis change in the SDP-RoQ specification is pretty straightforward (I'm just saying \"MUST include rtcp-mux attribute in SDP\", but I THINK this may require a rippled change in the RoQ base specification. I'm including @mengelbart here, so that we stay in sync. \r\n\r\nI'm tagging reviewers who have expressed opinions about this change previously. ",
       "createdAt": "2025-06-12T14:59:22Z",
-      "updatedAt": "2025-06-19T20:04:46Z",
+      "updatedAt": "2025-07-22T15:08:41Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6",
@@ -1036,7 +1037,21 @@
           "updatedAt": "2025-06-19T20:04:46Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMBStD861Z9CB",
+          "commit": {
+            "abbreviatedOid": "d5ec91a"
+          },
+          "author": "alvestrand",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-22T15:08:41Z",
+          "updatedAt": "2025-07-22T15:08:41Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 29,
@@ -1052,7 +1067,7 @@
       "labels": [],
       "body": "closes #3\r\n\r\nAfter some discussion, @mengelbart and I were unable to develop a coherent theory of why BUNDLE would be used with RoQ, since the primary benefit of BUNDLE (multiple media flows on a single transport connection) is already provided by RoQ (multiple media flows on a single QUIC connection).\r\n\r\nI updated the SDP example (while correcting some mistakes) to show multiple media flows on a single RoQ connection, as @JonathanLennox had suggested in email (I was too lazy to do that, when I was putting the initial SDP example together).  That seemed closely related to the work I was already doing in this PR. \r\n\r\nThank you, @srinivasgu, for pointing out the mistakes during the June 10 virtual interim meeting. ",
       "createdAt": "2025-06-19T20:26:49Z",
-      "updatedAt": "2025-07-16T20:54:17Z",
+      "updatedAt": "2025-07-22T15:04:56Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6",
@@ -1132,6 +1147,19 @@
               "updatedAt": "2025-07-16T20:36:00Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOMBStD861Z30R",
+          "commit": {
+            "abbreviatedOid": "0532b37"
+          },
+          "author": "alvestrand",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "Note: ROQ still refers to BUNDLE.\r\nA deeper issue is what RTP sessions are described here - is each media section a separate RTP session, or do all the media sections form one RTP session?\r\n(This is a leftover from when RTP was for multicast....)\r\n\r\nThis matters because of feedback messages - for instance, RFC8888 feedback carries info for multiple SSRCs - on which ROQ ID it should be sent should be clear, somehow.",
+          "createdAt": "2025-07-22T15:04:56Z",
+          "updatedAt": "2025-07-22T15:04:56Z",
+          "comments": []
         }
       ]
     },
@@ -1149,7 +1177,7 @@
       "labels": [],
       "body": "closes #21",
       "createdAt": "2025-07-19T16:08:48Z",
-      "updatedAt": "2025-07-19T16:40:34Z",
+      "updatedAt": "2025-07-23T07:06:00Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6",
@@ -1160,8 +1188,30 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "rshpount",
+          "authorAssociation": "NONE",
+          "body": "\"The RoQ endpoints need to negotiate a suitable candidate pair that can provide a UDP path.\" is technically not needed. The media can traverse a TCP port pair with RFC 4571 framing.",
+          "createdAt": "2025-07-23T07:06:00Z",
+          "updatedAt": "2025-07-23T07:06:00Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMBStD861ZyGh",
+          "commit": {
+            "abbreviatedOid": "926ed4b"
+          },
+          "author": "alvestrand",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "This PR actually defines QUIC-over-ICE.\r\nPresumably, the result of the ICE exchange would be for the active endpoint to send a QUIC connect request to the UDP address found in the ICE candidate pair.\r\nHowever, this means that we don't know the name of the endpoint; we probably need to have the FINGERPRINT authentication method available for ROQ in order to make this work.",
+          "createdAt": "2025-07-22T15:00:36Z",
+          "updatedAt": "2025-07-22T15:00:36Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
