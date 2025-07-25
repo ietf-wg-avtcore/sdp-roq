@@ -200,15 +200,17 @@ A RoQ application MUST include the "rtcp-mux" attribute defined in {{!RFC5761}} 
 
 Beyond those normative requirements, there are topics that are worth considering as part of implementation work, because we have been asked, "but what about the grommet SDP extension?" These topics are not part of the normative "SDP for RoQ" specification, but are gathered here for now. These topics might better appear in an appendix, a separate "SDP for RoQ Implementation Guide", or even best included in the GitHub repository Wiki for this document, because that would allow us to maintain this material on an ongoing basis.
 
-## Bundling Considerations {#bundle-cons}
+## RoQ Multiplexing Replaces BUNDLE Multiplexing {#bundle-cons}
 
 {{?RFC8843}} describes a  Session Description Protocol (SDP) Grouping Framework extension called 'BUNDLE'. The extension can be used with the SDP offer/answer mechanism to negotiate the usage of a single transport (5-tuple) for sending and receiving media described by multiple SDP media descriptions ("m=" sections).
 
-The authors believe that no special considerations apply when using BUNDLE with a single QUIC connection carrying RoQ.
+The basic functionality of BUNDLE (multiplexing multiple media flows on a single transport connection) is also provided by RoQ itself - multiple media flows can be carried within a single QUIC connection, using RoQ flow IDs within the single QUIC connection to distinguish between the media flows being multiplexed.
 
-If an application uses multiple 5-tuples in order to allow QUIC Connection Migration as described in {{Section 9 of !RFC9000}}, it is assumed that only one QUIC path will be active at any given time.
+For this reason, it is assumed that RTP applications being ported to use RoQ with SDP will not use BUNDLE, but will be updated to use RoQ Flow IDs for multiplexing, with the appropriate signaling being included in SDP.
 
-If an application uses multiple 5-tuples in order to make use of the Multipath Extension for QUIC as described in {{?I-D.draft-ietf-quic-multipath}}, this would allow multiple QUIC paths to be active simultaneously, and this assumption will need revisiting when {{?I-D.draft-ietf-quic-multipath}} is approved.
+**Note:** It is likely that any RTP translator providing translation service between RoQ RTP endpoints and non-RoQ RTP endpoints will see multiple RoQ media flows carried in a single QUIC connection to the RoQ endpoint. If the RTP translator wishes to multiplex these RTP flows onto a single non-RoQ transport connection, the RTP translator is responsible for ensuring that BUNDLE constraints on IDs are obeyed. One way to ensure these constraints are obeyed is for the translators to be RTP-session-terminating (Topo-Back-To-Back), as described in {{Section 3.2.2 of !RFC7667}}.
+
+While it is certainly possible to use multiple QUIC connections with RoQ, and rely on QUIC Connection Migration for various benefits such as surviving path failures (as described in {{Section 9.2 of !RFC9000}}), RoQ RTP application developers might prefer to rely on RTCP-level liveness and path health mechanisms to detect path degredations and failures, and simply perform additional SDP signaling procedures to perform path switching at the application level. This would allow the RTP application to simultaneously make any necessary application-level changes to the media being carried (for instance, switching to a different video codec if the new path characteristicss are significantly different).
 
 ## Implications of Replacing RTCP Feedback with QUIC Feedback  {#quic-rtcp}
 
@@ -279,13 +281,17 @@ A complete example of an SDP offer using QUIC/RTP/AVPF might look like:
 |a=fingerprint:sha-1 47:5D:A9:48:E4:BA:44:D9:B5:BC:31:AB:4B:80:06:11:3F:D5:F5:38 | {{Section 5 of !RFC8122}} |
 |---
 |**Media Description** | |
-|m=video 51372 QUIC/RTP/AVPF 99 | As defined in {{avpf}}|
-|a=rtcp-mux | Will multiplex RTP and RTCP on the same port {{!RFC5761}}|
+|m=audio 49170 RTP/AVP 0 |Same as {{Section 5 of !RFC8866}}|
+|a=rtcp-mux | Will multiplex RTP and RTCP on the same RoQ Flow ID {{!RFC5761}}|
 |a=roq-flow-id:4 | RoQ Flow Identifier shall be 4 for streams described by this SDP media description|
-|c=IN IP6 2001:db8::2 |Same as {{Section 5 of !RFC8866}}|
-|a=rtpmap:99 h266/90000 |H.266 VVC codec {{?I-D.ietf-avtcore-rtp-vvc}}|
+|m=audio 49180 RTP/AVP 0 |Same as {{Section 5 of !RFC8866}}|
+|a=rtcp-mux | Will multiplex RTP and RTCP on the same RoQ Flow ID {{!RFC5761}}|
+|a=roq-flow-id:5 | RoQ Flow Identifier shall be 5 for streams described by this SDP media description|
+|m=video 51372 QUIC/RTP/AVPF 99 | As defined in {{avpf}}|
+|a=rtcp-mux | Will multiplex RTP and RTCP on the same RoQ Flow ID {{!RFC5761}}|
+|a=roq-flow-id:6 | RoQ Flow Identifier shall be 6 for streams described by this SDP media description|
+|a=rtpmap:99 h266/90000 |H.266 VVC codec {{?RFC9328}}|
 |===
-
 
 This example is largely based on an example appearing in {{!RFC8866}}, Section 5, but includes the necessary protos and attribute-names for RoQ SDP.
 
