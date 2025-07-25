@@ -232,13 +232,17 @@ Because RoQ applications are always congestion controlled at the QUIC connection
 
 ## Implications of using ICE with RoQ {#ice-impl}
 
-The profiles defined in {{rtp-protos}} assume that if an application needs to perform NAT traversal, the endpoints will perform ICE procedures as described in {{!RFC8445}} to gather and prioritize candidate pairs, and will then select candidate pairs that can be included in SDP media lines, as described in {{rtp-protos}}.
+The profiles defined in {{rtp-protos}} assume that if an application needs to perform NAT traversal, the RoQ endpoints will perform ICE procedures as described in {{!RFC8445}} to gather and prioritize candidate pairs, and will then select candidate pairs that can be included in SDP media lines, as described in {{rtp-protos}}.
+
+The RoQ endpoints need to negotiate a suitable candidate pair that can provide a UDP path. This is necessary because RoQ packets are encapsulated in QUIC packets, which are encapsulated in UDP packets.
+
+ICE procedures are performed outside of RoQ, relying on {{!RFC9443}} multiplexing, which allows RoQ endpoints to distinguish QUIC packets from STUN and TURN packets (among other protocols) that can also arrive on the same UDP port.
+
+After an ICE agent performs ICE candidate pair connectivity checks, the RoQ endpoints can establish a QUIC connection for use with RoQ using those candidate addresses, as described in {{Section 5 of !RFC9000}}.
 
 **Editors' Note:** Other ways of performing NAT traversal for QUIC are possible, and this specification might be modified to support one or more of those methods in the future, given sufficient requirements.
 The modifications would likely include additional protos being defined in {{rtp-protos}}.
 The editors encourage feedback on this point.
-
-Because a peer address is validated during QUIC connection establishment as described in {{Section 8.1 of !RFC9000}}, when a RoQ endpoint uses ICE {{!RFC8445}} to communicate with another RoQ endpoint, an ICE agent will have already performed ICE candidate pair connectivity checking before a QUIC connection can be opened for use with RoQ.
 
 An implementer should be aware that it is possible for a RoQ connection to be subject to "ping"/liveness checks at several different levels:
 
