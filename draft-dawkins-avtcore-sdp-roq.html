@@ -1193,11 +1193,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-roq-flow-identifiers" class="internal xref">RoQ Flow Identifiers</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.1">
-                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-roq-flow-identifiers-and-rt" class="internal xref">RoQ Flow Identifiers and RTCP</a></p>
-</li>
-                </ul>
 </li>
             </ul>
 </li>
@@ -1422,20 +1417,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </pre><a href="#section-4.1-14" class="pilcrow">¶</a>
 </div>
 <p id="section-4.1-15">The RoQ flow identifier range is between 0 and 4611686018427387903 (2^62 - 1) (both included). Leading zeroes <span class="bcp14">MUST NOT</span> be used.<a href="#section-4.1-15" class="pilcrow">¶</a></p>
-<div id="rctp-quic-flow-id">
-<section id="section-4.1.1">
-          <h4 id="name-roq-flow-identifiers-and-rt">
-<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-roq-flow-identifiers-and-rt" class="section-name selfRef">RoQ Flow Identifiers and RTCP</a>
-          </h4>
-<p id="section-4.1.1-1">Section 3.1.5 of <span>[<a href="#I-D.ietf-avtcore-rtp-over-quic" class="cite xref">I-D.ietf-avtcore-rtp-over-quic</a>]</span> points out that RoQ allows RTP and RTCP to be multiplexed on a single RoQ flow identifier, and Section 5.4 of the same specification points out that<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-4.1.1-2.1">
-              <p id="section-4.1.1-2.1.1">If a receiver sends aggregated RTCP reports for multiple RTP streams, the flow identifier no longer matches the flow identifier for a single RTP stream. Thus the sender always needs to inspect the received RTCP packet independent of the flow identifier used to the RTCP flow to determine to which of the RTP flows the received packets apply.<a href="#section-4.1.1-2.1.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<p id="section-4.1.1-3">For this reason, we do not define a separate attribute to provide an indication that a RoQ flow contains RTCP reports, or contains only RTCP reports.<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
-</section>
-</div>
 </section>
 </div>
 </section>
@@ -1485,7 +1466,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-the-sdp-rtcp-mux-attribute">
 <a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-the-sdp-rtcp-mux-attribute" class="section-name selfRef">The SDP "rtcp-mux" Attribute</a>
         </h3>
-<p id="section-5.4-1"><span>[<a href="#I-D.ietf-avtcore-rtp-over-quic" class="cite xref">I-D.ietf-avtcore-rtp-over-quic</a>]</span> defines how RTP and RTCP can be multiplexed onto a single QUIC connection. An application that will perform this multiplexing <span class="bcp14">MUST</span> include the "rtcp-mux" attribute defined in <span>[<a href="#RFC5761" class="cite xref">RFC5761</a>]</span> in its SDP signaling.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-1">A RoQ application <span class="bcp14">MUST</span> include the "rtcp-mux" attribute defined in <span>[<a href="#RFC5761" class="cite xref">RFC5761</a>]</span> in its SDP signaling.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
