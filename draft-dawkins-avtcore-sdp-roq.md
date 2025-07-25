@@ -165,14 +165,6 @@ Syntax:
 
 The RoQ flow identifier range is between 0 and 4611686018427387903 (2^62 - 1) (both included). Leading zeroes MUST NOT be used.
 
-### RoQ Flow Identifiers and RTCP {#rctp-quic-flow-id}
-
-Section 3.1.5 of {{!I-D.ietf-avtcore-rtp-over-quic}} points out that RoQ allows RTP and RTCP to be multiplexed on a single RoQ flow identifier, and Section 5.4 of the same specification points out that
-
-> If a receiver sends aggregated RTCP reports for multiple RTP streams, the flow identifier no longer matches the flow identifier for a single RTP stream. Thus the sender always needs to inspect the received RTCP packet independent of the flow identifier used to the RTCP flow to determine to which of the RTP flows the received packets apply.
-
-For this reason, we do not define a separate attribute to provide an indication that a RoQ flow contains RTCP reports, or contains only RTCP reports.
-
 # Special Considerations for Selected SDP Attributes When Using RoQ Transport {#special-cons}
 
 This section does not introduce new SDP attribute extensions, but describes how some existing SDP attribute extensions are reused to describe RoQ media flows.
@@ -198,7 +190,7 @@ Because QUIC itself uses the TLS handshake as described in {{!RFC9001}}, the par
 
 ## The SDP "rtcp-mux" Attribute {#rtcp-mux}
 
-{{!I-D.ietf-avtcore-rtp-over-quic}} defines how RTP and RTCP can be multiplexed onto a single QUIC connection. An application that will perform this multiplexing MUST include the "rtcp-mux" attribute defined in {{!RFC5761}} in its SDP signaling.
+A RoQ application MUST include the "rtcp-mux" attribute defined in {{!RFC5761}} in its SDP signaling.
 
 # Implementation Topics {#impl-topics}
 
