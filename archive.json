@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-27T01:26:47.681964+00:00",
+  "timestamp": "2025-08-31T01:13:39.728474+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -1203,7 +1203,7 @@
       "labels": [],
       "body": "closes #21",
       "createdAt": "2025-07-19T16:08:48Z",
-      "updatedAt": "2025-07-23T07:06:00Z",
+      "updatedAt": "2025-08-28T13:33:52Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6",
@@ -1221,6 +1221,20 @@
           "body": "\"The RoQ endpoints need to negotiate a suitable candidate pair that can provide a UDP path.\" is technically not needed. The media can traverse a TCP port pair with RFC 4571 framing.",
           "createdAt": "2025-07-23T07:06:00Z",
           "updatedAt": "2025-07-23T07:06:00Z"
+        },
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> This PR actually defines QUIC-over-ICE. Presumably, the result of the ICE exchange would be for the active endpoint to send a QUIC connect request to the UDP address found in the ICE candidate pair. However, this means that we don't know the name of the endpoint; we probably need to have the FINGERPRINT authentication method available for ROQ in order to make this work.\r\n\r\nHi, @alvestrand, FINGERPRINT is now required in -01 - the text is here: https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html#name-the-sdp-fingerprint-attribu. \r\n\r\nPlease let me know if that needs improvement, of course. ",
+          "createdAt": "2025-08-28T13:27:49Z",
+          "updatedAt": "2025-08-28T13:27:49Z"
+        },
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> \"The RoQ endpoints need to negotiate a suitable candidate pair that can provide a UDP path.\" is technically not needed. The media can traverse a TCP port pair with RFC 4571 framing.\r\n\r\nHi, @rshpount, I think the problem with this text is that it stopped too soon. You're right, that if no suitable candidate pair for UDP can be negotiated, the media can traverse a TCP port pair with RFC 4571 framing. What this text was intending to say, is \"if you can't negotiate a suitable candidate pair for UDP, you can't do RoQ, although you can fall back to another transport protocol\", but I didn't **SAY** that!. ",
+          "createdAt": "2025-08-28T13:33:51Z",
+          "updatedAt": "2025-08-28T13:33:51Z"
         }
       ],
       "reviews": [
