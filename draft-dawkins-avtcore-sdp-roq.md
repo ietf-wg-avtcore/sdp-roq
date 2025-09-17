@@ -149,7 +149,7 @@ Mux category:  CAUTION
 
 Subject to charset:  No
 
-Purpose:  This attribute indicates the RoQ Flow Idenfitier associated with the SDP media description.
+Purpose:  This attribute indicates the RoQ Flow Identifier associated with the SDP media description.
 
 Contact name:  Spencer Dawkins
 
