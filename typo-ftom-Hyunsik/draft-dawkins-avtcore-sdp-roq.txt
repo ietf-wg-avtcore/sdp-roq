@@ -5,8 +5,8 @@
 Network Working Group                                         S. Dawkins
 Internet-Draft                        Wonder Hamster Internetworking LLC
 Intended status: Experimental                                 V. Pascual
-Expires: 17 January 2026                                           Nokia
-                                                            16 July 2025
+Expires: 21 March 2026                                             Nokia
+                                                       17 September 2025
 
 
                 SDP Offer/Answer for RTP over QUIC (RoQ)
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 January 2026.
+   This Internet-Draft will expire on 21 March 2026.
 
 Copyright Notice
 
@@ -82,9 +82,7 @@ Table of Contents
        3.2.4.  The QUIC/RTP/SAVPF proto
      3.3.  AV Profile-related Security Considerations
    4.  New SDP Attribute-Names for RoQ
-     4.1.  RoQ QUIC-DATAGRAMs Attribute
-     4.2.  RoQ Flow Identifiers
-       4.2.1.  RoQ Flow Identifiers and RTCP
+     4.1.  RoQ Flow Identifiers
    5.  Special Considerations for Selected SDP Attributes When Using
            RoQ Transport
      5.1.  The SDP "setup" Attribute
@@ -92,7 +90,7 @@ Table of Contents
      5.3.  The SDP "fingerprint" Attribute
      5.4.  The SDP "rtcp-mux" Attribute
    6.  Implementation Topics
-     6.1.  RoQ Multiplexing Replaces BUNDLE Multiplexing
+     6.1.  Bundling Considerations
      6.2.  Implications of Replacing RTCP Feedback with QUIC Feedback
      6.3.  Implications of Congestion Control
      6.4.  Implications of using ICE with RoQ
@@ -100,8 +98,7 @@ Table of Contents
    8.  Security Considerations
    9.  IANA Considerations
      9.1.  QUIC and QUIC-related protos
-     9.2.  quic-datagrams
-     9.3.  roq-flow-id
+     9.2.  roq-flow-id
    10. References
      10.1.  Normative References
      10.2.  Informative References
@@ -251,82 +248,7 @@ Table of Contents
    This section describes new SDP attributes that are created for use
    with RoQ.
 
-4.1.  RoQ QUIC-DATAGRAMs Attribute
-
-   As noted in [I-D.ietf-avtcore-rtp-over-quic], the RoQ specification
-   only assumes a baseline QUIC implementation as defined in [RFC8999],
-   [RFC9000], [RFC9001], and [RFC9002], and this baseline does not
-   provide unreliable datagrams, which are defined in [RFC9221].
-
-   It is very likely that RoQ implementers will wish to use QUIC
-   DATAGRAMs, for a variety of reasons too large to list in this
-   specification.
-
-   In order to support this capability, this section defines a new SDP
-   media-level attribute, "quic-datagrams".  The attribute can be
-   associated with an SDP media description ("m=" line) with any of the
-   QUIC proto values defined in Section 3.1.
-
-   Actual support for QUIC DATAGRAMs is negotiated between two QUIC
-   endpoints, as described in Section 3 of [RFC9221], and nothing
-   specified in SDP will cause a QUIC endpoint that does not advertise
-   support for QUIC DATAGRAMs to suddenly begin to support them.
-   However, it may be useful to tell a RoQ receiver that the RoQ sender
-   plans to send QUIC DATAGRAMs, and to allow a RoQ receiver to tell the
-   SDP sender that the RoQ receiver does not plan to support receiving
-   QUIC DATAGRAMs for that media flow.
-
-   If the quic-datagrams attribute is present, the RoQ sender indicates
-   its intention to use QUIC DATAGRAMs for the associated media flow,
-   and the RoQ receiver indicates its willingness to accept QUIC
-   DATAGRAMs for that media flow.
-
-   The quic-datagrams attribute is OPTIONAL for RoQ applications, even
-   when the sender intends to use QUIC DATAGRAMs.  Omitting the quic-
-   datagrams attribute merely complicates the sender's decision whether
-   to send specific media using QUIC DATAGRAMs.
-
-   If the attribute is not present in SDP, the sender sends its QUIC
-   Initial packet with a non-zero max_datagram_frame_size QUIC transport
-   parameter, and the receiver with a non-zero max_datagram_frame_size
-   QUIC transport parameter, all will proceed normally.  If the sender
-   attempts to send DATAGRAMs before it receives a non-zero
-   name=max_datagram_frame_size QUIC transport parameter in the initial
-   handshake, this is a QUIC PROTOCOL_VIOLATION, as described in
-   Section 3 of [RFC9221].
-
-   The definition of the SDP "quic-datagrams" attribute is:
-
-   Attribute name: quic-datagrams
-
-   Type of attribute: session or media
-
-   Mux category: IDENTICAL
-
-      *NOTE:* This specification sets the mux category (as discussed in
-      Section 4 of [RFC8859]) as IDENTICAL, as an RTP mixer which is
-      multiplexing several incoming streams onto one connection needs to
-      provide the same quidance to a RoQ receiver for all multiplexed
-      media flows.
-
-   Subject to charset: No
-
-   Purpose: This attribute provides a hint as to whether the media
-   associated with the SDP media description is likely to arrive via
-   QUIC DATAGRAMs.  It is a property attribute, which does not take a
-   value.
-
-   Contact name: Spencer Dawkins
-
-   Contact e-mail: spencerdawkins.ietf@gmail.com
-
-   Reference: [I-D.dawkins-avtcore-sdp-roq] (This document)
-
-   Syntax:
-
-       quic-datagrams
-
-4.2.  RoQ Flow Identifiers
+4.1.  RoQ Flow Identifiers
 
    Section 5.1 of [I-D.ietf-avtcore-rtp-over-quic] introduces a
    multiplexing identifier for RTP flows carried over a QUIC connection
@@ -358,7 +280,7 @@ Table of Contents
 
    Subject to charset: No
 
-   Purpose: This attribute indicates the RoQ Flow Idenfitier associated
+   Purpose: This attribute indicates the RoQ Flow Identifier associated
    with the SDP media description.
 
    Contact name: Spencer Dawkins
@@ -373,23 +295,6 @@ Table of Contents
 
    The RoQ flow identifier range is between 0 and 4611686018427387903
    (2^62 - 1) (both included).  Leading zeroes MUST NOT be used.
-
-4.2.1.  RoQ Flow Identifiers and RTCP
-
-   Section 3.1.5 of [I-D.ietf-avtcore-rtp-over-quic] points out that RoQ
-   allows RTP and RTCP to be multiplexed on a single RoQ flow
-   identifier, and Section 5.4 of the same specification points out that
-
-      If a receiver sends aggregated RTCP reports for multiple RTP
-      streams, the flow identifier no longer matches the flow identifier
-      for a single RTP stream.  Thus the sender always needs to inspect
-      the received RTCP packet independent of the flow identifier used
-      to the RTCP flow to determine to which of the RTP flows the
-      received packets apply.
-
-   For this reason, we do not define a separate attribute to provide an
-   indication that a RoQ flow contains RTCP reports, or contains only
-   RTCP reports.
 
 5.  Special Considerations for Selected SDP Attributes When Using RoQ
     Transport
@@ -440,10 +345,8 @@ Table of Contents
 
 5.4.  The SDP "rtcp-mux" Attribute
 
-   [I-D.ietf-avtcore-rtp-over-quic] defines how RTP and RTCP can be
-   multiplexed onto a single QUIC connection.  An application that will
-   perform this multiplexing MUST include the "rtcp-mux" attribute
-   defined in [RFC5761] in its SDP signaling.
+   A RoQ application MUST include the "rtcp-mux" attribute defined in
+   [RFC5761] in its SDP signaling.
 
 6.  Implementation Topics
 
@@ -461,7 +364,7 @@ Table of Contents
    included in the GitHub repository Wiki for this document, because
    that would allow us to maintain this material on an ongoing basis.
 
-6.1.  RoQ Multiplexing Replaces BUNDLE Multiplexing
+6.1.  Bundling Considerations
 
    [RFC8843] describes a Session Description Protocol (SDP) Grouping
    Framework extension called 'BUNDLE'.  The extension can be used with
@@ -469,38 +372,18 @@ Table of Contents
    transport (5-tuple) for sending and receiving media described by
    multiple SDP media descriptions ("m=" sections).
 
-   The basic functionality of BUNDLE (multiplexing multiple media flows
-   on a single transport connection) is also provided by RoQ itself -
-   multiple media flows can be carried within a single QUIC connection,
-   using RoQ flow IDs within the single QUIC connection to distinguish
-   between the media flows being multiplexed.
+   The authors believe that no special considerations apply when using
+   BUNDLE with a single QUIC connection carrying RoQ.
 
-   For this reason, it is assumed that RTP applications being ported to
-   use RoQ with SDP will not use BUNDLE, but will be updated to use RoQ
-   Flow IDs for multiplexing, with the appropriate signaling being
-   included in SDP.
+   If an application uses multiple 5-tuples in order to allow QUIC
+   Connection Migration as described in Section 9 of [RFC9000], it is
+   assumed that only one QUIC path will be active at any given time.
 
-   *Note:* It is likely that any RTP translator providing translation
-   service between RoQ RTP endpoints and non-RoQ RTP endpoints will see
-   multiple RoQ media flows carried in a single QUIC connection to the
-   RoQ endpoint.  If the RTP translator wishes to multiplex these RTP
-   flows onto a single non-RoQ transport connection, the RTP translator
-   is responsible for ensuring that BUNDLE constraints on IDs are
-   obeyed.  One way to ensure these constraints are obeyed is for the
-   translators to be RTP-session-terminating (Topo-Back-To-Back), as
-   described in Section 3.2.2 of [RFC7667].
-
-   While it is certainly possible to use multiple QUIC connections with
-   RoQ, and rely on QUIC Connection Migration for various benefits such
-   as surviving path failures (as described in Section 9.2 of
-   [RFC9000]), RoQ RTP application developers might prefer to rely on
-   RTCP-level liveness and path health mechanisms to detect path
-   degredations and failures, and simply perform additional SDP
-   signaling procedures to perform path switching at the application
-   level.  This would allow the RTP application to simultaneously make
-   any necessary application-level changes to the media being carried
-   (for instance, switching to a different video codec if the new path
-   characteristicss are significantly different).
+   If an application uses multiple 5-tuples in order to make use of the
+   Multipath Extension for QUIC as described in
+   [I-D.draft-ietf-quic-multipath], this would allow multiple QUIC paths
+   to be active simultaneously, and this assumption will need revisiting
+   when [I-D.draft-ietf-quic-multipath] is approved.
 
 6.2.  Implications of Replacing RTCP Feedback with QUIC Feedback
 
@@ -613,136 +496,68 @@ Table of Contents
    A complete example of an SDP offer using QUIC/RTP/AVPF might look
    like:
 
-   +===========================================================+=============+
-   |SDP line                                                   |Notes        |
-   +===========================================================+=============+
-   |*Session Description*                                      |             |
-   +-----------------------------------------------------------+-------------+
-   |v=0                                                        |Same as      |
-   |                                                           |Section 5 of |
-   |                                                           |[RFC8866]    |
-   +-----------------------------------------------------------+-------------+
-   |o=jdoe 3724394400 3724394405 IN IP4 198.51.100.1           |Same as      |
-   |                                                           |Section 5 of |
-   |                                                           |[RFC8866]    |
-   +-----------------------------------------------------------+-------------+
-   |s=Call to John Smith                                       |Same as      |
-   |                                                           |Section 5 of |
-   |                                                           |[RFC8866]    |
-   +-----------------------------------------------------------+-------------+
-   |i=SDP Offer #1                                             |Same as      |
-   |                                                           |Section 5 of |
-   |                                                           |[RFC8866]    |
-   +-----------------------------------------------------------+-------------+
-   |u=http://www.jdoe.example.com/home.html                    |Same as      |
-   |                                                           |Section 5 of |
-   |                                                           |[RFC8866]    |
-   +-----------------------------------------------------------+-------------+
-   |e=Jane Doe jane@jdoe.example.com                           |Same as      |
-   |(mailto:jane@jdoe.example.com)                             |Section 5 of |
-   |                                                           |[RFC8866]    |
-   +-----------------------------------------------------------+-------------+
-   |p=+1 617 555-6011                                          |Same as      |
-   |                                                           |Section 5 of |
-   |                                                           |[RFC8866]    |
-   +-----------------------------------------------------------+-------------+
-   |c=IN IP4 198.51.100.1                                      |Same as      |
-   |                                                           |Section 5 of |
-   |                                                           |[RFC8866]    |
-   +-----------------------------------------------------------+-------------+
-   |a=quic-datagrams                                           |Expects to   |
-   |                                                           |use QUIC     |
-   |                                                           |DATAGRAMs in |
-   |                                                           |this RTP     |
-   |                                                           |session, as  |
-   |                                                           |defined in   |
-   |                                                           |this         |
-   |                                                           |specification|
-   +-----------------------------------------------------------+-------------+
-   |a=tls-id:abc3de65cddef001be82                              |As defined in|
-   |                                                           |Section 4 of |
-   |                                                           |[RFC8842]    |
-   +-----------------------------------------------------------+-------------+
-   |a=setup:passive                                            |Will wait for|
-   |                                                           |QUIC         |
-   |                                                           |handshake    |
-   |                                                           |(setup       |
-   |                                                           |attribute    |
-   |                                                           |from         |
-   |                                                           |[RFC4145]    |
-   +-----------------------------------------------------------+-------------+
-   |t=0 0                                                      |Same as      |
-   |                                                           |Section 5 of |
-   |                                                           |[RFC8866]    |
-   +-----------------------------------------------------------+-------------+
-   |a=fingerprint:sha-1                                        |Section 5 of |
-   |47:5D:A9:48:E4:BA:44:D9:B5:BC:31:AB:4B:80:06:11:3F:D5:F5:38|[RFC8122]    |
-   +-----------------------------------------------------------+-------------+
-   |*Media Description*                                        |             |
-   +-----------------------------------------------------------+-------------+
-   |m=audio 49170 RTP/AVP 0                                    |Same as      |
-   |                                                           |Section 5 of |
-   |                                                           |[RFC8866]    |
-   +-----------------------------------------------------------+-------------+
-   |a=rtcp-mux                                                 |Will         |
-   |                                                           |multiplex RTP|
-   |                                                           |and RTCP on  |
-   |                                                           |the same RoQ |
-   |                                                           |Flow ID      |
-   |                                                           |[RFC5761]    |
-   +-----------------------------------------------------------+-------------+
-   |a=roq-flow-id:4                                            |RoQ Flow     |
-   |                                                           |Identifier   |
-   |                                                           |shall be 4   |
-   |                                                           |for streams  |
-   |                                                           |described by |
-   |                                                           |this SDP     |
-   |                                                           |media        |
-   |                                                           |description  |
-   +-----------------------------------------------------------+-------------+
-   |m=audio 49180 RTP/AVP 0                                    |Same as      |
-   |                                                           |Section 5 of |
-   |                                                           |[RFC8866]    |
-   +-----------------------------------------------------------+-------------+
-   |a=rtcp-mux                                                 |Will         |
-   |                                                           |multiplex RTP|
-   |                                                           |and RTCP on  |
-   |                                                           |the same RoQ |
-   |                                                           |Flow ID      |
-   |                                                           |[RFC5761]    |
-   +-----------------------------------------------------------+-------------+
-   |a=roq-flow-id:5                                            |RoQ Flow     |
-   |                                                           |Identifier   |
-   |                                                           |shall be 5   |
-   |                                                           |for streams  |
-   |                                                           |described by |
-   |                                                           |this SDP     |
-   |                                                           |media        |
-   |                                                           |description  |
-   +-----------------------------------------------------------+-------------+
-   |m=video 51372 QUIC/RTP/AVPF 99                             |As defined in|
-   |                                                           |Section 3.2.2|
-   +-----------------------------------------------------------+-------------+
-   |a=rtcp-mux                                                 |Will         |
-   |                                                           |multiplex RTP|
-   |                                                           |and RTCP on  |
-   |                                                           |the same RoQ |
-   |                                                           |Flow ID      |
-   |                                                           |[RFC5761]    |
-   +-----------------------------------------------------------+-------------+
-   |a=roq-flow-id:6                                            |RoQ Flow     |
-   |                                                           |Identifier   |
-   |                                                           |shall be 6   |
-   |                                                           |for streams  |
-   |                                                           |described by |
-   |                                                           |this SDP     |
-   |                                                           |media        |
-   |                                                           |description  |
-   +-----------------------------------------------------------+-------------+
-   |a=rtpmap:99 h266/90000                                     |H.266 VVC    |
-   |                                                           |codec        |
-   |                                                           |[RFC9328]    |
-   +-----------------------------------------------------------+-------------+
+   +===========================================================+==========================+
+   |SDP line                                                   |Notes                     |
+   +===========================================================+==========================+
+   |*Session Description*                                      |                          |
+   +-----------------------------------------------------------+--------------------------+
+   |v=0                                                        |Same as Section 5 of      |
+   |                                                           |[RFC8866]                 |
+   +-----------------------------------------------------------+--------------------------+
+   |o=jdoe 3724394400 3724394405 IN IP4 198.51.100.1           |Same as Section 5 of      |
+   |                                                           |[RFC8866]                 |
+   +-----------------------------------------------------------+--------------------------+
+   |s=Call to John Smith                                       |Same as Section 5 of      |
+   |                                                           |[RFC8866]                 |
+   +-----------------------------------------------------------+--------------------------+
+   |i=SDP Offer #1                                             |Same as Section 5 of      |
+   |                                                           |[RFC8866]                 |
+   +-----------------------------------------------------------+--------------------------+
+   |u=http://www.jdoe.example.com/home.html                    |Same as Section 5 of      |
+   |                                                           |[RFC8866]                 |
+   +-----------------------------------------------------------+--------------------------+
+   |e=Jane Doe jane@jdoe.example.com                           |Same as Section 5 of      |
+   |(mailto:jane@jdoe.example.com)                             |[RFC8866]                 |
+   +-----------------------------------------------------------+--------------------------+
+   |p=+1 617 555-6011                                          |Same as Section 5 of      |
+   |                                                           |[RFC8866]                 |
+   +-----------------------------------------------------------+--------------------------+
+   |c=IN IP4 198.51.100.1                                      |Same as Section 5 of      |
+   |                                                           |[RFC8866]                 |
+   +-----------------------------------------------------------+--------------------------+
+   |a=tls-id:abc3de65cddef001be82                              |As defined in Section 4 of|
+   |                                                           |[RFC8842]                 |
+   +-----------------------------------------------------------+--------------------------+
+   |a=setup:passive                                            |Will wait for QUIC        |
+   |                                                           |handshake (setup attribute|
+   |                                                           |from [RFC4145]            |
+   +-----------------------------------------------------------+--------------------------+
+   |t=0 0                                                      |Same as Section 5 of      |
+   |                                                           |[RFC8866]                 |
+   +-----------------------------------------------------------+--------------------------+
+   |a=fingerprint:sha-1                                        |Section 5 of [RFC8122]    |
+   |47:5D:A9:48:E4:BA:44:D9:B5:BC:31:AB:4B:80:06:11:3F:D5:F5:38|                          |
+   +-----------------------------------------------------------+--------------------------+
+   |*Media Description*                                        |                          |
+   +-----------------------------------------------------------+--------------------------+
+   |m=video 51372 QUIC/RTP/AVPF 99                             |As defined in             |
+   |                                                           |Section 3.2.2             |
+   +-----------------------------------------------------------+--------------------------+
+   |a=rtcp-mux                                                 |Will multiplex RTP and    |
+   |                                                           |RTCP on the same port     |
+   |                                                           |[RFC5761]                 |
+   +-----------------------------------------------------------+--------------------------+
+   |a=roq-flow-id:4                                            |RoQ Flow Identifier shall |
+   |                                                           |be 4 for streams described|
+   |                                                           |by this SDP media         |
+   |                                                           |description               |
+   +-----------------------------------------------------------+--------------------------+
+   |c=IN IP6 2001:db8::2                                       |Same as Section 5 of      |
+   |                                                           |[RFC8866]                 |
+   +-----------------------------------------------------------+--------------------------+
+   |a=rtpmap:99 h266/90000                                     |H.266 VVC codec           |
+   |                                                           |[I-D.ietf-avtcore-rtp-vvc]|
+   +-----------------------------------------------------------+--------------------------+
 
                                   Table 1
 
@@ -785,22 +600,7 @@ Table of Contents
 
                                  Table 2
 
-9.2.  quic-datagrams
-
-   This document defines a new SDP attribute, "quic-datagrams".
-
-    +===========+================+========+===========+===============+
-    | Type      | SDP Name       |Usage   | Mux       | Reference     |
-    |           |                |Level   | Category  |               |
-    +===========+================+========+===========+===============+
-    | attribute | quic-datagrams |session,| IDENTICAL | Section 4.1   |
-    |           |                |media   |           | of this       |
-    |           |                |        |           | specification |
-    +-----------+----------------+--------+-----------+---------------+
-
-                                  Table 3
-
-9.3.  roq-flow-id
+9.2.  roq-flow-id
 
    This document defines a new SDP attribute, "roq-flow-id".
 
@@ -808,12 +608,12 @@ Table of Contents
      | Type      | SDP Name    | Usage    | Mux      | Reference     |
      |           |             | Level    | Category |               |
      +===========+=============+==========+==========+===============+
-     | attribute | roq-flow-id | session, | CAUTION  | Section 9.3   |
+     | attribute | roq-flow-id | session, | CAUTION  | Section 9.2   |
      |           |             | media    |          | of this       |
      |           |             |          |          | specification |
      +-----------+-------------+----------+----------+---------------+
 
-                                  Table 4
+                                  Table 3
 
 10.  References
 
@@ -822,9 +622,9 @@ Table of Contents
    [I-D.dawkins-avtcore-sdp-roq]
               Dawkins, S. and V. P. Pascual, "SDP Offer/Answer for RTP
               over QUIC (RoQ)", Work in Progress, Internet-Draft, draft-
-              dawkins-avtcore-sdp-roq-00, 10 February 2025,
+              dawkins-avtcore-sdp-roq-01, 25 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-dawkins-
-              avtcore-sdp-roq-00>.
+              avtcore-sdp-roq-01>.
 
    [I-D.ietf-avtcore-rtp-over-quic]
               Engelbart, M., Ott, J., and S. Dawkins, "RTP over QUIC
@@ -910,10 +710,6 @@ Table of Contents
               DOI 10.17487/RFC8866, January 2021,
               <https://www.rfc-editor.org/rfc/rfc8866>.
 
-   [RFC8999]  Thomson, M., "Version-Independent Properties of QUIC",
-              RFC 8999, DOI 10.17487/RFC8999, May 2021,
-              <https://www.rfc-editor.org/rfc/rfc8999>.
-
    [RFC9000]  Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", RFC 9000,
               DOI 10.17487/RFC9000, May 2021,
@@ -922,10 +718,6 @@ Table of Contents
    [RFC9001]  Thomson, M., Ed. and S. Turner, Ed., "Using TLS to Secure
               QUIC", RFC 9001, DOI 10.17487/RFC9001, May 2021,
               <https://www.rfc-editor.org/rfc/rfc9001>.
-
-   [RFC9002]  Iyengar, J., Ed. and I. Swett, Ed., "QUIC Loss Detection
-              and Congestion Control", RFC 9002, DOI 10.17487/RFC9002,
-              May 2021, <https://www.rfc-editor.org/rfc/rfc9002>.
 
    [RFC9221]  Pauly, T., Kinnear, E., and D. Schinazi, "An Unreliable
               Datagram Extension to QUIC", RFC 9221,
@@ -949,6 +741,21 @@ Table of Contents
               parameters.xhtml#sdp-parameters-2>.
 
 10.2.  Informative References
+
+   [I-D.draft-ietf-quic-multipath]
+              Liu, Y., Ma, Y., De Coninck, Q., Bonaventure, O., Huitema,
+              C., and M. Kühlewind, "Multipath Extension for QUIC", Work
+              in Progress, Internet-Draft, draft-ietf-quic-multipath-16,
+              21 August 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-quic-multipath-16>.
+
+   [I-D.ietf-avtcore-rtp-vvc]
+              Zhao, S., Wenger, S., Sanchez, Y., Wang, Y., and M. M.
+              Hannuksela, "RTP Payload Format for Versatile Video Coding
+              (VVC)", Work in Progress, Internet-Draft, draft-ietf-
+              avtcore-rtp-vvc-18, 4 August 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-avtcore-
+              rtp-vvc-18>.
 
    [RFC3261]  Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
               A., Peterson, J., Sparks, R., Handley, M., and E.
@@ -1003,11 +810,6 @@ Table of Contents
               Control Protocol (RTCP) Feedback for Congestion Control",
               RFC 8888, DOI 10.17487/RFC8888, January 2021,
               <https://www.rfc-editor.org/rfc/rfc8888>.
-
-   [RFC9328]  Zhao, S., Wenger, S., Sanchez, Y., Wang, Y.-K., and M. M.
-              Hannuksela, "RTP Payload Format for Versatile Video Coding
-              (VVC)", RFC 9328, DOI 10.17487/RFC9328, December 2022,
-              <https://www.rfc-editor.org/rfc/rfc9328>.
 
 Acknowledgments
 
