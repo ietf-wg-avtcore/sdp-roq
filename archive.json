@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-31T01:13:39.728474+00:00",
+  "timestamp": "2025-09-18T01:05:49.273071+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -590,6 +590,33 @@
       "updatedAt": "2025-05-31T13:12:57Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 31,
+      "id": "I_kwDOMBStD87MULw_",
+      "title": "Consider title change to \"SDP for RTP over QUIC (RoQ)\u201d",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/issues/31",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "help wanted",
+        "for-next-meeting"
+      ],
+      "body": "We received this request from Ross Findlayson during the AVTCORE adoption poll. \n\n>  I would prefer that the title be simplified to \"SDP for RTP over QUIC (RoQ)\u201d, because this could also be applicable to protocols that use SDP in a declarative style - e.g., a potential upgrade to RTSP.)\n\n",
+      "createdAt": "2025-09-17T21:23:05Z",
+      "updatedAt": "2025-09-17T21:28:11Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Spencer is happy to make this change, but has questions about whether the mandatory SDP \"tls-id\" Attribute works in declarative SDP applications. If so, full steam ahead - the protos and other attributes don't require a response from the other RoQ endpoint. ",
+          "createdAt": "2025-09-17T21:27:46Z",
+          "updatedAt": "2025-09-17T21:27:46Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1252,6 +1279,36 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDOMBStD86pKbtk",
+      "title": "Correct typo from Hyunsik Yang",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/32",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [
+        "documentation"
+      ],
+      "body": "Thank you, Hyunsik!",
+      "createdAt": "2025-09-17T22:09:21Z",
+      "updatedAt": "2025-09-17T22:09:21Z",
+      "baseRepository": "ietf-wg-avtcore/sdp-roq",
+      "baseRefName": "main",
+      "baseRefOid": "1badc76db6a0dfd53b5c5a2de3e92d636df628ad",
+      "headRepository": "ietf-wg-avtcore/sdp-roq",
+      "headRefName": "typo-ftom-Hyunsik",
+      "headRefOid": "63038579771626d77b3e04dd2c38688f81208bb3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
