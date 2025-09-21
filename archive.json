@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-18T01:05:49.273071+00:00",
+  "timestamp": "2025-09-21T01:13:46.014298+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -604,9 +604,9 @@
         "help wanted",
         "for-next-meeting"
       ],
-      "body": "We received this request from Ross Findlayson during the AVTCORE adoption poll. \n\n>  I would prefer that the title be simplified to \"SDP for RTP over QUIC (RoQ)\u201d, because this could also be applicable to protocols that use SDP in a declarative style - e.g., a potential upgrade to RTSP.)\n\n",
+      "body": "We received this request from Ross Findlayson (@rsfinlayson) during the AVTCORE adoption poll. \n\n>  I would prefer that the title be simplified to \"SDP for RTP over QUIC (RoQ)\u201d, because this could also be applicable to protocols that use SDP in a declarative style - e.g., a potential upgrade to RTSP.)\n\n",
       "createdAt": "2025-09-17T21:23:05Z",
-      "updatedAt": "2025-09-17T21:28:11Z",
+      "updatedAt": "2025-09-18T13:12:59Z",
       "closedAt": null,
       "comments": [
         {
