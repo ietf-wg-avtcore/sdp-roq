@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-21T01:13:46.014298+00:00",
+  "timestamp": "2025-09-23T01:06:23.000571+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -1294,9 +1294,9 @@
       "labels": [
         "documentation"
       ],
-      "body": "Thank you, Hyunsik!",
+      "body": "Thank you, Hyunsik! @7439henry",
       "createdAt": "2025-09-17T22:09:21Z",
-      "updatedAt": "2025-09-17T22:09:21Z",
+      "updatedAt": "2025-09-22T19:37:30Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "1badc76db6a0dfd53b5c5a2de3e92d636df628ad",
