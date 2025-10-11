@@ -21,7 +21,7 @@ venue:
 #  mail: "avt@ietf.org"
 #  arch: "https://mailarchive.ietf.org/arch/browse/avt/"
   github: "ietf-wg-avtcore/sdp-roq"
-  latest: "https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html"
+  latest: "https://ietf-wg-avtcore.github.io/sdp-roq/draft-ietf-avtcore-sdp-roq.html"
 
 author:
  -
