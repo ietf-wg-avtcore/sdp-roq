@@ -1,11 +1,11 @@
 # SDP Offer/Answer for RTP over QUIC (RoQ)
 
-This is the working area for the individual Internet-Draft, "SDP Offer/Answer for RTP over QUIC (RoQ)".
+This is the working area for the Working Group Internet-Draft, "SDP Offer/Answer for RTP over QUIC (RoQ)".
 
-* [Editor's Copy](https://ietf-wg-avtcore.github.io/sdp-roq/#go.draft-dawkins-avtcore-sdp-roq.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-dawkins-avtcore-sdp-roq)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-dawkins-avtcore-sdp-roq)
-* [Compare Editor's Copy to Individual Draft](https://ietf-wg-avtcore.github.io/sdp-roq/#go.draft-dawkins-avtcore-sdp-roq.diff)
+* [Editor's Copy](https://ietf-wg-avtcore.github.io/sdp-roq/#go.draft-ietf-avtcore-sdp-roq.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-avtcore-sdp-roq)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-avtcore-sdp-roq)
+* [Compare Editor's Copy to Working Group Draft](https://ietf-wg-avtcore.github.io/sdp-roq/#go.draft-ietf-avtcore-sdp-roq.diff)
 
 ## Contributing
 
