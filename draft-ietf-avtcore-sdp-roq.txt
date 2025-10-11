@@ -5,12 +5,12 @@
 Network Working Group                                         S. Dawkins
 Internet-Draft                        Wonder Hamster Internetworking LLC
 Intended status: Experimental                                 V. Pascual
-Expires: 12 April 2026                                             Nokia
-                                                          9 October 2025
+Expires: 14 April 2026                                             Nokia
+                                                         11 October 2025
 
 
                 SDP Offer/Answer for RTP over QUIC (RoQ)
-                  draft-dawkins-avtcore-sdp-roq-latest
+                   draft-ietf-avtcore-sdp-roq-latest
 
 Abstract
 
@@ -30,9 +30,9 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at https://ietf-wg-
-   avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html.  Status
+   avtcore.github.io/sdp-roq/draft-ietf-avtcore-sdp-roq.html.  Status
    information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-dawkins-avtcore-sdp-roq/.
+   https://datatracker.ietf.org/doc/draft-ietf-avtcore-sdp-roq/.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/ietf-wg-avtcore/sdp-roq.
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 April 2026.
+   This Internet-Draft will expire on 14 April 2026.
 
 Copyright Notice
 
@@ -622,9 +622,9 @@ Table of Contents
    [I-D.dawkins-avtcore-sdp-roq]
               Dawkins, S. and V. P. Pascual, "SDP Offer/Answer for RTP
               over QUIC (RoQ)", Work in Progress, Internet-Draft, draft-
-              dawkins-avtcore-sdp-roq-01, 25 July 2025,
+              dawkins-avtcore-sdp-roq-02, 9 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-dawkins-
-              avtcore-sdp-roq-01>.
+              avtcore-sdp-roq-02>.
 
    [I-D.ietf-avtcore-rtp-over-quic]
               Engelbart, M., Ott, J., and S. Dawkins, "RTP over QUIC
