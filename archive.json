@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-23T01:06:23.000571+00:00",
+  "timestamp": "2025-10-12T01:11:01.549198+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -1285,7 +1285,7 @@
       "id": "PR_kwDOMBStD86pKbtk",
       "title": "Correct typo from Hyunsik Yang",
       "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/32",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SpencerDawkins",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1296,17 +1296,49 @@
       ],
       "body": "Thank you, Hyunsik! @7439henry",
       "createdAt": "2025-09-17T22:09:21Z",
-      "updatedAt": "2025-09-22T19:37:30Z",
+      "updatedAt": "2025-10-09T19:45:06Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "1badc76db6a0dfd53b5c5a2de3e92d636df628ad",
       "headRepository": "ietf-wg-avtcore/sdp-roq",
       "headRefName": "typo-ftom-Hyunsik",
       "headRefOid": "63038579771626d77b3e04dd2c38688f81208bb3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-09T19:45:06Z",
+      "mergedAt": "2025-10-09T19:45:06Z",
+      "mergedBy": "SpencerDawkins",
+      "mergeCommit": {
+        "oid": "6ea99716c707540433846f56807779b2fd2577f4"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 33,
+      "id": "PR_kwDOMBStD86tQUT3",
+      "title": "Rename individual -02 as WG -00",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/33",
+      "state": "MERGED",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-11T15:35:31Z",
+      "updatedAt": "2025-10-11T15:48:52Z",
+      "baseRepository": "ietf-wg-avtcore/sdp-roq",
+      "baseRefName": "main",
+      "baseRefOid": "6ea99716c707540433846f56807779b2fd2577f4",
+      "headRepository": "ietf-wg-avtcore/sdp-roq",
+      "headRefName": "Rename-WG",
+      "headRefOid": "0def1dc266fe940ce771cc757d7e23a2e9f80ea7",
+      "closedAt": "2025-10-11T15:48:52Z",
+      "mergedAt": "2025-10-11T15:48:52Z",
+      "mergedBy": "SpencerDawkins",
+      "mergeCommit": {
+        "oid": "267fb2248e9454a34ee0d16dd957c06e271c44c6"
+      },
       "comments": [],
       "reviews": []
     }
