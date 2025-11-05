@@ -234,7 +234,7 @@ Because RoQ applications are always congestion controlled at the QUIC connection
 
 The profiles defined in {{rtp-protos}} assume that if an application needs to perform NAT traversal, the RoQ endpoints will perform ICE procedures as described in {{!RFC8445}} to gather and prioritize candidate pairs, and will then select candidate pairs that can be included in SDP media lines, as described in {{rtp-protos}}.
 
-The RoQ endpoints need to negotiate a suitable candidate pair that can provide a UDP path, in order to open a QUIC connection and use RoQ. This is necessary because RoQ packets are encapsulated in QUIC packets, which are encapsulated in UDP packets. If no candidate pair suitable for UDP can be negotiated, fallback to another transport protocol might be a useful alternative (for example, {{?RFC4571}} framing using a TCP candidate port pair). 
+The RoQ endpoints need to negotiate a suitable candidate pair that can provide a UDP path, in order to open a QUIC connection and use RoQ. This is necessary because RoQ packets are encapsulated in QUIC packets, which are encapsulated in UDP packets. If no candidate pair suitable for UDP can be negotiated, fallback to another transport protocol might be a useful alternative (for example, {{?RFC4571}} framing using a TCP candidate port pair).
 
 ICE procedures are performed outside of RoQ, relying on {{!RFC9443}} multiplexing, which allows RoQ endpoints to distinguish QUIC packets from STUN and TURN packets (among other protocols) that can also arrive on the same UDP port.
 
