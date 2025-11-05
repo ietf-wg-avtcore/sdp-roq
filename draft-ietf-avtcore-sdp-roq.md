@@ -202,9 +202,13 @@ Beyond those normative requirements, there are topics that are worth considering
 
 ## Bundling Considerations {#bundle-cons}
 
-{{?RFC8843}} describes a  Session Description Protocol (SDP) Grouping Framework extension called 'BUNDLE'. The extension can be used with the SDP offer/answer mechanism to negotiate the usage of a single transport (5-tuple) for sending and receiving media described by multiple SDP media descriptions ("m=" sections).
+{{!I-D.ietf-avtcore-rtp-over-quic}} defines the RoQ flow identifer as a way to multiplex multiple RTP sessions onto a single QUIC connection, so, onto a single transport.
 
-The authors believe that no special considerations apply when using BUNDLE with a single QUIC connection carrying RoQ.
+{{!RFC8843}} describes a  Session Description Protocol (SDP) Grouping Framework extension called 'BUNDLE'. The extension can also be used with the SDP offer/answer mechanism to negotiate the usage of a single transport (5-tuple) for sending and receiving media described by multiple SDP media descriptions ("m=" sections).
+
+If a RoQ application developer wishes to use the BUNDLE extension, each group of SDP media descriptions MUST be carried in a single RoQ flow identifier.
+
+Multiple BUNDLEs can be carried within a single QUIC connection, as long as each BUNDLE is carried in its own RoQ flow identifier.
 
 If an application uses multiple 5-tuples in order to allow QUIC Connection Migration as described in {{Section 9 of !RFC9000}}, it is assumed that only one QUIC path will be active at any given time.
 
