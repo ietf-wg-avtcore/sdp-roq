@@ -11,27 +11,26 @@
        This document is intended to allow the use of QUIC as an underlying transport protocol for RTP applications that commonly use SDP as a session signaling protocol to set up RTP connections, such as SIP and WebRTC. The document describes several new SDP "proto" and "attribute-name" attribute values in the "Session Description Protocol (SDP) Parameters" IANA registry that can be used to describe QUIC transport for RTP and RTCP packets, and describes how SDP Offer/Answer can be used to set up an RTP connection using QUIC. 
        This document also contains non-normative guidance for implementers. 
     ' name="description">
-<meta content="xml2rfc 3.30.1" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="RTP over QUIC" name="keyword">
 <meta content="RoQ" name="keyword">
 <meta content="SDP" name="keyword">
-<meta content="draft-dawkins-avtcore-sdp-roq-latest" name="ietf.draft">
+<meta content="draft-ietf-avtcore-sdp-roq-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.1
-    Python 3.12.11
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.4.0
+    platformdirs 4.5.0
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.5
-    setuptools 80.9.0
-    wcwidth 0.2.13
+    wcwidth 0.2.14
 -->
-<link href="draft-dawkins-avtcore-sdp-roq.xml" rel="alternate" type="application/rfc+xml">
+<link href="draft-ietf-avtcore-sdp-roq.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@font-face {
   font-family: 'Lora';
@@ -1048,11 +1047,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SDP O/A for RoQ</td>
-<td class="right">September 2025</td>
+<td class="right">November 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Dawkins &amp; Pascual</td>
-<td class="center">Expires 21 March 2026</td>
+<td class="center">Expires 9 May 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,15 +1061,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">Network Working Group</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-dawkins-avtcore-sdp-roq-latest</dd>
+<dd class="internet-draft">draft-ietf-avtcore-sdp-roq-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-17" class="published">17 September 2025</time>
+<time datetime="2025-11-05" class="published">5 November 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Experimental</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-03-21">21 March 2026</time></dd>
+<dd class="expires"><time datetime="2026-05-09">9 May 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1096,8 +1095,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">
-        The latest revision of this draft can be found at <span><a href="https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html">https://ietf-wg-avtcore.github.io/sdp-roq/draft-dawkins-avtcore-sdp-roq.html</a></span>.
-        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-dawkins-avtcore-sdp-roq/">https://datatracker.ietf.org/doc/draft-dawkins-avtcore-sdp-roq/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+        The latest revision of this draft can be found at <span><a href="https://ietf-wg-avtcore.github.io/sdp-roq/draft-ietf-avtcore-sdp-roq.html">https://ietf-wg-avtcore.github.io/sdp-roq/draft-ietf-avtcore-sdp-roq.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-avtcore-sdp-roq/">https://datatracker.ietf.org/doc/draft-ietf-avtcore-sdp-roq/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">Source for this draft and an issue tracker can be found at
         <span><a href="https://github.com/ietf-wg-avtcore/sdp-roq">https://github.com/ietf-wg-avtcore/sdp-roq</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 </section>
@@ -1120,7 +1119,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1517,36 +1516,38 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-implications-of-using-ice-w">
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-implications-of-using-ice-w" class="section-name selfRef">Implications of using ICE with RoQ</a>
         </h3>
-<p id="section-6.4-1">The profiles defined in <a href="#rtp-protos" class="auto internal xref">Section 3.2</a> assume that if an application needs to perform NAT traversal, the endpoints will perform ICE procedures as described in <span>[<a href="#RFC8445" class="cite xref">RFC8445</a>]</span> to gather and prioritize candidate pairs, and will then select candidate pairs that can be included in SDP media lines, as described in <a href="#rtp-protos" class="auto internal xref">Section 3.2</a>.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
-<p id="section-6.4-2"><strong>Editors' Note:</strong> Other ways of performing NAT traversal for QUIC are possible, and this specification might be modified to support one or more of those methods in the future, given sufficient requirements.
+<p id="section-6.4-1">The profiles defined in <a href="#rtp-protos" class="auto internal xref">Section 3.2</a> assume that if an application needs to perform NAT traversal, the RoQ endpoints will perform ICE procedures as described in <span>[<a href="#RFC8445" class="cite xref">RFC8445</a>]</span> to gather and prioritize candidate pairs, and will then select candidate pairs that can be included in SDP media lines, as described in <a href="#rtp-protos" class="auto internal xref">Section 3.2</a>.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-2">The RoQ endpoints need to negotiate a suitable candidate pair that can provide a UDP path, in order to open a QUIC connection and use RoQ. This is necessary because RoQ packets are encapsulated in QUIC packets, which are encapsulated in UDP packets. If no candidate pair suitable for UDP can be negotiated, fallback to another transport protocol might be a useful alternative (for example, <span>[<a href="#RFC4571" class="cite xref">RFC4571</a>]</span> framing using a TCP candidate port pair).<a href="#section-6.4-2" class="pilcrow">¶</a></p>
+<p id="section-6.4-3">ICE procedures are performed outside of RoQ, relying on <span>[<a href="#RFC9443" class="cite xref">RFC9443</a>]</span> multiplexing, which allows RoQ endpoints to distinguish QUIC packets from STUN and TURN packets (among other protocols) that can also arrive on the same UDP port.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
+<p id="section-6.4-4">After an ICE agent performs ICE candidate pair connectivity checks, the RoQ endpoints can establish a QUIC connection for use with RoQ using those candidate addresses, as described in <span><a href="https://rfc-editor.org/rfc/rfc9000#section-5" class="relref">Section 5</a> of [<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
+<p id="section-6.4-5"><strong>Editors' Note:</strong> Other ways of performing NAT traversal for QUIC are possible, and this specification might be modified to support one or more of those methods in the future, given sufficient requirements.
 The modifications would likely include additional protos being defined in <a href="#rtp-protos" class="auto internal xref">Section 3.2</a>.
-The editors encourage feedback on this point.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
-<p id="section-6.4-3">Because a peer address is validated during QUIC connection establishment as described in <span><a href="https://rfc-editor.org/rfc/rfc9000#section-8.1" class="relref">Section 8.1</a> of [<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>, when a RoQ endpoint uses ICE <span>[<a href="#RFC8445" class="cite xref">RFC8445</a>]</span> to communicate with another RoQ endpoint, an ICE agent will have already performed ICE candidate pair connectivity checking before a QUIC connection can be opened for use with RoQ.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
-<p id="section-6.4-4">An implementer should be aware that it is possible for a RoQ connection to be subject to "ping"/liveness checks at several different levels:<a href="#section-6.4-4" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-6.4-5.1">
-            <p id="section-6.4-5.1.1">QUIC PING frames, as described in <span><a href="https://rfc-editor.org/rfc/rfc9000#section-10.1.2" class="relref">Section 10.1.2</a> of [<a href="#RFC9000" class="cite xref">RFC9000</a>]</span><a href="#section-6.4-5.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-6.4-5.2">
-            <p id="section-6.4-5.2.1">ICE keepalives, as described in <span><a href="https://rfc-editor.org/rfc/rfc5245#section-10" class="relref">Section 10</a> of [<a href="#RFC5245" class="cite xref">RFC5245</a>]</span> and in <span>[<a href="#RFC6263" class="cite xref">RFC6263</a>]</span><a href="#section-6.4-5.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-6.4-5.3">
-            <p id="section-6.4-5.3.1">ICE consent freshness, as described in <span>[<a href="#RFC7675" class="cite xref">RFC7675</a>]</span><a href="#section-6.4-5.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-6.4-5.4">
-            <p id="section-6.4-5.4.1">RTCP packets, as described in <span><a href="https://rfc-editor.org/rfc/rfc3550#section-6.2" class="relref">Section 6.2</a> of [<a href="#RFC3550" class="cite xref">RFC3550</a>]</span><a href="#section-6.4-5.4.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-6.4-6">The following considerations are worth reviewing for implementers.<a href="#section-6.4-6" class="pilcrow">¶</a></p>
+The editors encourage feedback on this point.<a href="#section-6.4-5" class="pilcrow">¶</a></p>
+<p id="section-6.4-6">An implementer should be aware that it is possible for a RoQ connection to be subject to "ping"/liveness checks at several different levels:<a href="#section-6.4-6" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.4-7.1">
-            <p id="section-6.4-7.1.1">QUIC PING frames are entirely under the control of an implementation. If a QUIC connection carries RTP/RTCP traffic, the RTCP transmission interval is likely to suffice for RTP liveness detection, but a wise implementer will look at this in their environment and proceed accordingly.<a href="#section-6.4-7.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.4-7.1.1">QUIC PING frames, as described in <span><a href="https://rfc-editor.org/rfc/rfc9000#section-10.1.2" class="relref">Section 10.1.2</a> of [<a href="#RFC9000" class="cite xref">RFC9000</a>]</span><a href="#section-6.4-7.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.4-7.2">
-            <p id="section-6.4-7.2.1">ICE consent freshness, as described in <span><a href="https://rfc-editor.org/rfc/rfc7675#section-4" class="relref">Section 4</a> of [<a href="#RFC7675" class="cite xref">RFC7675</a>]</span>, also serves the ICE keepalive function, so ICE keepalives are no longer necessary.<a href="#section-6.4-7.2.1" class="pilcrow">¶</a></p>
+            <p id="section-6.4-7.2.1">ICE keepalives, as described in <span><a href="https://rfc-editor.org/rfc/rfc5245#section-10" class="relref">Section 10</a> of [<a href="#RFC5245" class="cite xref">RFC5245</a>]</span> and in <span>[<a href="#RFC6263" class="cite xref">RFC6263</a>]</span><a href="#section-6.4-7.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.4-7.3">
-            <p id="section-6.4-7.3.1">At least some RTCP feedback might be unnecessary, as described in <a href="#quic-rtcp" class="auto internal xref">Section 6.2</a>, so a wise implementer will look at what RTCP feedback can be replaced with QUIC feedback.<a href="#section-6.4-7.3.1" class="pilcrow">¶</a></p>
+            <p id="section-6.4-7.3.1">ICE consent freshness, as described in <span>[<a href="#RFC7675" class="cite xref">RFC7675</a>]</span><a href="#section-6.4-7.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-7.4">
+            <p id="section-6.4-7.4.1">RTCP packets, as described in <span><a href="https://rfc-editor.org/rfc/rfc3550#section-6.2" class="relref">Section 6.2</a> of [<a href="#RFC3550" class="cite xref">RFC3550</a>]</span><a href="#section-6.4-7.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-6.4-8">The following considerations are worth reviewing for implementers.<a href="#section-6.4-8" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.4-9.1">
+            <p id="section-6.4-9.1.1">QUIC PING frames are entirely under the control of an implementation. If a QUIC connection carries RTP/RTCP traffic, the RTCP transmission interval is likely to suffice for RTP liveness detection, but a wise implementer will look at this in their environment and proceed accordingly.<a href="#section-6.4-9.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-9.2">
+            <p id="section-6.4-9.2.1">ICE consent freshness, as described in <span><a href="https://rfc-editor.org/rfc/rfc7675#section-4" class="relref">Section 4</a> of [<a href="#RFC7675" class="cite xref">RFC7675</a>]</span>, also serves the ICE keepalive function, so ICE keepalives are no longer necessary.<a href="#section-6.4-9.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.4-9.3">
+            <p id="section-6.4-9.3.1">At least some RTCP feedback might be unnecessary, as described in <a href="#quic-rtcp" class="auto internal xref">Section 6.2</a>, so a wise implementer will look at what RTCP feedback can be replaced with QUIC feedback.<a href="#section-6.4-9.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1784,7 +1785,7 @@ The editors encourage feedback on this point.<a href="#section-6.4-2" class="pil
 <dl class="references">
 <dt id="I-D.dawkins-avtcore-sdp-roq">[I-D.dawkins-avtcore-sdp-roq]</dt>
         <dd>
-<span class="refAuthor">Dawkins, S.</span> and <span class="refAuthor">V. P. Pascual</span>, <span class="refTitle">"SDP Offer/Answer for RTP over QUIC (RoQ)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-dawkins-avtcore-sdp-roq-01</span>, <time datetime="2025-07-25" class="refDate">25 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-dawkins-avtcore-sdp-roq-01">https://datatracker.ietf.org/doc/html/draft-dawkins-avtcore-sdp-roq-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Dawkins, S.</span> and <span class="refAuthor">V. P. Pascual</span>, <span class="refTitle">"SDP Offer/Answer for RTP over QUIC (RoQ)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-dawkins-avtcore-sdp-roq-02</span>, <time datetime="2025-10-09" class="refDate">9 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-dawkins-avtcore-sdp-roq-02">https://datatracker.ietf.org/doc/html/draft-dawkins-avtcore-sdp-roq-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-avtcore-rtp-over-quic">[I-D.ietf-avtcore-rtp-over-quic]</dt>
         <dd>
@@ -1862,6 +1863,10 @@ The editors encourage feedback on this point.<a href="#section-6.4-2" class="pil
         <dd>
 <span class="refAuthor">Pauly, T.</span>, <span class="refAuthor">Kinnear, E.</span>, and <span class="refAuthor">D. Schinazi</span>, <span class="refTitle">"An Unreliable Datagram Extension to QUIC"</span>, <span class="seriesInfo">RFC 9221</span>, <span class="seriesInfo">DOI 10.17487/RFC9221</span>, <time datetime="2022-03" class="refDate">March 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9221">https://www.rfc-editor.org/rfc/rfc9221</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9443">[RFC9443]</dt>
+        <dd>
+<span class="refAuthor">Aboba, B.</span>, <span class="refAuthor">Salgueiro, G.</span>, and <span class="refAuthor">C. Perkins</span>, <span class="refTitle">"Multiplexing Scheme Updates for QUIC"</span>, <span class="seriesInfo">RFC 9443</span>, <span class="seriesInfo">DOI 10.17487/RFC9443</span>, <time datetime="2023-07" class="refDate">July 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9443">https://www.rfc-editor.org/rfc/rfc9443</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9605">[RFC9605]</dt>
         <dd>
 <span class="refAuthor">Omara, E.</span>, <span class="refAuthor">Uberti, J.</span>, <span class="refAuthor">Murillo, S. G.</span>, <span class="refAuthor">Barnes, R., Ed.</span>, and <span class="refAuthor">Y. Fablet</span>, <span class="refTitle">"Secure Frame (SFrame): Lightweight Authenticated Encryption for Real-Time Media"</span>, <span class="seriesInfo">RFC 9605</span>, <span class="seriesInfo">DOI 10.17487/RFC9605</span>, <time datetime="2024-08" class="refDate">August 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9605">https://www.rfc-editor.org/rfc/rfc9605</a>&gt;</span>. </dd>
@@ -1885,7 +1890,7 @@ The editors encourage feedback on this point.<a href="#section-6.4-2" class="pil
 <dl class="references">
 <dt id="I-D.draft-ietf-quic-multipath">[I-D.draft-ietf-quic-multipath]</dt>
         <dd>
-<span class="refAuthor">Liu, Y.</span>, <span class="refAuthor">Ma, Y.</span>, <span class="refAuthor">De Coninck, Q.</span>, <span class="refAuthor">Bonaventure, O.</span>, <span class="refAuthor">Huitema, C.</span>, and <span class="refAuthor">M. Kühlewind</span>, <span class="refTitle">"Multipath Extension for QUIC"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-quic-multipath-16</span>, <time datetime="2025-08-21" class="refDate">21 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-quic-multipath-16">https://datatracker.ietf.org/doc/html/draft-ietf-quic-multipath-16</a>&gt;</span>. </dd>
+<span class="refAuthor">Liu, Y.</span>, <span class="refAuthor">Ma, Y.</span>, <span class="refAuthor">De Coninck, Q.</span>, <span class="refAuthor">Bonaventure, O.</span>, <span class="refAuthor">Huitema, C.</span>, and <span class="refAuthor">M. Kühlewind</span>, <span class="refTitle">"Managing multiple paths for a QUIC connection"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-quic-multipath-17</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-quic-multipath-17">https://datatracker.ietf.org/doc/html/draft-ietf-quic-multipath-17</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-avtcore-rtp-vvc">[I-D.ietf-avtcore-rtp-vvc]</dt>
         <dd>
@@ -1894,6 +1899,10 @@ The editors encourage feedback on this point.<a href="#section-6.4-2" class="pil
 <dt id="RFC3261">[RFC3261]</dt>
         <dd>
 <span class="refAuthor">Rosenberg, J.</span>, <span class="refAuthor">Schulzrinne, H.</span>, <span class="refAuthor">Camarillo, G.</span>, <span class="refAuthor">Johnston, A.</span>, <span class="refAuthor">Peterson, J.</span>, <span class="refAuthor">Sparks, R.</span>, <span class="refAuthor">Handley, M.</span>, and <span class="refAuthor">E. Schooler</span>, <span class="refTitle">"SIP: Session Initiation Protocol"</span>, <span class="seriesInfo">RFC 3261</span>, <span class="seriesInfo">DOI 10.17487/RFC3261</span>, <time datetime="2002-06" class="refDate">June 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3261">https://www.rfc-editor.org/rfc/rfc3261</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC4571">[RFC4571]</dt>
+        <dd>
+<span class="refAuthor">Lazzaro, J.</span>, <span class="refTitle">"Framing Real-time Transport Protocol (RTP) and RTP Control Protocol (RTCP) Packets over Connection-Oriented Transport"</span>, <span class="seriesInfo">RFC 4571</span>, <span class="seriesInfo">DOI 10.17487/RFC4571</span>, <time datetime="2006-07" class="refDate">July 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4571">https://www.rfc-editor.org/rfc/rfc4571</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5104">[RFC5104]</dt>
         <dd>
