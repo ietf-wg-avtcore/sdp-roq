@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-12T01:11:01.549198+00:00",
+  "timestamp": "2025-11-06T01:13:07.604254+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -54,8 +54,8 @@
       "color": "fef2c0"
     },
     {
-      "name": "IETF123",
-      "description": "PR text due by IETF 123",
+      "name": "IETF124",
+      "description": "PR text due by IETF 124",
       "color": "0D6733"
     },
     {
@@ -238,11 +238,15 @@
       "state": "OPEN",
       "author": "samhurst",
       "authorAssociation": "NONE",
-      "assignees": [],
-      "labels": [],
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [
+        "ready-to-merge"
+      ],
       "body": "The draft currently doesn't specify how to identify a QUIC transport session that will carry the RTP-over-QUIC traffic. I think we could adopt the COMEDIA mechanisms specified for TCP and adapt them to QUIC. [RFC4145](https://www.rfc-editor.org/rfc/rfc4145) specifies how to do it with regular TCP and section 8 describes how to apply it to protocols that are not TCP. Then there's [RFC8122](https://www.rfc-editor.org/rfc/rfc8122) which adds things about TLS (which I haven't read in detail yet so I don't know if this is helpful, but I'm linking it here anyway just in case).\r\n\r\nThe only concern I have is that existing COMEDIA options all use the 5-tuple to uniquely identify a transport connection. However, a QUIC connection is not bound to a single 5-tuple, as it can perform connection migration. In future, this would also preclude the description of multipath QUIC sessions.\r\n\r\nIn the case where a new connection is established, this should be fine - but the concern here is about reuse of existing connections. Given that QUIC allows multiplexing of traffic, there's definitely a use-case where you could negotiate SDP media descriptions using something like SIP-over-QUIC using bidirectional streams, and then re-use the same transport connection with the callee/caller to run the RTP over unidirectional streams.\r\n\r\nI don't have a good answer to the identification of extant QUIC transport associations at the moment, so this is more of an open question. We also can't use QUIC connection IDs as for one they can be generated and revoked at any time by the transport layer, and two I feel that putting connection IDs in an SDP media description is a security problem as it means an attacker could gain prior knowledge of some of the things which might be present in a QUIC transport packet, and use that to help attack the encryption context.",
       "createdAt": "2024-06-05T10:27:53Z",
-      "updatedAt": "2025-05-29T16:11:36Z",
+      "updatedAt": "2025-11-05T21:48:30Z",
       "closedAt": null,
       "comments": [
         {
@@ -346,19 +350,19 @@
       "id": "I_kwDOMBStD86LNkRO",
       "title": "Controlling stream representation",
       "url": "https://github.com/ietf-wg-avtcore/sdp-roq/issues/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "samhurst",
       "authorAssociation": "NONE",
       "assignees": [
         "SpencerDawkins"
       ],
       "labels": [
-        "wg-discuss"
+        "wontfix"
       ],
       "body": "This is related to my questions in #6, but this is something I've been experimenting on so wanted to surface it somewhere, and as this may result in some suggestions that go back to the RoQ draft itself I thought I won't detract from discussion there with this.\r\n\r\nIn my implementation, I've made it so the way that RTP frames are payloaded into QUIC streams can be controlled in the following ways:\r\n\r\n- All RTP frames on a single stream (until the QUIC stream runs out of sending credit)\r\n- All RTP frames for one or more GOPs on a single stream\r\n- All RTP frames for one or more frames on a single stream\r\n\r\nI control this with a \"stream boundary\" and \"stream packing\" parameter. The \"stream boundary\" parameter can be set to single, gop or frame, and then the \"stream packing\" parameter sets the number of GOPs or frames to put in each stream.\r\n\r\nThe reason you might want to do this is to be able to send `STOP_SENDING` or reset a stream you're no longer interested in, to get the sender to catch up to the latest frames.\r\n\r\nThe RoQ draft doesn't say anything on this subject, merely leaves it up to implementations to decide. I wonder whether this is something that we might want to specify more concretely, and where would be the best place to put it? Is there a use-case for a caller requesting a stream (i.e. `a=recvonly`) and then specifying how it wants that stream to be delivered? I've added `roq-stream-boundary` and `roq-stream-packing` attributes to my WIP implementation and have been experimenting with it a little bit with the intention of seeing whether it can positively affect latency on received streams.",
       "createdAt": "2024-06-05T11:01:20Z",
-      "updatedAt": "2025-05-29T16:13:14Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-05T21:21:02Z",
+      "closedAt": "2025-11-05T21:21:02Z",
       "comments": [
         {
           "author": "SpencerDawkins",
@@ -394,6 +398,13 @@
           "body": "I agree that RoQ doesn't need to signal this, but there may be cases where it could be useful for a receiver to know what to expect in order to provide sufficient flow control limits. `initial_max_stream_data_uni` is one example, `initial_max_streams_uni` is another example, which may be particularly important in large sessions with many streams where each frame opens a new stream.\r\n\r\nI am not sure if this needs to be negotiated in SDP, though. I think in most cases, the sender will be in a better position to decide whether to open new streams or not and receivers should be prepared for that by providing enough flow control credits to allow the sender to do the right thing.",
           "createdAt": "2024-11-11T19:13:50Z",
           "updatedAt": "2024-11-11T19:13:50Z"
+        },
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree with @mengelbart. I'd add that signaling this means receivers need to manage flow control credits AND tell senders what to do, which seems unhelpful, if managing flow control credits alone is sufficient. I'll close this as wontfix. ",
+          "createdAt": "2025-11-05T21:21:02Z",
+          "updatedAt": "2025-11-05T21:21:02Z"
         }
       ]
     },
@@ -472,13 +483,13 @@
         "SpencerDawkins"
       ],
       "labels": [
-        "active",
-        "IETF123",
-        "wg-discuss"
+        "IETF124",
+        "wg-discuss",
+        "ready-to-merge"
       ],
       "body": "From @alvestrand, in private email: \n\n> Section 6.4 is weak on guidance on how ICE with RoQ should work - should\n> there be ICE packets outside of the RoQ connection, or inside it? If\n> inside, are we using the \"demux\" method (first 2 bits) of distinguishing\n> ICE from RTP?\n> \n> There is no mechanism defined to specify RoQ as an ICE candidate in the\n> same way as a TCP or UDP candidate can be specified. This has\n> implication for the \"proto\" field - if you want to make it impossible to\n> pick and choose between UDP, TCP and RoQ connections, probably mention\n> this explicitly as \"out of scope - ICE with RoQ is for further study\".",
       "createdAt": "2025-05-29T16:25:22Z",
-      "updatedAt": "2025-07-19T16:11:27Z",
+      "updatedAt": "2025-11-05T21:45:21Z",
       "closedAt": null,
       "comments": []
     },
@@ -1111,7 +1122,7 @@
       "id": "PR_kwDOMBStD86bTzof",
       "title": "Replace discussion of BUNDLE (no longer useful with RoQ)",
       "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/29",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "SpencerDawkins",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1120,14 +1131,14 @@
       "labels": [],
       "body": "closes #3\r\n\r\nAfter some discussion, @mengelbart and I were unable to develop a coherent theory of why BUNDLE would be used with RoQ, since the primary benefit of BUNDLE (multiple media flows on a single transport connection) is already provided by RoQ (multiple media flows on a single QUIC connection).\r\n\r\nI updated the SDP example (while correcting some mistakes) to show multiple media flows on a single RoQ connection, as @JonathanLennox had suggested in email (I was too lazy to do that, when I was putting the initial SDP example together).  That seemed closely related to the work I was already doing in this PR. \r\n\r\nThank you, @srinivasgu, for pointing out the mistakes during the June 10 virtual interim meeting. ",
       "createdAt": "2025-06-19T20:26:49Z",
-      "updatedAt": "2025-07-22T15:04:56Z",
+      "updatedAt": "2025-11-05T21:06:40Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6",
       "headRepository": "ietf-wg-avtcore/sdp-roq",
       "headRefName": "3-clarify-that-roq-makes-bundle-unnecessary",
       "headRefOid": "0532b375426438d7e8e1f02ec34d18d59c28c802",
-      "closedAt": null,
+      "closedAt": "2025-11-05T21:06:39Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -1138,6 +1149,13 @@
           "body": "closes #20 (actually, this PR removes the text that #20 found problematic). ",
           "createdAt": "2025-07-16T20:54:17Z",
           "updatedAt": "2025-07-16T20:54:17Z"
+        },
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This PR replaced by #35, so closed now. ",
+          "createdAt": "2025-11-05T21:06:39Z",
+          "updatedAt": "2025-11-05T21:06:39Z"
         }
       ],
       "reviews": [
@@ -1221,7 +1239,7 @@
       "id": "PR_kwDOMBStD86fsF5W",
       "title": "Provide a better explanation of how to do ICE and RoQ on the same port",
       "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/30",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "SpencerDawkins",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1230,14 +1248,14 @@
       "labels": [],
       "body": "closes #21",
       "createdAt": "2025-07-19T16:08:48Z",
-      "updatedAt": "2025-08-28T13:33:52Z",
+      "updatedAt": "2025-11-05T00:51:56Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "34408887a4f9d054375c6b0e92541bbf3f11a3b6",
       "headRepository": "ietf-wg-avtcore/sdp-roq",
       "headRefName": "21-improve-ICE-guidance",
       "headRefOid": "926ed4b01f93ec67fc84bb0bfb21df7a9952613e",
-      "closedAt": null,
+      "closedAt": "2025-11-05T00:36:08Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -1262,6 +1280,20 @@
           "body": "> \"The RoQ endpoints need to negotiate a suitable candidate pair that can provide a UDP path.\" is technically not needed. The media can traverse a TCP port pair with RFC 4571 framing.\r\n\r\nHi, @rshpount, I think the problem with this text is that it stopped too soon. You're right, that if no suitable candidate pair for UDP can be negotiated, the media can traverse a TCP port pair with RFC 4571 framing. What this text was intending to say, is \"if you can't negotiate a suitable candidate pair for UDP, you can't do RoQ, although you can fall back to another transport protocol\", but I didn't **SAY** that!. ",
           "createdAt": "2025-08-28T13:33:51Z",
           "updatedAt": "2025-08-28T13:33:51Z"
+        },
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@alvestrand and @rshpount, this PR is replaced by #34. Your comments ought to be addressed by that PR. ",
+          "createdAt": "2025-11-05T00:36:08Z",
+          "updatedAt": "2025-11-05T00:36:08Z"
+        },
+        {
+          "author": "rshpount",
+          "authorAssociation": "NONE",
+          "body": "LGTM",
+          "createdAt": "2025-11-05T00:51:56Z",
+          "updatedAt": "2025-11-05T00:51:56Z"
         }
       ],
       "reviews": [
@@ -1339,6 +1371,68 @@
       "mergeCommit": {
         "oid": "267fb2248e9454a34ee0d16dd957c06e271c44c6"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 34,
+      "id": "PR_kwDOMBStD86xhfzB",
+      "title": "Describe how a RoQ endpoint uses ICE",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/34",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #21\r\nsupersedes #30",
+      "createdAt": "2025-11-05T00:29:09Z",
+      "updatedAt": "2025-11-05T00:34:05Z",
+      "baseRepository": "ietf-wg-avtcore/sdp-roq",
+      "baseRefName": "main",
+      "baseRefOid": "267fb2248e9454a34ee0d16dd957c06e271c44c6",
+      "headRepository": "ietf-wg-avtcore/sdp-roq",
+      "headRefName": "21-ice-before-roq",
+      "headRefOid": "5eaf8c2e808f32002404f4d77a2f8bc9db704b5d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "SpencerDawkins",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@alvestrand and @rshpount, this PR replaces #30, and OUGHT to address your comments on that PR. Thank you for your help!",
+          "createdAt": "2025-11-05T00:34:05Z",
+          "updatedAt": "2025-11-05T00:34:05Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDOMBStD86xtGzE",
+      "title": "Clarify each RTP session has its own flow ID, and how that works with BUNDLE",
+      "url": "https://github.com/ietf-wg-avtcore/sdp-roq/pull/35",
+      "state": "OPEN",
+      "author": "SpencerDawkins",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "SpencerDawkins"
+      ],
+      "labels": [],
+      "body": "closes #3\r\ncloses #5 \r\nsupersedes #29  (headed the wrong direction)",
+      "createdAt": "2025-11-05T17:15:44Z",
+      "updatedAt": "2025-11-05T21:47:35Z",
+      "baseRepository": "ietf-wg-avtcore/sdp-roq",
+      "baseRefName": "main",
+      "baseRefOid": "267fb2248e9454a34ee0d16dd957c06e271c44c6",
+      "headRepository": "ietf-wg-avtcore/sdp-roq",
+      "headRefName": "3-clarify-each-branch-has-its-own-flow-id",
+      "headRefOid": "f40f434f3e79913308a4a8bf9cd27f0f88b28e3d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
