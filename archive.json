@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-06T01:13:07.604254+00:00",
+  "timestamp": "2025-11-09T01:15:46.454522+00:00",
   "repo": "ietf-wg-avtcore/sdp-roq",
   "labels": [
     {
@@ -1386,7 +1386,7 @@
       "labels": [],
       "body": "Closes #21\r\nsupersedes #30",
       "createdAt": "2025-11-05T00:29:09Z",
-      "updatedAt": "2025-11-05T00:34:05Z",
+      "updatedAt": "2025-11-06T17:08:15Z",
       "baseRepository": "ietf-wg-avtcore/sdp-roq",
       "baseRefName": "main",
       "baseRefOid": "267fb2248e9454a34ee0d16dd957c06e271c44c6",
@@ -1406,7 +1406,48 @@
           "updatedAt": "2025-11-05T00:34:05Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMBStD87MaJR1",
+          "commit": {
+            "abbreviatedOid": "5eaf8c2"
+          },
+          "author": "alvestrand",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-06T17:02:02Z",
+          "updatedAt": "2025-11-06T17:02:03Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "The ROQ endpoint needs to be represented in a way that prevents matching up with an UDP candidate - an UDP candidate expects to match up with an endpoint sending / receiving raw RTP packets.\r\n\r\nThe easiest way to do this is to define a new \"proto\" field in the candidate (instead of \"udp\", \"tcp\" and \"tls\") of \"roq\" or \"quic\".",
+              "createdAt": "2025-11-06T17:02:03Z",
+              "updatedAt": "2025-11-06T17:02:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMBStD87MaRQ_",
+          "commit": {
+            "abbreviatedOid": "5eaf8c2"
+          },
+          "author": "alvestrand",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-06T17:08:14Z",
+          "updatedAt": "2025-11-06T17:08:15Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "Given that QUIC still doesn't have peer-to-peer exensions specified, we might want to mention that the client end of the connection will have to specify port 9 (discard) - meaning that it can do outgoing QUIC but not incoming QUIC over this UDP port pair.\r\n",
+              "createdAt": "2025-11-06T17:08:14Z",
+              "updatedAt": "2025-11-06T17:08:15Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 35,
