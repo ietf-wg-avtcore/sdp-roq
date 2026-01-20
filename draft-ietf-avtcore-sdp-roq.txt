@@ -5,8 +5,8 @@
 Network Working Group                                         S. Dawkins
 Internet-Draft                        Wonder Hamster Internetworking LLC
 Intended status: Experimental                                 V. Pascual
-Expires: 14 April 2026                                             Nokia
-                                                         11 October 2025
+Expires: 24 July 2026                                              Nokia
+                                                         20 January 2026
 
 
                 SDP Offer/Answer for RTP over QUIC (RoQ)
@@ -52,11 +52,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 April 2026.
+   This Internet-Draft will expire on 24 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -366,14 +366,22 @@ Table of Contents
 
 6.1.  Bundling Considerations
 
-   [RFC8843] describes a Session Description Protocol (SDP) Grouping
-   Framework extension called 'BUNDLE'.  The extension can be used with
-   the SDP offer/answer mechanism to negotiate the usage of a single
-   transport (5-tuple) for sending and receiving media described by
-   multiple SDP media descriptions ("m=" sections).
+   [I-D.ietf-avtcore-rtp-over-quic] defines the RoQ flow identifer as a
+   way to multiplex multiple RTP sessions onto a single QUIC connection,
+   so, onto a single transport.
 
-   The authors believe that no special considerations apply when using
-   BUNDLE with a single QUIC connection carrying RoQ.
+   [RFC8843] describes a Session Description Protocol (SDP) Grouping
+   Framework extension called 'BUNDLE'.  The extension can also be used
+   with the SDP offer/answer mechanism to negotiate the usage of a
+   single transport (5-tuple) for sending and receiving media described
+   by multiple SDP media descriptions ("m=" sections).
+
+   If a RoQ application developer wishes to use the BUNDLE extension,
+   each group of SDP media descriptions MUST be carried in a single RoQ
+   flow identifier.
+
+   Multiple BUNDLEs can be carried within a single QUIC connection, as
+   long as each BUNDLE is carried in its own RoQ flow identifier.
 
    If an application uses multiple 5-tuples in order to allow QUIC
    Connection Migration as described in Section 9 of [RFC9000], it is
@@ -705,6 +713,12 @@ Table of Contents
               RFC 8842, DOI 10.17487/RFC8842, January 2021,
               <https://www.rfc-editor.org/rfc/rfc8842>.
 
+   [RFC8843]  Holmberg, C., Alvestrand, H., and C. Jennings,
+              "Negotiating Media Multiplexing Using the Session
+              Description Protocol (SDP)", RFC 8843,
+              DOI 10.17487/RFC8843, January 2021,
+              <https://www.rfc-editor.org/rfc/rfc8843>.
+
    [RFC8866]  Begen, A., Kyzivat, P., Perkins, C., and M. Handley, "SDP:
               Session Description Protocol", RFC 8866,
               DOI 10.17487/RFC8866, January 2021,
@@ -744,10 +758,11 @@ Table of Contents
 
    [I-D.draft-ietf-quic-multipath]
               Liu, Y., Ma, Y., De Coninck, Q., Bonaventure, O., Huitema,
-              C., and M. Kühlewind, "Multipath Extension for QUIC", Work
-              in Progress, Internet-Draft, draft-ietf-quic-multipath-16,
-              21 August 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-quic-multipath-16>.
+              C., and M. Kühlewind, "Managing multiple paths for a QUIC
+              connection", Work in Progress, Internet-Draft, draft-ietf-
+              quic-multipath-19, 12 January 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-quic-
+              multipath-19>.
 
    [I-D.ietf-avtcore-rtp-vvc]
               Zhao, S., Wenger, S., Sanchez, Y., Wang, Y., and M. M.
@@ -794,12 +809,6 @@ Table of Contents
               Browser-Based Applications", RFC 8825,
               DOI 10.17487/RFC8825, January 2021,
               <https://www.rfc-editor.org/rfc/rfc8825>.
-
-   [RFC8843]  Holmberg, C., Alvestrand, H., and C. Jennings,
-              "Negotiating Media Multiplexing Using the Session
-              Description Protocol (SDP)", RFC 8843,
-              DOI 10.17487/RFC8843, January 2021,
-              <https://www.rfc-editor.org/rfc/rfc8843>.
 
    [RFC8859]  Nandakumar, S., "A Framework for Session Description
               Protocol (SDP) Attributes When Multiplexing", RFC 8859,
