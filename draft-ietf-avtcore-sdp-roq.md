@@ -1,5 +1,5 @@
 ---
-title: SDP Offer/Answer for RTP over QUIC (RoQ)
+title: SDP for RTP over QUIC (RoQ)
 abbrev: SDP O/A for RoQ
 category: exp
 
